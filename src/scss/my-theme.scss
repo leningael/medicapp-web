@@ -1,0 +1,119 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$my-primary-color: (
+  50: #e4ecf3,
+  100: #bbd0e2,
+  200: #8eb1ce,
+  300: #6092ba,
+  400: #3e7aac,
+  500: #1c639d,
+  600: #195b95,
+  700: #14518b,
+  800: #114781,
+  900: #09356f,
+  A100: #a1c4ff,
+  A200: #6ea4ff,
+  A400: #3b85ff,
+  A700: #2175ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$my-accent-color: (
+  50: #f8f3fe,
+  100: #efe2fc,
+  200: #e4cefa,
+  300: #d9baf8,
+  400: #d0acf7,
+  500: #c89df5,
+  600: #c295f4,
+  700: #bb8bf2,
+  800: #b481f0,
+  900: #a76fee,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffffff,
+  A700: #f1e6ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$my-warn-color: (
+  50: #fde7e7,
+  100: #f9c4c4,
+  200: #f69d9d,
+  300: #f27676,
+  400: #ef5858,
+  500: #ec3b3b,
+  600: #ea3535,
+  700: #e72d2d,
+  800: #e42626,
+  900: #df1919,
+  A100: #ffffff,
+  A200: #ffdede,
+  A400: #ffabab,
+  A700: #ff9191,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$my-primary: mat.define-palette($my-primary-color);
+$my-accent: mat.define-palette($my-accent-color);
+$my-warn: mat.define-palette($my-warn-color);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    )
+  ),
+);
+
+@include mat.all-component-themes($my-theme);
+@include mat.form-field-density(-2);

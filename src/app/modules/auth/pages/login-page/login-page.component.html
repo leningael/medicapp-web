@@ -1,1 +1,33 @@
-<p>login-page works!</p>
+<section class="h-full flex justify-center items-center">
+  <mat-card class="w-[500px] p-10">
+    <h1 class="text-center text-2xl font-medium mb-8">Inicia sesión en <span class="text-primary">MedicApp</span></h1>
+    <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+      <div class="mb-6 flex flex-col gap-2">
+        <label class="font-medium" for="email">Correo electrónico</label>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <input
+            id="email"
+            matInput
+            formControlName="email"
+            placeholder="Ingrese su correo"
+          />
+        </mat-form-field>
+      </div>
+      <div class="mb-8 flex flex-col gap-2">
+        <label class="font-medium" for="password">Contraseña</label>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <input
+            id="password"
+            type="password"
+            matInput
+            formControlName="password"
+            placeholder="********"
+          />
+        </mat-form-field>
+      </div>
+      <button type="submit" class="w-full" mat-flat-button color="primary">
+        Iniciar sesión
+      </button>
+    </form>
+  </mat-card>
+</section>

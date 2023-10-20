@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { UserCredentials, UserData } from '../interfaces/credentials.interfaces';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +33,9 @@ export class CredentialsService {
     localStorage.setItem('role', value);
   }
   
-  constructor(private router: Router) {}
+  constructor() {}
 
-  setCredentials(credentials:UserCredentials){
+  setCredentials(credentials:UserCredentials){    
     this.token = credentials.token || '';
     this.user_credentials = credentials.user || {} as UserData;
     this.role = credentials.role || '';

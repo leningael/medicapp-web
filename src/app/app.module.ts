@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 
 import { SharedModule } from './shared/shared.module';
 import { InterceptorService } from './modules/auth/services/interceptor.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { InterceptorService } from './modules/auth/services/interceptor.service'
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

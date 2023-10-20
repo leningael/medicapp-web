@@ -10,7 +10,7 @@ const routes: Routes = [
       {
         path: 'manage-accounts',
         component: ManageAccountsPageComponent,
-        data: { title: 'Manage Accounts' }
+        data: { title: 'Administrar cuentas' }
       },
       {
         path: '**',

@@ -51,6 +51,10 @@ export class SidebarLayoutComponent implements OnInit {
     return '';
   }
 
+  checkPermission(permission: string): boolean {
+    return this.credentialsService.checkPermissions(permission);
+  }
+
   logout() {
     this.dialog
       .open(ConfirmDialogComponent, {

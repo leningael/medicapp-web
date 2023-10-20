@@ -17,8 +17,7 @@
       <a
         mat-list-item
         routerLink="/profile/my-profile"
-        routerLinkActive="active"
-        (click)="sidenav.toggle()"
+        routerLinkActive="active-link"
       >
         <div class="flex items-center gap-2">
           <mat-icon>person</mat-icon>
@@ -26,10 +25,10 @@
         </div>
       </a>
       <a
+        *ngIf="checkPermission('admin')"
         mat-list-item
         routerLink="/accounts/manage-accounts"
-        routerLinkActive="active"
-        (click)="sidenav.toggle()"
+        routerLinkActive="active-link"
       >
         <div class="flex items-center gap-2">
           <mat-icon>settings</mat-icon>
@@ -40,7 +39,7 @@
   </mat-sidenav>
   <div class="flex flex-col h-full">
     <mat-toolbar>
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button *ngIf="!sidenav.opened" mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span class="font-medium text-lg mx-2 pt-1">{{ routeTitle }}</span>

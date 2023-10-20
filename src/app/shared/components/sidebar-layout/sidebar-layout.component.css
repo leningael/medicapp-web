@@ -1,0 +1,4 @@
+.active-link {
+  background-color: var(--secondary-color);
+  font-weight: 500;
+}

@@ -10,7 +10,7 @@ const routes: Routes = [
       {
         path: 'my-profile',
         component: ProfilePageComponent,
-        data: { title: 'My Profile' }
+        data: { title: 'Mi perfil' }
       },
       {
         path: '**',

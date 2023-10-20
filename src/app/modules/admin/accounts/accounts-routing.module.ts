@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ManageAccountsPageComponent } from './pages/manage-accounts-page/manage-accounts-page.component';
 import { RouterModule, Routes } from '@angular/router';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'my-profile',
-        component: ProfilePageComponent,
-        data: { title: 'My Profile' }
+        path: 'manage-accounts',
+        component: ManageAccountsPageComponent,
+        data: { title: 'Manage Accounts' }
       },
       {
         path: '**',
-        redirectTo: 'my-profile'
+        redirectTo: 'manage-accounts'
       }
     ]
   }
@@ -24,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProfileRoutingModule { }
+export class AccountsRoutingModule { }

@@ -1,6 +1,6 @@
 export interface UserCredentials{
     token: string;
-    user: UserData;
+    user_credentials: UserData;
     role: string;
 }
 

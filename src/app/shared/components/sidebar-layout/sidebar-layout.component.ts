@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { filter, map } from 'rxjs';
 import { UserData } from '../../interfaces/credentials.interfaces';
+import { NAV_ITEMS, NavItem } from './nav-items'
 
 @Component({
   selector: 'app-sidebar-layout',
@@ -13,9 +14,11 @@ import { UserData } from '../../interfaces/credentials.interfaces';
   styleUrls: ['./sidebar-layout.component.css'],
 })
 export class SidebarLayoutComponent implements OnInit {
+  navItems: NavItem[] = NAV_ITEMS;
   routeTitle: string = '';
   userData: UserData;
   userName: string = '';
+
   constructor(
     private authService: AuthService,
     private credentialsService: CredentialsService,
@@ -51,8 +54,8 @@ export class SidebarLayoutComponent implements OnInit {
     return '';
   }
 
-  checkPermission(permission: string): boolean {
-    return this.credentialsService.checkPermissions(permission);
+  checkPermission(permissions: string[]): boolean {
+    return this.credentialsService.checkPermission(permissions);
   }
 
   logout() {

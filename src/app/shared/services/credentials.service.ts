@@ -48,7 +48,7 @@ export class CredentialsService {
     localStorage.clear();
   }
 
-  checkPermissions(role:string):boolean{
-    return this.role === role;
+  checkPermission(roles:string[]):boolean{
+    return roles.includes(this.role);
   }
 }

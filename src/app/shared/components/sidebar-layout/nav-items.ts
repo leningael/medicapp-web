@@ -27,21 +27,21 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     route: '/patients/patients-list',
-    title: 'Lista de pacientes',
+    title: 'Mis pacientes',
     permissions: ['doctor'],
     icon: 'groups',
   },
   {
     route: '/receptionists/receptionists-list',
-    title: 'Lista de recepcionistas',
+    title: 'Recepcionistas',
     permissions: ['doctor'],
-    icon: 'partner_exchange',
+    icon: 'support_agent',
   },
   {
     route: '/notes/notes-list',
     title: 'Notas',
     permissions: ['doctor'],
-    icon: 'note',
+    icon: 'description',
   },
   // Receptionist routes
   {

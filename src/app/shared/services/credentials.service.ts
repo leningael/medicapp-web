@@ -36,7 +36,7 @@ export class CredentialsService {
   constructor() {}
 
   setCredentials(credentials:UserCredentials){    
-    this.token = credentials.token || '';
+    this.token = credentials.app_token || '';
     this.user_credentials = credentials.user_credentials || {} as UserData;
     this.role = credentials.role || '';
   }

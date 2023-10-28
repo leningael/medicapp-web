@@ -1,5 +1,5 @@
 export interface UserCredentials{
-    token: string;
+    app_token: string;
     user_credentials: UserData;
     role: string;
 }

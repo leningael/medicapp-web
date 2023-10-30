@@ -17,9 +17,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidebarLayoutComponent } from './components/sidebar-layout/sidebar-layout.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ShortNamePipe } from './pipes/short-name.pipe';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 
 @NgModule({
-  declarations: [SidebarLayoutComponent, ConfirmDialogComponent, ShortNamePipe],
+  declarations: [SidebarLayoutComponent, ConfirmDialogComponent, ShortNamePipe, LoadingSpinnerComponent, SearchBoxComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -30,10 +32,14 @@ import { ShortNamePipe } from './pipes/short-name.pipe';
     MatListModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     SidebarLayoutComponent,
     ConfirmDialogComponent,
+    ShortNamePipe,
+    LoadingSpinnerComponent,
+    SearchBoxComponent,
     // Material Modules
     MatButtonModule,
     MatCardModule,

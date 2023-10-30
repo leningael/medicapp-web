@@ -1474,12 +1474,12 @@
 
 "@esbuild/linux-x64@0.18.17":
   version "0.18.17"
-  resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.18.17.tgz"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-x64/-/linux-x64-0.18.17.tgz#948cdbf46d81c81ebd7225a7633009bc56a4488c"
   integrity sha512-QM50vJ/y+8I60qEmFxMoxIx4de03pGo2HwxdBeFd4nMh364X6TIBZ6VQ5UQmPbQWUVWHWws5MmJXlHAXvJEmpQ==
 
 "@esbuild/linux-x64@0.18.20":
   version "0.18.20"
-  resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.18.20.tgz"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-x64/-/linux-x64-0.18.20.tgz#c7690b3417af318a9b6f96df3031a8865176d338"
   integrity sha512-UYqiqemphJcNsFEskc73jQ7B9jgwjWrSayxawS6UVFZGWrAAtkzjxSqnoclCXxWtfwLdzU+vTpcNYhpn43uP1w==
 
 "@esbuild/netbsd-x64@0.18.17":
@@ -5555,14 +5555,14 @@ neo-async@^2.6.2:
 
 ngx-toastr@^17.0.2:
   version "17.0.2"
-  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-17.0.2.tgz#fb7bb4fc22e5425bbacde0856165d30b7900adec"
+  resolved "https://registry.npmjs.org/ngx-toastr/-/ngx-toastr-17.0.2.tgz"
   integrity sha512-KehiPx6bkbiUyJbabf0ZA04+ASumS8r/y4wPsUOMI9OrBvBcfq27UQmWuQKoVR8E+9y4Pq7eZkSg2kvxNvpxTA==
   dependencies:
     tslib "^2.3.0"
 
 nice-napi@^1.0.2:
   version "1.0.2"
-  resolved "https://registry.npmjs.org/nice-napi/-/nice-napi-1.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"
   integrity sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==
   dependencies:
     node-addon-api "^3.0.0"
@@ -5570,7 +5570,7 @@ nice-napi@^1.0.2:
 
 node-addon-api@^3.0.0:
   version "3.2.1"
-  resolved "https://registry.npmjs.org/node-addon-api/-/node-addon-api-3.2.1.tgz"
+  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-3.2.1.tgz#81325e0a2117789c0128dab65e7e38f07ceba161"
   integrity sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==
 
 node-forge@^1:
@@ -5580,7 +5580,7 @@ node-forge@^1:
 
 node-gyp-build@^4.2.2:
   version "4.6.1"
-  resolved "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.6.1.tgz"
+  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.6.1.tgz#24b6d075e5e391b8d5539d98c7fc5c210cac8a3e"
   integrity sha512-24vnklJmyRS8ViBNI8KbtK/r/DmXQMRiOMXTNz2nrTnAYUwjmEEbnnpB/+kt+yWRv73bPsSPRFddrcIbAxSiMQ==
 
 node-gyp@^9.0.0:
@@ -6949,7 +6949,7 @@ symbol-tree@^3.2.4:
 
 tailwindcss@^3.3.5:
   version "3.3.5"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.3.5.tgz#22a59e2fbe0ecb6660809d9cc5f3976b077be3b8"
+  resolved "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.3.5.tgz"
   integrity sha512-5SEZU4J7pxZgSkv7FP1zY8i2TIAOooNZ1e/OGtxIEv6GltpoiXUqWvLy89+a10qYTB1N5Ifkuw9lqQkN9sscvA==
   dependencies:
     "@alloc/quick-lru" "^5.2.0"

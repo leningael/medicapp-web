@@ -1,35 +1,52 @@
    <div class="mx-5 mt-4">
-    <shared-search-box 
-        placeholder="Buscar en mis pacientes"
-        (onValue)="searchPatient($event)">
-    </shared-search-box>
+    <div class="flex items-center">
+        <div class="flex mr-auto items-center">
+            <shared-filter-data [options]=options
+            class="mr-3"></shared-filter-data>
+            <shared-search-box 
+                placeholder="Buscar en mis pacientes"
+                (onValue)="searchPatient($event)">
+            </shared-search-box>
+        </div>
+        <div>
+            <button mat-flat-button color="primary"><mat-icon>add</mat-icon> Agregar paciente</button>
+        </div>
+    </div>
+  
     <ng-container *ngIf="!isLoading; else loading">
-        <mat-card *ngFor="let patient of patients" class="my-4">
-            <mat-card-content >
-                <div class="flex">
-                    <div class="flex items-center mr-auto">
-                        <div class="rounded-full w-fit p-3 bg-secondary text-white mr-6 ml-3">
-                            {{ get_fullname(patient) | shortName }}
+        <ng-container *ngIf="patients == []; else table">
+            <div class="bg-accent p-4 rounded-md mt-3 text-center">
+                No patients found.
+            </div>
+        </ng-container>
+        <ng-template #table>
+            <mat-card *ngFor="let patient of patients" class="my-4">
+                <mat-card-content >
+                    <div class="flex">
+                        <div class="flex items-center mr-auto">
+                            <div class="rounded-full w-fit p-3 bg-secondary text-white mr-6 ml-3">
+                                {{ get_fullname(patient) | shortName }}
+                            </div>
+                            {{ get_fullname(patient) }}
                         </div>
-                        {{ get_fullname(patient) }}
+                        <div class="flex items-center mr-3">
+                            <button class="bg-primary-light hover:bg-primary-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                                (click)="seePatientProfile(patient._id)">
+                                <mat-icon fontSet="material-icons-outlined">visibility</mat-icon>
+                            </button>
+                            <button class="bg-success-light hover:bg-success-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                                (click)="addNote(patient._id)">
+                                <mat-icon fontSet="material-icons-outlined">note_add</mat-icon>
+                            </button>
+                            <button class="bg-warn-light hover:bg-warn-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                                (click)="deletePatient(patient._id)">
+                                <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex items-center mr-3">
-                        <button class="bg-primary-light hover:bg-primary-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                            (click)="seePatientProfile(patient._id)">
-                            <mat-icon fontSet="material-icons-outlined">visibility</mat-icon>
-                        </button>
-                        <button class="bg-success-light hover:bg-success-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                            (click)="addNote(patient._id)">
-                            <mat-icon fontSet="material-icons-outlined">note_add</mat-icon>
-                        </button>
-                        <button class="bg-warn-light hover:bg-warn-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                            (click)="deletePatient(patient._id)">
-                            <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
-                        </button>
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
+                </mat-card-content>
+            </mat-card>
+        </ng-template>
     </ng-container>
 
     <ng-template #loading>

@@ -13,6 +13,7 @@ export class PatientsListComponent implements OnInit {
   public patients: Patient[] = [];
   public userName: string = '';
   public isLoading: boolean = true;
+  public options: string[] = ['Nombre (A-Z)', 'Nombre (Z-A)'];
   private doctor_id: string = '';
 
   constructor(

@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { Patient } from '../interfaces/patient.interfaces';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
   apiUrl: string = environment.apiUrl;
+  //apiUrl = 'http://127.0.0.1:7004'
   constructor(
     private http: HttpClient,
   ) {}
@@ -18,6 +19,7 @@ export class PatientService {
   }
 
   get_my_patients(doctor_id: string): Observable<Patient[]> {
+    console.log("apiUrl: " + this.apiUrl)
     return this.http.get<Patient[]>(`${this.apiUrl}/patients/doctor/${doctor_id}`);
   }
 

@@ -27,6 +27,7 @@ export class SidebarLayoutComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.userData = this.credentialsService.user_credentials;
+    console.log(this.userData);
     this.userName = `${this.userData.name} ${this.userData.lastname}`;
   }
 

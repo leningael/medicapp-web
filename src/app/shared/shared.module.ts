@@ -13,13 +13,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatSelectModule} from '@angular/material/select'; 
 
 import { SidebarLayoutComponent } from './components/sidebar-layout/sidebar-layout.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ShortNamePipe } from './pipes/short-name.pipe';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { FilterDataComponent } from './components/filter-data/filter-data.component';
 
 @NgModule({
-  declarations: [SidebarLayoutComponent, ConfirmDialogComponent, ShortNamePipe],
+  declarations: [SidebarLayoutComponent, ConfirmDialogComponent, ShortNamePipe, LoadingSpinnerComponent, SearchBoxComponent, FilterDataComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -30,10 +34,17 @@ import { ShortNamePipe } from './pipes/short-name.pipe';
     MatListModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatFormFieldModule 
   ],
   exports: [
     SidebarLayoutComponent,
     ConfirmDialogComponent,
+    ShortNamePipe,
+    LoadingSpinnerComponent,
+    SearchBoxComponent,
+    FilterDataComponent,
     // Material Modules
     MatButtonModule,
     MatCardModule,
@@ -42,6 +53,8 @@ import { ShortNamePipe } from './pipes/short-name.pipe';
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    
   ],
 })
 export class SharedModule {}

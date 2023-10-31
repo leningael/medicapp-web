@@ -23,7 +23,7 @@ export class ManageAccountsPageComponent {
 
   addAccount(): void {
     const dialogRef = this.dialog.open(AccountDialogComponent, {
-      width: '250px', // Ajusta el ancho según tus necesidades
+      width: '550px',
     });
   }
 }

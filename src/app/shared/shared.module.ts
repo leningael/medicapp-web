@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 // Material Modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDateFnsModule } from '@angular/material-date-fns-adapter';
 import {MatSelectModule} from '@angular/material/select'; 
 
 import { SidebarLayoutComponent } from './components/sidebar-layout/sidebar-layout.component';
@@ -48,10 +50,13 @@ import { FilterDataComponent } from './components/filter-data/filter-data.compon
     // Material Modules
     MatButtonModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatDateFnsModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     

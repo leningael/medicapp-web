@@ -58,8 +58,7 @@ import { FilterDataComponent } from './components/filter-data/filter-data.compon
     MatInputModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatSelectModule,
-    
+    MatSelectModule
   ],
 })
 export class SharedModule {}

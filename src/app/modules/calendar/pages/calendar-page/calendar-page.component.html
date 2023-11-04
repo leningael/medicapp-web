@@ -10,7 +10,7 @@
           {{ isLoading ? "Cargando..." : businessHours.getHoursRange() }}
         </span>
       </p>
-      <button mat-flat-button color="primary" class="businessHoursBtn">
+      <button mat-flat-button (click)="setBusinessHours()" color="primary" class="businessHoursBtn">
         <mat-icon>schedule</mat-icon>
         Establecer horario de atención
       </button>

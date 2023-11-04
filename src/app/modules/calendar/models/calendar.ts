@@ -1,4 +1,9 @@
-export class BuissinessHours {
+export interface TimeRange {
+    start_time: string;
+    end_time: string;
+}
+
+export class BuissinessHours implements TimeRange {
     start_time: string;
     end_time: string;
 
@@ -36,7 +41,7 @@ export interface PatientInfo {
 }
 
 export interface DayAppointments {
-    business_hours: BuissinessHours;
+    business_hours: TimeRange;
     appointments: Appointment[];
 }
 

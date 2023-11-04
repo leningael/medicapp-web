@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Appointment, BuissinessHours, CreateAppointmentArgs, DayAppointments } from '../models/calendar';
+import { Appointment, CreateAppointmentArgs, DayAppointments, TimeRange } from '../models/calendar';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class CalendarService {
 
   constructor(private http:HttpClient) { }
 
-  setDrBusinnessHours(doctorId:string, businessHours:BuissinessHours): Observable<any>{
-    return this.http.put<any>(`${this.apiUrl}/calendar/set_businnes_hours/${doctorId}`, businessHours);
+  setDrBusinnessHours(doctorId:string, businessHours:TimeRange): Observable<any>{
+    return this.http.put<any>(`${this.apiUrl}/calendar/set_businness_hours/${doctorId}`, businessHours);
   }
 
   createAppointment(appointment:CreateAppointmentArgs): Observable<Appointment>{

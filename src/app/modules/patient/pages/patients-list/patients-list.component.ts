@@ -24,7 +24,7 @@ export class PatientsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.doctor_id = this.credentialsService.user_credentials.id;
+    this.doctor_id = this.credentialsService.user_credentials._id;
     this.get_patients(this.doctor_id);
   }
 
@@ -47,7 +47,6 @@ export class PatientsListComponent implements OnInit {
 
   addNote(patient_id: string): void {
     //falta agregar que abra el modal para la creacion de la nota
-    console.log('abre modal de nota');
   }
 
   deletePatient(patient_id: string): void {

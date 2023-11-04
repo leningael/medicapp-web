@@ -19,7 +19,6 @@ export class PatientService {
   }
 
   get_my_patients(doctor_id: string): Observable<Patient[]> {
-    console.log("apiUrl: " + this.apiUrl)
     return this.http.get<Patient[]>(`${this.apiUrl}/patients/doctor/${doctor_id}`);
   }
 

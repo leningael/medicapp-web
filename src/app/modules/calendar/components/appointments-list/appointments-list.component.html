@@ -1,0 +1,47 @@
+<mat-list role="list">
+  <mat-list-item
+    role="listitem"
+    *ngFor="let slot of calendarSlots"
+    class="w-full"
+    [ngClass]="{ 'bg-gray-100': slot.appointment }"
+    style="height: 70px"
+  >
+    <div class="flex items-center w-full gap-4">
+      <p>{{ slot.time }}</p>
+      <div class="grow flex items-center gap-3">
+        <ng-container *ngIf="slot.appointment">
+          <div
+            class="rounded-full w-fit py-2 px-[10px] bg-secondary text-xl text-white"
+          >
+            {{ getCompleteName(slot.appointment.patient) | shortName }}
+          </div>
+          <p>
+            {{
+              getCompleteName(slot.appointment.patient) +
+                " - " +
+                slot.appointment.cause
+            }}
+          </p>
+        </ng-container>
+      </div>
+      <div class="flex items-center gap-4">
+        <ng-container *ngIf="slot.appointment; else noAppointment">
+          <button mat-flat-button color="orange" class="small-button">
+            <mat-icon>autorenew</mat-icon>
+          </button>
+          <button mat-flat-button color="success" class="small-button">
+            <mat-icon class="material-icons-outlined">note_add</mat-icon>
+          </button>
+          <button mat-flat-button color="warn" class="small-button">
+            <mat-icon class="material-icons-outlined">delete</mat-icon>
+          </button>
+        </ng-container>
+        <ng-template #noAppointment>
+          <button mat-flat-button color="primary" class="small-button">
+            <mat-icon>add</mat-icon>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </mat-list-item>
+</mat-list>

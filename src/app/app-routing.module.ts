@@ -30,6 +30,13 @@ const routes: Routes = [
         canLoad: [AuthGuard],
         canActivate: [PermissionGuard],
         data: { permissions: ['admin'] }
+      },
+      {
+        path: 'calendar',
+        loadChildren: () => import('./modules/calendar/calendar.module').then(m => m.CalendarModule),
+        canLoad: [AuthGuard],
+        canActivate: [PermissionGuard],
+        data: { permissions: ['doctor'] }
       }
     ]
   }

@@ -5,6 +5,7 @@ export interface UserCredentials{
 }
 
 export interface UserData{
+    _id: string;
     username: string;
     email: string;
     name: string;

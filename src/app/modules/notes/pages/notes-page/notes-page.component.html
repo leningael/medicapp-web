@@ -1,0 +1,31 @@
+<div class="m-5">
+    <div class="flex justify-between ">
+
+        <shared-search-box
+        placeholder="Buscar nota"
+        (onValue)="searchNotes($event)">
+        </shared-search-box>
+    </div>
+
+    <div class="my-5">
+        <div *ngIf="!isLoading">
+            <table mat-table [dataSource]="data" class="mat-elevation-z8 notes-table">
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>Date</th>
+                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>Title - Motivo Consulta</th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</div>

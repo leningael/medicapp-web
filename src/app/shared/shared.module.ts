@@ -19,6 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 import { SidebarLayoutComponent } from './components/sidebar-layout/sidebar-layout.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -52,7 +53,8 @@ import { SearchPipe } from './pipes/search.pipe';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
   ],
   exports: [
     SidebarLayoutComponent,
@@ -68,6 +70,7 @@ import { SearchPipe } from './pipes/search.pipe';
     MatDateFnsModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatTableModule,
     MatIconModule,
     MatInputModule,
     MatListModule,

@@ -1,0 +1,33 @@
+export interface Notes {
+    id: string;
+    title: string;
+    content: string;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
+    userId: string;
+    isDeleted: boolean;
+    isArchived: boolean;
+    isPinned: boolean;
+    color: string;
+    isTrashed: boolean;
+    isStarred: boolean;
+    isShared: boolean;
+    isRead: boolean;
+    isFavourite: boolean;
+    isNotification: boolean;
+    isNotificationSent: boolean;
+    isNotificationViewed: boolean;
+    isNotificationDeleted: boolean;
+    isNotificationUpdated: boolean;
+    isNotificationCreated: boolean;
+    isNotificationShared: boolean;
+    isNotificationUnshared: boolean;
+    isNotificationFavourite: boolean;
+    isNotificationUnfavourite: boolean;
+    isNotificationTrashed: boolean;
+    isNotificationUntrashed: boolean;
+    isNotificationStarred: boolean;
+    isNotificationUnstarred: boolean;
+    isNotificationRead: boolean;
+}

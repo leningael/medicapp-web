@@ -23,6 +23,7 @@ import { ShortNamePipe } from './pipes/short-name.pipe';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { FilterDataComponent } from './components/filter-data/filter-data.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SidebarLayoutComponent, ConfirmDialogComponent, ShortNamePipe, LoadingSpinnerComponent, SearchBoxComponent, FilterDataComponent],

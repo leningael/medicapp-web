@@ -3,6 +3,8 @@ import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../interfaces/patient.interfaces';
 import { Router } from '@angular/router';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddPatientComponent } from '../add-patient/add-patient.component';
 
 @Component({
   selector: 'app-patients-list',
@@ -20,6 +22,7 @@ export class PatientsListComponent implements OnInit {
     private patientService: PatientService,
     private credentialsService: CredentialsService,
     private router: Router,
+    public dialog: MatDialog,
     ) { 
   }
 
@@ -29,7 +32,7 @@ export class PatientsListComponent implements OnInit {
   }
 
   get_patients(doctor_id: string): void {
-    this.patientService.get_my_patients(doctor_id).subscribe(
+    this.patientService.getDrPatients(doctor_id).subscribe(
       (response: Patient[]) => {
         this.patients = response;
         this.isLoading = false;
@@ -50,7 +53,7 @@ export class PatientsListComponent implements OnInit {
   }
 
   deletePatient(patient_id: string): void {
-    this.patientService.delete_patient(patient_id).subscribe(
+    this.patientService.deletePatient(patient_id).subscribe(
       (response: Patient) => {
         this.isLoading = true;
         this.get_patients(this.doctor_id);
@@ -59,7 +62,27 @@ export class PatientsListComponent implements OnInit {
   }
 
   searchPatient(term: string): void {
-    
+    this.isLoading = true;
+    this.patientService.getDrPatients(term, this.doctor_id).subscribe(
+      (response: Patient[]) => {
+        this.patients = response;
+        this.isLoading = false;
+      }
+    );
+  }
+
+  openAddPatient(): void {
+    const dialogRef = this.dialog.open(AddPatientComponent, {
+      height: '550px',
+      
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.isLoading = true;
+        this.get_patients(this.doctor_id);
+      }
+    });
   }
 
 }

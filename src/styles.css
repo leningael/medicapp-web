@@ -21,3 +21,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 .spacer {
   flex: auto;
 }
+
+/* Style to fix the weird border in form fields with angular material */
+.mat-mdc-form-field .mdc-notched-outline__notch {
+  border-right: none;
+}

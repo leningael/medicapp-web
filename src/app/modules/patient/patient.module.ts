@@ -4,16 +4,20 @@ import { PatientsListComponent } from './pages/patients-list/patients-list.compo
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PatientRoutingModule } from './patient-routing.module';
 import { PatientProfileComponent } from './pages/patient-profile/patient-profile.component';
+import { AddPatientComponent } from './pages/add-patient/add-patient.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     PatientsListComponent,
-    PatientProfileComponent
+    PatientProfileComponent,
+    AddPatientComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    PatientRoutingModule
+    PatientRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class PatientModule { }

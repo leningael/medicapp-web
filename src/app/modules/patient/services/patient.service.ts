@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Patient } from '../interfaces/patient.interfaces';
@@ -14,15 +14,22 @@ export class PatientService {
     private http: HttpClient,
   ) {}
   
-  get_patients(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${this.apiUrl}/patients`);
+  getAllExistingPatients(search?: string): Observable<Patient[]> {
+    const params = new HttpParams();
+    if (search) params.set('search', search);
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients`, {params} );
   }
 
-  get_my_patients(doctor_id: string): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${this.apiUrl}/patients/doctor/${doctor_id}`);
+  getDrPatients(doctor_id: string, search?: string): Observable<Patient[]> {
+    const params = new HttpParams();
+    if (search) params.set('search', search);
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients/doctor/${doctor_id}`, {params} );
   }
 
-  delete_patient(patient_id: string): Observable<Patient> {
+  updatePatients(patient: Patient): Observable<Patient> {
+    return this.http.put<Patient>(`${this.apiUrl}/patients`, patient);
+  }
+  deletePatient(patient_id: string): Observable<Patient> {
     return this.http.delete<Patient>(`${this.apiUrl}/patients/${patient_id}`);
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientService } from '../../services/patient.service';
-import { Patient } from '../../interfaces/patient.interfaces';
+import { Patient, PatientOverview } from '../../interfaces/patient.interfaces';
 import { Router } from '@angular/router';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,11 +12,12 @@ import { AddPatientComponent } from '../add-patient/add-patient.component';
   styleUrls: ['./patients-list.component.css']
 })
 export class PatientsListComponent implements OnInit {
-  public patients: Patient[] = [];
+  public patients: PatientOverview[] = [];
   public userName: string = '';
   public isLoading: boolean = true;
   public options: string[] = ['Nombre (A-Z)', 'Nombre (Z-A)'];
   private doctor_id: string = '';
+  public notFound: boolean = false;
 
   constructor(
     private patientService: PatientService,
@@ -33,14 +34,17 @@ export class PatientsListComponent implements OnInit {
 
   get_patients(doctor_id: string): void {
     this.patientService.getDrPatients(doctor_id).subscribe(
-      (response: Patient[]) => {
+      (response: PatientOverview[]) => {
         this.patients = response;
         this.isLoading = false;
+      } , (error) => {
+        this.isLoading = false;
+        this.notFound = true;
       }
     );
   }
 
-  get_fullname(patient: Patient): string {
+  get_fullname(patient: PatientOverview): string {
     return `${patient.name} ${patient.lastname}`;
   }
 
@@ -64,7 +68,7 @@ export class PatientsListComponent implements OnInit {
   searchPatient(term: string): void {
     this.isLoading = true;
     this.patientService.getDrPatients(term, this.doctor_id).subscribe(
-      (response: Patient[]) => {
+      (response: PatientOverview[]) => {
         this.patients = response;
         this.isLoading = false;
       }
@@ -73,8 +77,8 @@ export class PatientsListComponent implements OnInit {
 
   openAddPatient(): void {
     const dialogRef = this.dialog.open(AddPatientComponent, {
-      height: '550px',
-      
+      disableClose: true,
+      data: {doctor_id: this.doctor_id}
     });
 
     dialogRef.afterClosed().subscribe((result) => {

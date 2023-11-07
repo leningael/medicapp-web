@@ -1,6 +1,83 @@
-<div class="mb-4 px-2">
-    <h2 class="mt-4" mat-dialog-title>Agregar paciente</h2>
-    <form [formGroup]="newPatientForm" (ngSubmit)="saveData()">
+<div class="mb-4" >
+    <div class="bg-secondary text-center py-5 mb-5">
+        <p class="text-2xl">Agregar paciente</p>
+    </div>
+    
+    <form [formGroup]="newPatientForm" (ngSubmit)="saveData()" class="p-4 px-9 w-full">
+        <div class="flex gap-4">
+            <mat-form-field appearance="outline" class="grow">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Ingrese el nombre" formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="grow">
+                <mat-label>Apellido</mat-label>
+                <input matInput placeholder="Ingrese el apellido" formControlName="lastname">
+            </mat-form-field>
+        </div>
+        
+       <div class="flex gap-4">
+            <mat-form-field appearance="outline" class="grow">
+                <mat-label>Género</mat-label>
+                <mat-select placeholder="Selecciona una opción" formControlName="gender">
+                    <mat-option value="female">Femenino</mat-option>
+                    <mat-option value="male">Masculino</mat-option>
+                    <mat-option value="other">Otro</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="grow">
+                <mat-label>CURP</mat-label>
+                <input matInput placeholder="Ingrese el CURP" formControlName="curp">
+            </mat-form-field>
+        </div>
+          
+        <div class="flex gap-4">
+            <mat-form-field appearance="outline" class="w-1/2">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" formControlName="birthdate"> 
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>              
+            <mat-form-field appearance="outline" class="w-1/2">
+                <mat-label>Teléfono</mat-label>
+                <input matInput placeholder="Ingrese el número" formControlName="phone">
+            </mat-form-field>
+        </div >
+
       
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput placeholder="Ingrese el correo" formControlName="email">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Dirección</mat-label>
+                <input matInput placeholder="Ingrese la dirección" formControlName="address">
+            </mat-form-field>
+            
+            
+        <div class="flex gap-4">
+            <mat-form-field appearance="outline" class="grow">
+                <mat-label>Código Postal</mat-label>
+                <input matInput placeholder="Ingrese el CP" formControlName="zipcode">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="grow">
+                <mat-label>Grupo Sanguíneo</mat-label>
+                <input matInput placeholder="Ingrese el grupo sanguíneo" formControlName="bloodtype">
+            </mat-form-field>
+        </div>
+        
+        <div class="flex justify-center mb-4">
+            <button mat-button color="primary" class="">Buscar paciente existente</button>
+        </div>
+        
+
+        <div class="flex gap-4 justify-center">
+            <button type="submit" mat-stroked-button color="primary" (click)="onCancel()">
+                Cancelar
+            </button>
+            <button  mat-flat-button color="primary">
+                Guardar
+            </button>
+        </div>
+
     </form>
 </div>

@@ -1,0 +1,46 @@
+<section class="h-full flex flex-col w-full">
+  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full">
+    <input
+      matInput
+      [placeholder]="searchPlaceholder"
+      [formControl]="searchCtrl"
+    />
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+  <p *ngIf="label" class="text-center text-sm text-gray-700 mt-3">
+    {{ label }}
+  </p>
+  <div class="grow overflow-auto my-2">
+    <mat-list *ngIf="!isLoading; else loadingSpinner" role="list">
+      <mat-list-item
+        *ngFor="let item of (frontendSearch ? (items | search:itemsToSearch:fieldsToSearch) : items)"
+        role="listitem"
+        class="border-b hover:bg-gray-200"
+        [ngStyle]="{ 'background-color': item === selectedItem ? '#b6d1e9' : '' }"
+        (click)="selectItem(item)"
+      >
+        <div class="flex items-center gap-3 py-2">
+          <div
+            class="rounded-full w-fit py-2 px-[10px] bg-secondary text-xl text-white"
+          >
+            {{ item.name + " " + item.lastname | shortName }}
+          </div>
+          <span>{{ item.name }} {{ item.lastname }}</span>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <ng-template #loadingSpinner>
+      <div class="flex h-full items-center justify-center py-4">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+  <div class="flex justify-center gap-4">
+    <button mat-stroked-button color="primary" (click)="cancel()">
+      Cancelar
+    </button>
+    <button mat-flat-button color="primary" (click)="confirmSelection()">
+      {{ afterSelectLoading ? "Espere un momento..." : "Seleccionar" }}
+    </button>
+  </div>
+</section>

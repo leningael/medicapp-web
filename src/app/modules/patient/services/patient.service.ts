@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Patient } from '../interfaces/patient.interfaces';
+import { Patient, PatientOverview } from '../interfaces/patient.interfaces';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,16 +9,19 @@ import { environment } from 'src/environments/environment';
 })
 export class PatientService {
   apiUrl: string = environment.apiUrl;
-  //apiUrl = 'http://127.0.0.1:7004'
   constructor(
     private http: HttpClient,
   ) {}
   
-  get_patients(): Observable<Patient[]> {
+  get_patients(): Observable<PatientOverview[]> {
     return this.http.get<Patient[]>(`${this.apiUrl}/patients`);
   }
 
-  get_my_patients(doctor_id: string): Observable<Patient[]> {
+  getPatientsByTerm(term: string): Observable<Patient[]> {
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients/search/${term}`);
+  }
+
+  getDrPatients(doctor_id: string): Observable<PatientOverview[]> {
     return this.http.get<Patient[]>(`${this.apiUrl}/patients/doctor/${doctor_id}`);
   }
 

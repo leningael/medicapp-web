@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientService } from '../../services/patient.service';
-import { Patient } from '../../interfaces/patient.interfaces';
+import { Patient, PatientOverview } from '../../interfaces/patient.interfaces';
 import { Router } from '@angular/router';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
 
@@ -10,7 +10,7 @@ import { CredentialsService } from 'src/app/shared/services/credentials.service'
   styleUrls: ['./patients-list.component.css']
 })
 export class PatientsListComponent implements OnInit {
-  public patients: Patient[] = [];
+  public patients: PatientOverview[] = [];
   public userName: string = '';
   public isLoading: boolean = true;
   public options: string[] = ['Nombre (A-Z)', 'Nombre (Z-A)'];
@@ -29,15 +29,15 @@ export class PatientsListComponent implements OnInit {
   }
 
   get_patients(doctor_id: string): void {
-    this.patientService.get_my_patients(doctor_id).subscribe(
-      (response: Patient[]) => {
-        this.patients = response;
+    this.patientService.getDrPatients(doctor_id).subscribe(
+      (patients) => {
+        this.patients = patients;
         this.isLoading = false;
       }
     );
   }
 
-  get_fullname(patient: Patient): string {
+  get_fullname(patient: PatientOverview): string {
     return `${patient.name} ${patient.lastname}`;
   }
 

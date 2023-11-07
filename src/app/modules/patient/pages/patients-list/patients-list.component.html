@@ -14,8 +14,8 @@
     </div>
   
     <ng-container *ngIf="!isLoading; else loading">
-        <ng-container *ngIf="patients == []; else table">
-            <div class="bg-accent p-4 rounded-md mt-3 text-center">
+        <ng-container *ngIf="patients == [] || notFound ; else table">
+            <div class="bg-yellow-100 p-4 rounded-md mt-10 text-center">
                 No patients found.
             </div>
         </ng-container>
@@ -50,6 +50,7 @@
     </ng-container>
 
     <ng-template #loading>
+        
         <loading-spinner whatIsLoading="pacientes"></loading-spinner>
     </ng-template>
 

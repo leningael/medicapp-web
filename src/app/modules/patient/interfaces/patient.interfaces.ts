@@ -11,12 +11,12 @@ export interface Patient {
     address: string;
     zipcode: string;
     bloodtype: string;
-    doctors: string[];
+    doctors:  string[];
 }
 
 export interface PatientOverview {
-    _id: string;
-    name: string;
-    lastname: string;
-    curp: string;
+    _id: string
+    name: string
+    lastname: string
+    curp: string
 }

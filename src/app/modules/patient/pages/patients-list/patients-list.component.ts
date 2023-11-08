@@ -17,6 +17,7 @@ export class PatientsListComponent implements OnInit {
   public isLoading: boolean = true;
   public options: string[] = ['Nombre (A-Z)', 'Nombre (Z-A)'];
   private doctor_id: string = '';
+  public notFound: boolean = false;
 
   constructor(
     private patientService: PatientService,
@@ -36,6 +37,9 @@ export class PatientsListComponent implements OnInit {
       (response) => {
         this.patients = response;
         this.isLoading = false;
+      } , (error) => {
+        this.isLoading = false;
+        this.notFound = true;
       }
     );
   }
@@ -73,8 +77,8 @@ export class PatientsListComponent implements OnInit {
 
   openAddPatient(): void {
     const dialogRef = this.dialog.open(AddPatientComponent, {
-      height: '550px',
-      
+      disableClose: true,
+      data: {doctor_id: this.doctor_id}
     });
 
     dialogRef.afterClosed().subscribe((result) => {

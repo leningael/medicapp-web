@@ -25,9 +25,14 @@ export class PatientService {
     return this.http.get<PatientOverview[]>(`${this.apiUrl}/patients/doctor/${doctor_id}`, {params} );
   }
 
+  addPatient(patient: Patient): Observable<Patient> {
+    return this.http.post<Patient>(`${this.apiUrl}/patients`, patient);
+  }
+
   updatePatients(patient: Patient): Observable<Patient> {
     return this.http.put<Patient>(`${this.apiUrl}/patients`, patient);
   }
+
   deletePatient(patient_id: string): Observable<Patient> {
     return this.http.delete<Patient>(`${this.apiUrl}/patients/${patient_id}`);
   }

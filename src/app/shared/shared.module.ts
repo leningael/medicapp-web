@@ -24,6 +24,9 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { FilterDataComponent } from './components/filter-data/filter-data.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [SidebarLayoutComponent, ConfirmDialogComponent, ShortNamePipe, LoadingSpinnerComponent, SearchBoxComponent, FilterDataComponent],
@@ -59,7 +62,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    
   ],
 })
 export class SharedModule {}

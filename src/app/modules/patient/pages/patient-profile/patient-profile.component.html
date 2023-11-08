@@ -1,1 +1,15 @@
-<p>patient-profile works!</p>
+
+<div class="flex justify-center m-5" *ngIf="!isLoading">
+    <mat-tab-group class="w-full"  mat-stretch-tabs="false">
+        <mat-tab label="Información Personal">
+            <personal-data *ngIf="!isLoading" [patient]=patient></personal-data>
+        </mat-tab>
+        <mat-tab label="Historial Clínico"> 
+            <clinical-history *ngIf="!isLoading"></clinical-history> 
+        </mat-tab>
+        <mat-tab label="Notas"> 
+            <notes *ngIf="!isLoading" ></notes> 
+        </mat-tab>
+    </mat-tab-group>
+    
+</div>

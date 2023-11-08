@@ -4,7 +4,7 @@ import { Patient, PatientOverview } from '../../interfaces/patient.interfaces';
 import { Router } from '@angular/router';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddPatientComponent } from '../add-patient/add-patient.component';
+import { AddPatientComponent } from '../../components/add-patient/add-patient.component';
 
 @Component({
   selector: 'app-patients-list',
@@ -76,9 +76,10 @@ export class PatientsListComponent implements OnInit {
   }
 
   openAddPatient(): void {
+    const doctorID = this.doctor_id;
     const dialogRef = this.dialog.open(AddPatientComponent, {
       disableClose: true,
-      data: {doctor_id: this.doctor_id}
+      data: {doctorID ,patient: null}
     });
 
     dialogRef.afterClosed().subscribe((result) => {

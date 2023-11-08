@@ -18,7 +18,7 @@
   </section>
   <section class="grow h-full px-10 py-5">
     <mat-card *ngIf="!isLoading; else loadingSpinner" class="max-h-full overflow-auto">
-      <appointments-list [calendarSlots]="calendarSlots"></appointments-list>
+      <appointments-list [calendarSlots]="calendarSlots" (onChanges)="requestDayAppointments()"></appointments-list>
     </mat-card>
     <ng-template #loadingSpinner>
       <div class="flex h-full items-center justify-center">

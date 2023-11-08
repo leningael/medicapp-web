@@ -1,3 +1,5 @@
+import { FormControl } from "@angular/forms";
+
 export interface TimeRange {
     start_time: string;
     end_time: string;
@@ -17,6 +19,14 @@ export class BuissinessHours implements TimeRange {
     }
 }
 
+export interface AppointmentForm {
+    doctor_id: FormControl<string>;
+    patient_id: FormControl<string>;
+    cause: FormControl<string>;
+    start_datetime: FormControl<Date>;
+    end_datetime: FormControl<Date>;
+}
+
 export interface CreateAppointmentArgs {
     doctor_id: string;
     patient_id: string;
@@ -24,6 +34,7 @@ export interface CreateAppointmentArgs {
     start_datetime: string;
     end_datetime: string;
 }
+
 
 export interface Appointment {
     _id: string;
@@ -46,6 +57,7 @@ export interface DayAppointments {
 }
 
 export interface CalendarSlot {
-    time: string;
+    start_datetime: Date;
+    end_datetime: Date;
     appointment: Appointment | false;
 }

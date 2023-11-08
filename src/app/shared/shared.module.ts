@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Material Modules
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDateFnsModule } from '@angular/material-date-fns-adapter';
-import {MatSelectModule} from '@angular/material/select'; 
+import { MatSelectModule } from '@angular/material/select';
 
 import { SidebarLayoutComponent } from './components/sidebar-layout/sidebar-layout.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -23,13 +24,24 @@ import { ShortNamePipe } from './pipes/short-name.pipe';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { FilterDataComponent } from './components/filter-data/filter-data.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { SelectPersonComponent } from './components/select-person/select-person.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
-  declarations: [SidebarLayoutComponent, ConfirmDialogComponent, ShortNamePipe, LoadingSpinnerComponent, SearchBoxComponent, FilterDataComponent],
+  declarations: [
+    SidebarLayoutComponent,
+    ConfirmDialogComponent,
+    ShortNamePipe,
+    LoadingSpinnerComponent,
+    SearchBoxComponent,
+    FilterDataComponent,
+    SelectPersonComponent,
+    SearchPipe,
+  ],
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
     // Material Modules
     MatButtonModule,
     MatDialogModule,
@@ -39,7 +51,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatFormFieldModule 
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     SidebarLayoutComponent,
@@ -48,6 +61,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoadingSpinnerComponent,
     SearchBoxComponent,
     FilterDataComponent,
+    SelectPersonComponent,
     // Material Modules
     MatButtonModule,
     MatCardModule,
@@ -59,7 +73,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
   ],
 })
 export class SharedModule {}

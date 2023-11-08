@@ -26,6 +26,7 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
 import { FilterDataComponent } from './components/filter-data/filter-data.component';
 import { SelectPersonComponent } from './components/select-person/select-person.component';
 import { SearchPipe } from './pipes/search.pipe';
+
 @NgModule({
   declarations: [
     SidebarLayoutComponent,

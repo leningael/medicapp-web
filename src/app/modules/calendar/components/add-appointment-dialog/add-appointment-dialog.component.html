@@ -14,6 +14,7 @@
     <div class="grow overflow-hidden">
       <select-person
         [dataSource$]="requestPatients.bind(this)"
+        [frontendSearch]="false"
         [afterSelectLoading]="isSaving"
         searchPlaceholder="Buscar paciente"
         label="Selecciona un paciente para crear la cita"

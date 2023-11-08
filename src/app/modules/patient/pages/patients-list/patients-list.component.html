@@ -9,7 +9,7 @@
             </shared-search-box>
         </div>
         <div>
-            <button mat-flat-button color="primary"><mat-icon>add</mat-icon> Agregar paciente</button>
+            <button mat-flat-button color="primary" (click)="openAddPatient()"><mat-icon>add</mat-icon> Agregar paciente</button>
         </div>
     </div>
   
@@ -31,15 +31,15 @@
                         </div>
                         <div class="flex items-center mr-3">
                             <button class="bg-primary-light hover:bg-primary-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                (click)="seePatientProfile(patient._id)">
+                                (click)="seePatientProfile(patient._id!)">
                                 <mat-icon fontSet="material-icons-outlined">visibility</mat-icon>
                             </button>
                             <button class="bg-success-light hover:bg-success-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                (click)="addNote(patient._id)">
+                                (click)="addNote(patient._id!)">
                                 <mat-icon fontSet="material-icons-outlined">note_add</mat-icon>
                             </button>
                             <button class="bg-warn-light hover:bg-warn-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                (click)="deletePatient(patient._id)">
+                                (click)="deletePatient(patient._id!)">
                                 <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
                             </button>
                         </div>

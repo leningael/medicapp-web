@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CalendarService } from '../../services/calendar.service';
 import { PatientService } from 'src/app/modules/patient/services/patient.service';
 import { ToastrService } from 'ngx-toastr';
-import { catchError } from 'rxjs';
+import { catchError, of } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AppointmentForm, CreateAppointmentArgs } from '../../models/calendar';
 import { format } from 'date-fns';
@@ -33,12 +33,13 @@ export class AddAppointmentDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: {doctorId:string, start_datetime: Date, end_datetime: Date},
   ) { }
 
-  requestPatients(){
-    return this.patientsService.get_patients()
+  requestPatients(args: SelectPersonArgs){
+    return this.patientsService.getAllExistingPatients(args.search)
     .pipe(
       catchError((err) => {
-        this.toastr.error("Error al cargar pacientes", "Error");
-        return [];
+        if(err.status !== 404)
+          this.toastr.error("No se encontraron pacientes coincidentes", "Error");
+        return of([]);
       }
     ));
   }

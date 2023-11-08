@@ -1,10 +1,10 @@
 
 export interface Patient {
-    _id: string;
-    name: string;
-    lastname: string;
-    gender: string;
-    curp: string;
+    _id?:      string;
+    name:      string;
+    lastname:  string;
+    gender:    string;
+    curp:      string;
     birthdate: string;
     phone: string;
     email: string;

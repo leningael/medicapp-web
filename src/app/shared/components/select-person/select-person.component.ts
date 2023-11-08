@@ -59,7 +59,7 @@ export class SelectPersonComponent implements OnInit, OnDestroy {
     }
     this.subs = this.dataSource$(args).subscribe((items: any[]) => {
       this.items = items;
-      this.isLoading = false;
+      this.isLoading = false;      
     });
   }
 

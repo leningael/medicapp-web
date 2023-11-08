@@ -34,7 +34,7 @@ export class PatientsListComponent implements OnInit {
 
   get_patients(doctor_id: string): void {
     this.patientService.getDrPatients(doctor_id).subscribe(
-      (response: PatientOverview[]) => {
+      (response) => {
         this.patients = response;
         this.isLoading = false;
       } , (error) => {
@@ -68,7 +68,7 @@ export class PatientsListComponent implements OnInit {
   searchPatient(term: string): void {
     this.isLoading = true;
     this.patientService.getDrPatients(term, this.doctor_id).subscribe(
-      (response: PatientOverview[]) => {
+      (response) => {
         this.patients = response;
         this.isLoading = false;
       }

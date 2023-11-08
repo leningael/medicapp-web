@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarService } from '../../services/calendar.service';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
-import { addHours, format, isEqual } from 'date-fns';
+import { addHours, format, isEqual, startOfDay } from 'date-fns';
 import {
   Appointment,
   BuissinessHours,
@@ -19,7 +19,7 @@ import { SetBusinessHoursDialogComponent } from '../../components/set-business-h
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarPageComponent implements OnInit, OnDestroy {
-  selectedDate: Date = new Date();
+  selectedDate: Date = startOfDay(new Date());
   doctorId: string = this.credentialsService.user_credentials._id;
   businessHours: BuissinessHours = new BuissinessHours();
   appointments: Appointment[] = [];
@@ -81,7 +81,8 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     let currentTime = startTime;
     while (currentTime <= endTime) {
       const slot: CalendarSlot = {
-        time: format(currentTime, 'HH:mm'),
+        start_datetime: currentTime,
+        end_datetime: addHours(currentTime, 1),
         appointment:
           this.appointments.find(({ start_datetime }) =>
             isEqual(currentTime, new Date(start_datetime))

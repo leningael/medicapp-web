@@ -11,3 +11,7 @@ export interface UserData{
     name: string;
     lastname: string;
 }
+
+export interface SelectPersonArgs{
+    search?: string;
+}

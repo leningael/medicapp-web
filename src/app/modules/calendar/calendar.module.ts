@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AppointmentsListComponent } from './components/appointments-list/appointments-list.component';
 import { SetBusinessHoursDialogComponent } from './components/set-business-hours-dialog/set-business-hours-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddAppointmentDialogComponent } from './components/add-appointment-dialog/add-appointment-dialog.component';
 
 
 
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     CalendarPageComponent,
     AppointmentsListComponent,
-    SetBusinessHoursDialogComponent
+    SetBusinessHoursDialogComponent,
+    AddAppointmentDialogComponent
   ],
   imports: [
     CommonModule,

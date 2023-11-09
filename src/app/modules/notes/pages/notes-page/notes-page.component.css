@@ -2,17 +2,23 @@
     width: 100%;
   }
   
-  .mat-column-date{
-    width: 50px;
-    border-right: 1px solid currentColor;
-    padding-right: 25px;
-    text-align: center;
-  }
-  
-  .mat-column-title {
-    padding-left: 16px;
-    font-size: 20px;
-  }
-  
+.mat-column-date{
+  width: 50px;
+  border-right: 1px solid currentColor;
+  padding-right: 25px;
+  text-align: center;
+}
 
-  
+.mat-column-title {
+  padding-left: 16px;
+  flex-grow:1;
+  font-size: 20px;
+  width:75%;
+}
+
+.add-button::before{
+  display: inline;
+  content: '+';
+  margin-right: 5px;
+  font-size: 1.2rem;
+}

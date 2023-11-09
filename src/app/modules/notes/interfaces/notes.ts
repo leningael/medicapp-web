@@ -1,33 +1,29 @@
 export interface Notes {
+    // database info
     id: string;
     title: string;
-    content: string;
-    createdAt: Date;
-    updatedAt: Date;
-    deletedAt: Date;
-    userId: string;
-    isDeleted: boolean;
-    isArchived: boolean;
-    isPinned: boolean;
-    color: string;
-    isTrashed: boolean;
-    isStarred: boolean;
-    isShared: boolean;
-    isRead: boolean;
-    isFavourite: boolean;
-    isNotification: boolean;
-    isNotificationSent: boolean;
-    isNotificationViewed: boolean;
-    isNotificationDeleted: boolean;
-    isNotificationUpdated: boolean;
-    isNotificationCreated: boolean;
-    isNotificationShared: boolean;
-    isNotificationUnshared: boolean;
-    isNotificationFavourite: boolean;
-    isNotificationUnfavourite: boolean;
-    isNotificationTrashed: boolean;
-    isNotificationUntrashed: boolean;
-    isNotificationStarred: boolean;
-    isNotificationUnstarred: boolean;
-    isNotificationRead: boolean;
+    doctor_name: string;
+    pacient_name: string;
+    date: string;
+    // information
+    reason: string;
+    information: string;
+    diagnosis: string;
+    temperature: string;
+    weight: string;
+    height: string;
+    imc: string;
+    sistolic_pressure: string;
+    diastolic_pressure: string;
+    medication: Meds[];
+}
+
+
+export interface Meds{
+    medicament: string;
+    quantity: string;
+    consume_method: string;
+    frequency: string;
+    duration: string;
+    notes: string;
 }

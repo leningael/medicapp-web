@@ -8,7 +8,6 @@ import { Notes } from '../interfaces/notes';
 })
 export class NotesService {
   apiUrl: string = environment.apiUrl;
-  //apiUrl = 'http://127.0.0.1:7004'
   constructor(
     private http: HttpClient,
   ) {}

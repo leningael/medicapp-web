@@ -1,10 +1,11 @@
 import { Component, Inject, inject } from '@angular/core';
 import { PatientsListComponent } from '../../pages/patients-list/patients-list.component';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorsService } from 'src/app/shared/services/validators.service';
 import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../interfaces/patient.interfaces';
+import { AddExistingPatientComponent } from '../add-existing-patient/add-existing-patient.component';
 
 @Component({
   selector: 'app-add-patient',
@@ -33,14 +34,14 @@ export class AddPatientComponent {
       private formBuilder: FormBuilder,
       private validatorService: ValidatorsService,
       private patientService: PatientService,
-      @Inject(MAT_DIALOG_DATA) public data: any
+      @Inject(MAT_DIALOG_DATA) public data: any,
+      private dialog: MatDialog,
     ) { 
       if (this.data.patient) {
         this.loadForm(this.data.patient);
       } 
       
     }
-
 
     loadForm(patient: Patient): void {
       this.newPatientForm.reset({
@@ -76,6 +77,18 @@ export class AddPatientComponent {
         }
       )
     }
+    
+    openAddExistingPatient(): void {
+      const dialogRef = this.dialog.open(AddExistingPatientComponent, {
+        disableClose: true,
+        width: '480px',
+        height: '650px',
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        this.dialogRef.close(result);
+      })
+    };
+    
 
     saveData(): void {
       this.newPatientForm.markAllAsTouched();

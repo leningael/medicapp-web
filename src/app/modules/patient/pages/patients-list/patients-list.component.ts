@@ -67,7 +67,7 @@ export class PatientsListComponent implements OnInit {
 
   searchPatient(term: string): void {
     this.isLoading = true;
-    this.patientService.getDrPatients(term, this.doctor_id).subscribe(
+    this.patientService.getDrPatients(this.doctor_id, term).subscribe(
       (response) => {
         this.patients = response;
         this.isLoading = false;

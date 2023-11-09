@@ -76,7 +76,7 @@
                     </thead>
                     <tbody>
                         <tr class="text-center" *ngFor="let appointment of appointments">
-                            <td class="px-4 py-3"> {{ appointment.start_datetime | date:'MMM dd, hh:mm a' }} </td>
+                            <td class="px-4 py-3"> {{ appointment.start_datetime | date:'MMM dd, HH:mm ' }} </td>
                             <td class="px-4 py-3"> {{ appointment.cause }} </td> 
                             <td class="px-4 py-5"> 
                                 <span class="bg-green-600 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"

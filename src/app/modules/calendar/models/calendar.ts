@@ -39,8 +39,8 @@ export interface CreateAppointmentArgs {
 export interface Appointment {
     _id: string;
     cause: string;
-    start_datetime: string;
-    end_datetime: string;
+    start_datetime: Date;
+    end_datetime: Date;
     patient: PatientInfo;
 }
 
@@ -60,4 +60,10 @@ export interface CalendarSlot {
     start_datetime: Date;
     end_datetime: Date;
     appointment: Appointment | false;
+}
+
+export interface AppointmentMove {
+    appointment_id: string;
+    start_datetime: string;
+    end_datetime: string;
 }

@@ -34,7 +34,7 @@ export class AddAppointmentDialogComponent {
   ) { }
 
   requestPatients(args: SelectPersonArgs){
-    return this.patientsService.getAllExistingPatients(args.search)
+    return this.patientsService.getDrPatients(this.data.doctorId, args.search)
     .pipe(
       catchError((err) => {
         if(err.status !== 404)

@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ClinicalHIstoryComponent } from './pages/patient-profile/components/clinical-history/clinical-history.component';
 import { NotesComponent } from './pages/patient-profile/components/notes/notes.component';
 import { PersonalDataComponent } from './pages/patient-profile/components/personal-data/personal-data.component';
+import { AddExistingPatientComponent } from './components/add-existing-patient/add-existing-patient.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PersonalDataComponent } from './pages/patient-profile/components/person
     AddPatientComponent,
     PersonalDataComponent,
     ClinicalHIstoryComponent,
-    NotesComponent
+    NotesComponent,
+    AddExistingPatientComponent
   ],
   imports: [
     CommonModule,

@@ -25,7 +25,6 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { ShortNamePipe } from './pipes/short-name.pipe';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
-import { FilterDataComponent } from './components/filter-data/filter-data.component';
 import { SelectPersonComponent } from './components/select-person/select-person.component';
 import { SearchPipe } from './pipes/search.pipe';
 
@@ -36,7 +35,6 @@ import { SearchPipe } from './pipes/search.pipe';
     ShortNamePipe,
     LoadingSpinnerComponent,
     SearchBoxComponent,
-    FilterDataComponent,
     SelectPersonComponent,
     SearchPipe,
   ],
@@ -62,7 +60,6 @@ import { SearchPipe } from './pipes/search.pipe';
     ShortNamePipe,
     LoadingSpinnerComponent,
     SearchBoxComponent,
-    FilterDataComponent,
     SelectPersonComponent,
     // Material Modules
     MatButtonModule,

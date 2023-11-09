@@ -13,8 +13,9 @@ export class PatientService {
     private http: HttpClient,
   ) {}
   
-  getAllExistingPatients(search?: string): Observable<PatientOverview[]> {
+  getAllExistingPatients(doctor_id?: string, search?: string): Observable<PatientOverview[]> {
     let params = new HttpParams();
+    if (doctor_id) params = params.append('doctor_id', doctor_id);
     if (search) params = params.append('search', search);
     return this.http.get<PatientOverview[]>(`${this.apiUrl}/patients`, {params} );
   }
@@ -25,12 +26,20 @@ export class PatientService {
     return this.http.get<PatientOverview[]>(`${this.apiUrl}/patients/doctor/${doctor_id}`, {params} );
   }
 
+  getPatient(patient_id: string): Observable<Patient> {
+    return this.http.get<Patient>(`${this.apiUrl}/patients/${patient_id}`);
+  }
+
   addPatient(patient: Patient): Observable<Patient> {
     return this.http.post<Patient>(`${this.apiUrl}/patients`, patient);
   }
 
-  updatePatients(patient: Patient): Observable<Patient> {
-    return this.http.put<Patient>(`${this.apiUrl}/patients`, patient);
+  addDoctorToPatient(patient_id: string, doctor_id: string): Observable<Patient> {
+    return this.http.put<Patient>(`${this.apiUrl}/patients/linkExistingPatient`, {patient_id, doctor_id});
+  }
+
+  updatePatient(patient_id: string, patient: Patient): Observable<Patient> {
+    return this.http.put<Patient>(`${this.apiUrl}/patients/${patient_id}`, patient);
   }
 
   deletePatient(patient_id: string): Observable<Patient> {

@@ -14,4 +14,5 @@ export interface UserData{
 
 export interface SelectPersonArgs{
     search?: string;
+    doctor_id?: string;
 }

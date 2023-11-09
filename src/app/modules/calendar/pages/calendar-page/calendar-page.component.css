@@ -7,25 +7,3 @@
 .mat-calendar-header{
   background-color: var(--secondary-color);
 }
-
-.small-button{
-  min-width: auto;
-  padding: 5px;
-}
-
-.small-button .mat-icon{
-  margin: 0px;
-  font-size: 24px;
-  width: auto;
-  height: auto;
-}
-
-.mat-orange {
-  background-color: #f3bf30!important;
-  color: #fff!important;
-}
-
-.mat-success {
-  background-color: #1C9D40!important;
-  color: #fff!important;
-}

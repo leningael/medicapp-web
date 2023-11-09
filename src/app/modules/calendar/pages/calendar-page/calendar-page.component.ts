@@ -25,6 +25,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   appointments: Appointment[] = [];
   calendarSlots: CalendarSlot[] = [];
   isLoading: boolean = false;
+  testDate: string = '2023-11-05T12:00:00.000+00:00';
   subs!: Subscription;
 
   constructor(
@@ -55,6 +56,8 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
             business_hours
           );
           this.appointments = appointments;
+          console.log(this.appointments);
+          
           this.generateCalendarSlots();
           this.isLoading = false;
         },

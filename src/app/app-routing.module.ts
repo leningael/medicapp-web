@@ -44,6 +44,13 @@ const routes: Routes = [
         canLoad: [AuthGuard],
         canActivate: [PermissionGuard],
         data: { permissions: ['doctor'] }
+      },
+      {
+        path: 'receptionists',
+        loadChildren: () => import('./modules/receptionists/receptionists.module').then(m => m.ReceptionistsModule),
+        canLoad: [AuthGuard],
+        canActivate: [PermissionGuard],
+        data: { permissions: ['doctor'] }
       }
     ]
   }

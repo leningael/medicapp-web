@@ -53,26 +53,26 @@ export class SelectPersonComponent implements OnInit, OnDestroy {
   loadData() {
     this.subs && this.subs.unsubscribe();
     this.isLoading = true;
-    const args:SelectPersonArgs = {};
-    if(!this.frontendSearch){
+    const args: SelectPersonArgs = {};
+    if (!this.frontendSearch) {
       args.search = this.itemsToSearch;
     }
     this.subs = this.dataSource$(args).subscribe((items: any[]) => {
       this.items = items;
-      this.isLoading = false;      
+      this.isLoading = false;
     });
   }
 
   listenToSearch() {
     this.searchCtrl.valueChanges
       .pipe(
-        (this.frontendSearch) ? debounceTime(0) : debounceTime(400),
+        this.frontendSearch ? debounceTime(0) : debounceTime(400),
         distinctUntilChanged()
       )
       .subscribe({
         next: (value: string) => {
           this.itemsToSearch = value;
-          if(!this.frontendSearch){
+          if (!this.frontendSearch) {
             this.loadData();
           }
         },

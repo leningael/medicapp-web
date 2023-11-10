@@ -1,0 +1,29 @@
+<div class="h-full flex flex-col px-10 py-6">
+    <div class="flex items-center justify-between mb-8">
+        <shared-search-box
+            placeholder="Buscar recepcionista">
+        </shared-search-box>
+        <button mat-flat-button color="primary" (click)="addReceptionist()">
+            <mat-icon>add</mat-icon>
+            Agregar recepcionista
+        </button>
+    </div>
+    <div class="grow">
+        <loading-spinner *ngIf="isLoading; else receptionistsList" whatIsLoading="recepcionistas"></loading-spinner>
+        <ng-template #receptionistsList>
+            <mat-card *ngFor="let receptionist of receptionists" class="px-4 py-3 mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="rounded-full w-fit py-2 px-3 bg-secondary text-xl text-white">
+                        {{ (receptionist.name + ' ' + receptionist.lastname) | shortName }}
+                    </div>
+                    <p class="grow">{{ receptionist.name + ' ' + receptionist.lastname }}</p>
+                    <div class="flex items-center gap-4">
+                        <button mat-flat-button color="warn" class="small-button">
+                            <mat-icon class="material-icons-outlined">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-card>
+        </ng-template>
+    </div>
+</div>

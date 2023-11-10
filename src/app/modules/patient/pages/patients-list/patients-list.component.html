@@ -18,7 +18,7 @@
                 </div>
             </ng-container>
             <ng-template #table class="">
-                <mat-card *ngFor="let patient of patients" class="mb-3">
+                <mat-card *ngFor="let patient of patients" class="mb-4">
                     <mat-card-content>
                         <div class="flex justify-between px-4">
                             <div class="flex items-center gap-2">
@@ -29,15 +29,15 @@
                             </div>
                             <div class="flex items-center">
                                 <button class="bg-primary-light hover:bg-primary-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                    (click)="seePatientProfile(patient._id!)">
+                                    (click)="seePatientProfile(patient._id)">
                                     <mat-icon fontSet="material-icons-outlined">visibility</mat-icon>
                                 </button>
                                 <button class="bg-success-light hover:bg-success-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                    (click)="addNote(patient._id!)">
+                                    (click)="addNote(patient._id)">
                                     <mat-icon fontSet="material-icons-outlined">note_add</mat-icon>
                                 </button>
                                 <button class="bg-warn-light hover:bg-warn-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                    (click)="deletePatient(patient._id!)">
+                                    (click)="deletePatient(patient._id)">
                                     <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
                                 </button>
                             </div>
@@ -47,8 +47,7 @@
             </ng-template>
         </ng-container>
   
-        <ng-template #loading>
-            
+        <ng-template #loading>  
             <loading-spinner whatIsLoading="pacientes"></loading-spinner>
         </ng-template>
      </div>

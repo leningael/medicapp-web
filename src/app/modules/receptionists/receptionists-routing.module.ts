@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { ReceptionistsPageComponent } from './pages/receptionists-page/receptionists-page.component';
 
 const routes: Routes = [
   {
@@ -7,7 +8,7 @@ const routes: Routes = [
     children: [
       {
         path: 'receptionists-list',
-        // component
+        component: ReceptionistsPageComponent,
         data: { title: 'Lista de recepcionistas' },
       },
       {
@@ -19,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [],
-  exports: [],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ReceptionistsRoutingModule { }

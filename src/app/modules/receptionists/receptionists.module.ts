@@ -4,12 +4,14 @@ import { ReceptionistsPageComponent } from './pages/receptionists-page/reception
 import { ReceptionistsRoutingModule } from './receptionists-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddReceptionistDialogComponent } from './components/add-receptionist-dialog/add-receptionist-dialog.component';
 
 
 
 @NgModule({
   declarations: [
-    ReceptionistsPageComponent
+    ReceptionistsPageComponent,
+    AddReceptionistDialogComponent
   ],
   imports: [
     CommonModule,

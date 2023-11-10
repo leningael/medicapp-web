@@ -1,0 +1,57 @@
+<div class="m-5">
+    <div class="flex justify-between ">
+        <div>Ordenar por</div>
+
+        <div class="flex gap-x-5">
+            <shared-search-box
+            placeholder="Buscar nota"
+            (onValue)="searchNotes($event)">
+        </shared-search-box>
+        <button class="add-button bg-primary-light hover:bg-primary-hover mx-2 py-2 px-4 rounded-md text-white"
+                (click)="addNote()">
+            Agregar nota
+        </button>
+    </div>
+    </div>
+
+    <div class="my-5">
+        <div *ngIf="!isLoading">
+            <table mat-table [dataSource]="data" class="mat-elevation-z8 notes-table">
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>Date</th>
+                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef >Paciente - Motivo Consulta</th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+
+            <!-- Options Column -->
+            <ng-container matColumnDef="option">
+                <th mat-header-cell *matHeaderCellDef>Options</th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="flex items-center mr-3 justify-center text-white text-center font-light">
+                        <button class="bg-orange-600 hover:bg-orange-700 mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                        (click)="null">
+                        <mat-icon fontSet="material-icons">edit_note</mat-icon>
+                    </button>
+
+                    <button class="bg-red-500 hover:bg-red-700 mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                    (click)="null">
+                        <mat-icon fontSet="material-icons">delete_forever</mat-icon>
+                    </button>
+
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</div>

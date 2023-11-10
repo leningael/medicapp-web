@@ -29,7 +29,6 @@ export class ClinicalHistoryComponent implements OnInit {
     this.clinicalHistoryForm.disable();
   }
   ngOnInit(): void {
-    console.log(this.patient)
     if (this.patient.clinical_history) this.loadForm(this.patient.clinical_history!)
   }
 
@@ -63,7 +62,6 @@ export class ClinicalHistoryComponent implements OnInit {
       }
     )
   }
-  
 
   savePatientData(){
     this.patientService.updatePatientClinicalHistory(this.patient._id!, this.clinicalHistoryForm.value).subscribe(

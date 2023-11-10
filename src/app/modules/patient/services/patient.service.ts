@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClinicalHistory, Patient, PatientOverview } from '../interfaces/patient.interfaces';
 import { environment } from 'src/environments/environment';
+import { Appointment, PatientAppointment } from '../../calendar/models/calendar';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class PatientService {
 
   getPatient(patient_id: string): Observable<Patient> {
     return this.http.get<Patient>(`${this.apiUrl}/patients/${patient_id}`);
+  }
+
+  getPatientAppointments(doctor_id: string, patient_id: string): Observable<PatientAppointment[]> {
+    return this.http.get<PatientAppointment[]>(`${this.apiUrl}/calendar/get_patient_appointments/${doctor_id}/${patient_id}`);
   }
 
   addPatient(patient: Patient): Observable<Patient> {

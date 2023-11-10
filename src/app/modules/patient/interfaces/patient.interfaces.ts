@@ -12,6 +12,7 @@ export interface Patient {
     zipcode: string;
     bloodtype: string;
     doctors:  string[];
+    clinical_history?: ClinicalHistory;
 }
 
 export interface PatientOverview {
@@ -19,4 +20,13 @@ export interface PatientOverview {
     name: string
     lastname: string
     curp: string
+}
+
+export interface ClinicalHistory {
+    pathological?: string
+    non_pathological?: string
+    inherit?: string
+    surgical?: string
+    current_medication?: string
+    allergies?: string
 }

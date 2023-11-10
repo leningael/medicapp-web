@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { BusinessHours } from 'src/app/modules/doctor/interfaces/doctor.interfaces';
 import { CalendarService } from '../../services/calendar.service';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
 import { ToastrService } from 'ngx-toastr';
+import { BusinessHours } from '../../models/calendar';
 
 @Component({
   selector: 'app-set-business-hours-dialog',

@@ -14,7 +14,7 @@
         <ng-container *ngIf="!isLoading; else loading">
             <ng-container *ngIf="!patients.length || notFound ; else table">
                 <div class="bg-yellow-100 p-4 rounded-md mt-6 text-center">
-                    No patients found.
+                    No se econtraron pacientes.
                 </div>
             </ng-container>
             <ng-template #table class="">
@@ -27,17 +27,14 @@
                                 </p>
                                 {{ get_fullname(patient) }}
                             </div>
-                            <div class="flex items-center">
-                                <button class="bg-primary-light hover:bg-primary-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                    (click)="seePatientProfile(patient._id!)">
+                            <div class="flex items-center gap-4">
+                                <button mat-flat-button color="primary" class="small-button" (click)="seePatientProfile(patient._id!)">
                                     <mat-icon fontSet="material-icons-outlined">visibility</mat-icon>
                                 </button>
-                                <button class="bg-success-light hover:bg-success-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                    (click)="addNote(patient._id!)">
+                                <button mat-flat-button color="success" class="small-button" (click)="addNote(patient._id!)">
                                     <mat-icon fontSet="material-icons-outlined">note_add</mat-icon>
                                 </button>
-                                <button class="bg-warn-light hover:bg-warn-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                                    (click)="deletePatient(patient._id!)">
+                                <button mat-flat-button color="warn" class="small-button" (click)="deletePatient(patient._id!)">
                                     <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
                                 </button>
                             </div>

@@ -6,6 +6,7 @@ import { ValidatorsService } from 'src/app/shared/services/validators.service';
 import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../interfaces/patient.interfaces';
 import { AddExistingPatientComponent } from '../add-existing-patient/add-existing-patient.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-patient',
@@ -36,11 +37,11 @@ export class AddPatientComponent {
       private patientService: PatientService,
       @Inject(MAT_DIALOG_DATA) public data: any,
       private dialog: MatDialog,
+      private toastr: ToastrService,
     ) { 
       if (this.data.patient) {
         this.loadForm(this.data.patient);
       } 
-      
     }
 
     loadForm(patient: Patient): void {
@@ -66,6 +67,7 @@ export class AddPatientComponent {
     updatePatient(): void {
       this.patientService.updatePatient(this.data.patient._id, this.newPatientForm.value).subscribe(
         (response) => {
+          this.toastr.success("Información del paciente actualizada", "Éxito");
           this.dialogRef.close(response);
       })
     }
@@ -73,6 +75,7 @@ export class AddPatientComponent {
     addPatient(): void {
       this.patientService.addPatient(this.newPatientForm.value).subscribe(
         (response) => {
+          this.toastr.success("Paciente añadido", "Éxito");
           this.dialogRef.close(response);
         }
       )

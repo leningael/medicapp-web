@@ -41,7 +41,7 @@ export class AddExistingPatientComponent {
     this.isSaving = true;
     this.doctor_id = this.credentialsService.user_credentials._id;
     this.patientsService.addDoctorToPatient(patient._id!, this.doctor_id).subscribe(
-      (patient: Patient) => {
+      (patient) => {
         this.toastr.success("Paciente añadido", "Éxito");
         this.dialogRef.close(patient);
       }

@@ -66,31 +66,37 @@
         <p class="text-2xl py-6 text-end">Historial de citas</p>
         <mat-card class="">
             <mat-card-content class="pb-0">
-                <table class="table-auto w-full bg-white divide-y divide-black">
-                    <thead>
-                        <tr class="text-center">
-                            <th class="py-4">Fecha</th>
-                            <th class="py-4">Descripción</th>
-                            <th class="py-4">Estado de la cita</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="text-center" *ngFor="let appointment of appointments">
-                            <td class="px-4 py-3"> {{ appointment.start_datetime | date:'MMM dd, HH:mm ' }} </td>
-                            <td class="px-4 py-3"> {{ appointment.cause }} </td> 
-                            <td class="px-4 py-5"> 
-                                <span class="bg-green-600 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"
-                                    *ngIf = isAppointmentPassed(appointment.start_datetime)>
-                                    Finalizada
-                                </span>
-                                <span class="bg-indigo-800 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"
-                                    *ngIf = !isAppointmentPassed(appointment.start_datetime)>
-                                    Pendiente
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <ng-container *ngIf="!appointments || notFound; else appointmentsTable">
+                    <p class="text-center">No hay citas registradas.</p>
+                </ng-container>
+                
+                <ng-template #appointmentsTable>
+                    <table class="table-auto w-full bg-white divide-y divide-black">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="py-4">Fecha</th>
+                                <th class="py-4">Descripción</th>
+                                <th class="py-4">Estado de la cita</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" *ngFor="let appointment of appointments">
+                                <td class="px-4 py-3"> {{ appointment.start_datetime | date:'MMM dd, HH:mm ' }} </td>
+                                <td class="px-4 py-3"> {{ appointment.cause }} </td> 
+                                <td class="px-4 py-5"> 
+                                    <span class="bg-emerald-500 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"
+                                        *ngIf = "appointment.status == 'completed'">
+                                        Finalizada
+                                    </span>
+                                    <span class="bg-indigo-800 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"
+                                        *ngIf = "appointment.status == 'pending'">
+                                        Pendiente
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-template>
                 
             </mat-card-content>
         </mat-card>

@@ -39,9 +39,17 @@ export interface CreateAppointmentArgs {
 export interface Appointment {
     _id: string;
     cause: string;
-    start_datetime: Date;
-    end_datetime: Date;
+    start_datetime: string;
+    end_datetime: string;
     patient: PatientInfo;
+}
+
+export interface PatientAppointment {
+    _id: string;
+    cause: string;
+    start_datetime: string;
+    end_datetime: string;
+    status: string;
 }
 
 export interface PatientInfo {

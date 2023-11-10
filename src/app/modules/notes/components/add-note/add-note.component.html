@@ -1,1 +1,18 @@
-<h1>{{ !patient_id ? 'Agregar' : 'Editar'}} Nota</h1>
+<h1 class="text-white text-center items-center bg-primary-light p-5 hover:cursor-pointer" (click)="toggle = !toggle">{{selected_patient ?? 'Ninguno'}} - Seleccionado</h1>
+<div [className]=" toggle ? '' : 'hidden' ">
+    <div class="grow overflow-hidden px-8 py-6 ">
+        <select-person
+        [dataSource$]="requestPatients.bind(this)"
+        [frontendSearch]="false"
+        [withInitialData]="false"
+        [afterSelectLoading]="isSaving"
+        searchPlaceholder="Buscar paciente por CURP"
+        (onSelect)="selectPatient($event)"
+        (onCancel)="toggle = !toggle"
+        ></select-person>
+    </div>
+</div>
+<section>
+    <h1 class="w-100 bg-primary-light text-center items-start">{{ !note_id ? 'Agregar' : 'Editar'}} Nota</h1>
+    <h3>{{ patient_id }} - Genero - Grupo Sanguineo </h3>
+</section >

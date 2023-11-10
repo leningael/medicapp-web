@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Material Modules
 import { MatButtonModule } from '@angular/material/button';
@@ -55,6 +55,7 @@ import { SearchPipe } from './pipes/search.pipe';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
+    FormsModule,
   ],
   exports: [
     SidebarLayoutComponent,
@@ -78,7 +79,7 @@ import { SearchPipe } from './pipes/search.pipe';
     MatSelectModule,
     MatTabsModule,
     MatPaginatorModule,
-    
+    FormsModule,
   ],
 })
 export class SharedModule {}

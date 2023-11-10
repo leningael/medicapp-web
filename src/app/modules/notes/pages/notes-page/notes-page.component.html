@@ -1,6 +1,11 @@
 <div class="m-5">
     <div class="flex justify-between ">
-        <div>Ordenar por</div>
+        <select  [(ngModel)]="selectedValue" (change)="handleSort()" class="bg-white border border-black p-3 rounded-md">
+            <option value="default" >Ordenar por</option>
+            <ng-container *ngFor="let option of sortOptions">
+                <option value="{{option}}">{{option}}</option>
+            </ng-container>
+        </select>
 
         <div class="flex gap-x-5">
             <shared-search-box
@@ -16,7 +21,7 @@
 
     <div class="my-5">
         <div *ngIf="!isLoading">
-            <table mat-table [dataSource]="data" class="mat-elevation-z8 notes-table">
+            <table mat-table [dataSource]="this.data" class="mat-elevation-z8 notes-table">
 
             <!-- Date Column -->
             <ng-container matColumnDef="date">
@@ -41,10 +46,9 @@
                     </button>
 
                     <button class="bg-red-500 hover:bg-red-700 mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                    (click)="null">
+                    (click)="handleDeleteNote(element.id)">
                         <mat-icon fontSet="material-icons">delete_forever</mat-icon>
                     </button>
-
                     </div>
                 </td>
             </ng-container>

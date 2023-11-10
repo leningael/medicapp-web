@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Patient, PatientOverview } from '../interfaces/patient.interfaces';
+import { ClinicalHistory, Patient, PatientOverview } from '../interfaces/patient.interfaces';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -40,6 +40,10 @@ export class PatientService {
 
   updatePatient(patient_id: string, patient: Patient): Observable<Patient> {
     return this.http.put<Patient>(`${this.apiUrl}/patients/${patient_id}`, patient);
+  }
+
+  updatePatientClinicalHistory(patient_id: string, clinicalHistory: ClinicalHistory): Observable<Patient> {
+    return this.http.put<Patient>(`${this.apiUrl}/patients/${patient_id}/clinicalHistory`, clinicalHistory);
   }
 
   deletePatient(patient_id: string): Observable<Patient> {

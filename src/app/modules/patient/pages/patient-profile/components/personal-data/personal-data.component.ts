@@ -115,7 +115,7 @@ export class PersonalDataComponent implements OnInit{
   }
   
 
-  getPatient(): void {
+  getUpdatedPatient(): void {
     this.patientService.getPatient(this.patient._id!).subscribe(
       (patient: Patient) => {
         this.patient = patient;
@@ -134,7 +134,7 @@ export class PersonalDataComponent implements OnInit{
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.isLoading = true;
-        this.getPatient();
+        this.getUpdatedPatient();
       }
     });
   }

@@ -1,5 +1,17 @@
-<h1 class="text-white text-center items-center bg-primary-light p-5 hover:cursor-pointer" (click)="toggle = !toggle">{{selected_patient ?? 'Ninguno'}} - Seleccionado</h1>
-<div [className]=" toggle ? '' : 'hidden' ">
+<section class="text-white text-center items-center bg-primary-light p-5 hover:cursor-pointer" (click)="toggle = !toggle">
+
+    <h1>{{ selected_patient && (selectPatient.name && selected_patient.lastname) ? 
+    selected_patient.name + ' ' + selected_patient.lastname 
+    : 'Ninguno' }} - Seleccionado</h1>
+    
+    <h3>{{selected_patient && (selected_patient.gender && selected_patient.bloodtype) ? 
+        selected_patient.gender + '-' + selected_patient.bloodtype : 
+        'Genero - Grupo Sanguíneo'
+    }}</h3>
+
+</section>
+
+<section [className]=" toggle ? '' : 'hidden' ">
     <div class="grow overflow-hidden px-8 py-6 ">
         <select-person
         [dataSource$]="requestPatients.bind(this)"
@@ -11,8 +23,14 @@
         (onCancel)="toggle = !toggle"
         ></select-person>
     </div>
-</div>
-<section>
-    <h1 class="w-100 bg-primary-light text-center items-start">{{ !note_id ? 'Agregar' : 'Editar'}} Nota</h1>
-    <h3>{{ patient_id }} - Genero - Grupo Sanguineo </h3>
-</section >
+</section>
+
+<main >
+    <h1 class="w-full h-full bg-primary-light text-center items-start p-4 text-white">{{ !note_id ? 'Agregar' : 'Editar'}} Nota</h1>
+    <div class="grid grid-flow-col justify-between w-full h-full p-2">
+        <h1>Dime quien???</h1>
+        <h1>Dime quien???</h1>
+        <h1>Dime quien???</h1>
+    </div>
+    <button class="justify-self-end align-bottom" mat-button mat-raised-button mat-dialog-close color="primary">Guardar</button>
+</main >

@@ -1,0 +1,9 @@
+.businessHoursBtn {
+  height: auto;
+  padding: 5px;
+  width: 100%;
+}
+
+.mat-calendar-header{
+  background-color: var(--secondary-color);
+}

@@ -1,0 +1,18 @@
+<section class="h-full flex flex-col">
+    <div class="bg-secondary text-center py-5">
+        <p class="text-2xl">Agregar paciente existente</p>
+    </div>
+      <div class="grow overflow-hidden px-8 py-6 ">
+        <select-person
+          [dataSource$]="requestPatients.bind(this)"
+          [frontendSearch]="false"
+          [withInitialData]="false"
+          [afterSelectLoading]="isSaving"
+          searchPlaceholder="Buscar paciente por CURP"
+          (onSelect)="onSelectPatient($event)"
+          (onCancel)="closeDialog()"
+        ></select-person>
+      </div>
+    
+</section>
+  

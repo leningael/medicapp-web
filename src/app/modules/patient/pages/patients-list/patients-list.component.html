@@ -1,0 +1,58 @@
+<div class="absolute inset-0 px-10 flex flex-col">
+    <div class="flex items-center pt-6 justify-between">
+        <div class="flex items-center">
+            <shared-search-box 
+                placeholder="Buscar en mis pacientes"
+                (onValue)="searchPatient($event)">
+            </shared-search-box>
+        </div>
+        <div>
+            <button mat-flat-button color="primary" (click)="openAddPatient()"><mat-icon>add</mat-icon> Agregar paciente</button>
+        </div>
+    </div>
+    <div class="grow overflow-auto my-5">
+        <ng-container *ngIf="!isLoading; else loading">
+            <ng-container *ngIf="!patients.length || notFound ; else table">
+                <div class="bg-yellow-100 p-4 rounded-md mt-6 text-center">
+                    No patients found.
+                </div>
+            </ng-container>
+            <ng-template #table class="">
+                <mat-card *ngFor="let patient of patients" class="mb-3">
+                    <mat-card-content>
+                        <div class="flex justify-between px-4">
+                            <div class="flex items-center gap-2">
+                                <p class="rounded-full bg-secondary text-white p-2">
+                                    {{ get_fullname(patient) | shortName }}
+                                </p>
+                                {{ get_fullname(patient) }}
+                            </div>
+                            <div class="flex items-center">
+                                <button class="bg-primary-light hover:bg-primary-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                                    (click)="seePatientProfile(patient._id!)">
+                                    <mat-icon fontSet="material-icons-outlined">visibility</mat-icon>
+                                </button>
+                                <button class="bg-success-light hover:bg-success-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                                    (click)="addNote(patient._id!)">
+                                    <mat-icon fontSet="material-icons-outlined">note_add</mat-icon>
+                                </button>
+                                <button class="bg-warn-light hover:bg-warn-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                                    (click)="deletePatient(patient._id!)">
+                                    <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </ng-template>
+        </ng-container>
+  
+        <ng-template #loading>
+            
+            <loading-spinner whatIsLoading="pacientes"></loading-spinner>
+        </ng-template>
+     </div>
+
+
+</div>
+   

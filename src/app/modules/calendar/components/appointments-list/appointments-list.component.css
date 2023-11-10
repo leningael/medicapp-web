@@ -1,0 +1,29 @@
+.mat-mdc-list-item {
+  height: auto;
+}
+
+.small-button {
+  min-width: auto;
+  padding: 5px;
+}
+
+.small-button .mat-icon {
+  margin: 0px;
+  font-size: 24px;
+  width: auto;
+  height: auto;
+}
+
+.mat-orange {
+  background-color: #f3bf30 !important;
+  color: #fff !important;
+}
+
+.mat-success {
+  background-color: var(--success-color) !important;
+  color: #fff !important;
+}
+
+.delete-spinner{
+    --mdc-circular-progress-active-indicator-color: #fff !important;
+}

@@ -6,7 +6,7 @@ import { PatientRoutingModule } from './patient-routing.module';
 import { PatientProfileComponent } from './pages/patient-profile/patient-profile.component';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ClinicalHIstoryComponent } from './pages/patient-profile/components/clinical-history/clinical-history.component';
+import { ClinicalHistoryComponent } from './pages/patient-profile/components/clinical-history/clinical-history.component';
 import { NotesComponent } from './pages/patient-profile/components/notes/notes.component';
 import { PersonalDataComponent } from './pages/patient-profile/components/personal-data/personal-data.component';
 import { AddExistingPatientComponent } from './components/add-existing-patient/add-existing-patient.component';
@@ -17,7 +17,7 @@ import { AddExistingPatientComponent } from './components/add-existing-patient/a
     PatientProfileComponent,
     AddPatientComponent,
     PersonalDataComponent,
-    ClinicalHIstoryComponent,
+    ClinicalHistoryComponent,
     NotesComponent,
     AddExistingPatientComponent
   ],

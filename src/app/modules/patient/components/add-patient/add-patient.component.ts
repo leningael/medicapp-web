@@ -93,6 +93,7 @@ export class AddPatientComponent {
     saveData(): void {
       this.newPatientForm.markAllAsTouched();
       if (this.newPatientForm.invalid) return;
+      console.log(this.newPatientForm.value)
       this.newPatientForm.value.birthdate = this.newPatientForm.value.birthdate.toISOString();
       if (this.data.patient) {
         this.updatePatient()
@@ -100,7 +101,5 @@ export class AddPatientComponent {
         this.newPatientForm.get('doctors')!.patchValue([...this.newPatientForm.get('doctors')!.value, this.data.doctorID])
         this.addPatient()  
       }
-      
-      
     }
 }

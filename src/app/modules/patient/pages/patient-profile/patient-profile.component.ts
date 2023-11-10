@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPatientComponent } from '../../components/add-patient/add-patient.component';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
@@ -12,7 +12,7 @@ import { is, th } from 'date-fns/locale';
   templateUrl: './patient-profile.component.html',
   styleUrls: ['./patient-profile.component.css']
 })
-export class PatientProfileComponent {
+export class PatientProfileComponent implements OnInit{
 
   isLoading: boolean = true;
   patiendId: string = '';
@@ -24,13 +24,20 @@ export class PatientProfileComponent {
     private route: ActivatedRoute,
   ) { 
     this.patiendId = route.snapshot.params['id']
-    this.getPatient()
   }
+
+  ngOnInit(): void {
+    this.getPatient();
+    
+  }
+  
 
   getPatient(): void {
     this.patientService.getPatient(this.patiendId.toString()).subscribe(
       (patient: Patient) => {
         this.patient = patient;
+
+        // Object.assign(this.patient, patient);
         this.isLoading = false;
       }
     )

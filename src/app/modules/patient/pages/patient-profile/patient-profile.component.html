@@ -5,7 +5,7 @@
             <personal-data *ngIf="!isLoading" [patient]=patient></personal-data>
         </mat-tab>
         <mat-tab label="Historial Clínico"> 
-            <clinical-history *ngIf="!isLoading"></clinical-history> 
+            <clinical-history *ngIf="!isLoading" [patient]=patient></clinical-history> 
         </mat-tab>
         <mat-tab label="Notas"> 
             <notes *ngIf="!isLoading" ></notes> 

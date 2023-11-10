@@ -75,3 +75,8 @@ export interface AppointmentMove {
     start_datetime: string;
     end_datetime: string;
 }
+
+export interface BusinessHours {
+    start_time: string;
+    end_time:   string;
+}

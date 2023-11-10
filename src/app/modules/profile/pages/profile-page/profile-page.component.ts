@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserCredentials, UserData } from 'src/app/shared/interfaces/credentials.interfaces';
 
 @Component({
   selector: 'app-profile-page',
@@ -6,15 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile-page.component.css'],
 })
 export class ProfilePageComponent {
-  imageUrl: string = 'https://www.w3schools.com/howto/img_avatar.png';
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      this.imageUrl = reader.result as string;
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+  public user!: UserData;
+  public isLoading: boolean = true;
+
+  constructor(
+    // private userCredencials: UserCredentials
+  ) {}
+
+  getUserData(): void {
+    
   }
+
+  openEditProfile(): void {}
+
 }
+

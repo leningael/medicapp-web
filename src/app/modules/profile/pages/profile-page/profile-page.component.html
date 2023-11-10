@@ -1,3 +1,38 @@
-<section class="h-full">
-    <p>profile-page works!</p>
-</section>
+<div class="flex flex-col md:flex-row">
+  <div class="w-full md:w-1/2 p-6">
+    <div class="mb-4">
+      <mat-form-field class="w-full">
+        <input matInput placeholder="Nombre" />
+      </mat-form-field>
+    </div>
+    <div class="mb-4">
+      <mat-form-field class="w-full">
+        <textarea matInput placeholder="Biografía" rows="5"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button color="primary">Actualizar perfil</button>
+    </div>
+  </div>
+  <div class="w-full md:w-1/2 p-6 flex flex-col items-center justify-center">
+    <div class="relative w-32 h-32">
+      <img
+        [src]="imageUrl"
+        alt="Imagen de perfil"
+        class="w-32 h-32 rounded-full object-cover"
+      />
+      <label
+        for="fileInput"
+        class="flex justify-center items-center absolute bottom-0 right-0 bg-primary rounded-full p-1 cursor-pointer h-10 w-10"
+      >
+        <mat-icon class="text-white">edit</mat-icon>
+        <input
+          type="file"
+          id="fileInput"
+          style="display: none"
+          (change)="onFileSelected($event)"
+        />
+      </label>
+    </div>
+  </div>
+</div>

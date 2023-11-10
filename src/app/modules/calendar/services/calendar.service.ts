@@ -30,7 +30,6 @@ export class CalendarService {
   }
 
   moveAppointment(moveArgs:AppointmentMove): Observable<any>{
-    console.log(moveArgs);
     return this.http.put<any>(`${this.apiUrl}/calendar/move_appointment`, moveArgs);
   }
 }

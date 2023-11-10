@@ -55,9 +55,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
             this.businessHours,
             business_hours
           );
-          this.appointments = appointments;
-          console.log(this.appointments);
-          
+          this.appointments = appointments;          
           this.generateCalendarSlots();
           this.isLoading = false;
         },

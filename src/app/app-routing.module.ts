@@ -51,7 +51,14 @@ const routes: Routes = [
         canLoad: [AuthGuard],
         canActivate: [PermissionGuard],
         data: { permissions: ['doctor'] }
-      }
+      },
+      {
+        path: 'notes',
+        loadChildren: () => import('./modules/notes/notes.module').then(m => m.NotesModule),
+        canLoad: [AuthGuard],
+        canActivate: [PermissionGuard],
+        data: { permissions: ['doctor'] }
+      },
     ]
   }
 ];

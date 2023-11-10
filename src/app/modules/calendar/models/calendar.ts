@@ -44,6 +44,14 @@ export interface Appointment {
     patient: PatientInfo;
 }
 
+export interface PatientAppointment {
+    _id: string;
+    cause: string;
+    start_datetime: string;
+    end_datetime: string;
+    status: string;
+}
+
 export interface PatientInfo {
     _id: string;
     name: string;

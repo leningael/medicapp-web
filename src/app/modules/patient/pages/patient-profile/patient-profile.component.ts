@@ -27,17 +27,13 @@ export class PatientProfileComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.getPatient();
-    
+    this.getPatient(); 
   }
-  
 
   getPatient(): void {
     this.patientService.getPatient(this.patiendId.toString()).subscribe(
       (patient: Patient) => {
         this.patient = patient;
-
-        // Object.assign(this.patient, patient);
         this.isLoading = false;
       }
     )

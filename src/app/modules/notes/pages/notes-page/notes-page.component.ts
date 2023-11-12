@@ -81,9 +81,11 @@ export class NotesPageComponent implements OnInit{
 
   }
 
-  addNote(){
+  addNote(noteId? : string){
     let dialog = this.matDialog.open(AddNoteComponent,{
-      data: {},
+      data: {
+        noteId
+      },
       width: '800px',
       height: '600px'
     });

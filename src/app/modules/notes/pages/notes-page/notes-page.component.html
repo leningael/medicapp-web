@@ -41,7 +41,7 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="flex items-center mr-3 justify-center text-white text-center font-light">
                         <button class="bg-orange-600 hover:bg-orange-700 mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
-                        (click)="null">
+                        (click)="addNote(element.id)">
                         <mat-icon fontSet="material-icons">edit_note</mat-icon>
                     </button>
 

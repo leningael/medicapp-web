@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, of } from 'rxjs';
 import { Patient } from 'src/app/modules/patient/interfaces/patient.interfaces';
@@ -14,7 +14,6 @@ import { CredentialsService } from 'src/app/shared/services/credentials.service'
 })
 export class AddNoteComponent implements OnInit{
   public note_id: string;
-  private dialogRef: any;
   public isSaving: boolean = false;
   public doctor_id: string = '';
   public toggle: boolean = true;
@@ -23,6 +22,7 @@ export class AddNoteComponent implements OnInit{
   constructor(private credentialsService: CredentialsService,
               private toastr: ToastrService,
               private patientsService: PatientService,
+              private dialogRef: MatDialogRef<AddNoteComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any,
               private dialogService: MatDialog){
               this.note_id = '';
@@ -31,7 +31,6 @@ export class AddNoteComponent implements OnInit{
   ngOnInit(): void {
     this.selected_patient = this.data.patient;
     this.note_id = this.data.note_id || '';
-    this.dialogRef = this.data.dialogRef;
   }
 
   selectPatient(patient: Patient){
@@ -42,7 +41,7 @@ export class AddNoteComponent implements OnInit{
   closeDialog(){
     this.dialogRef.close();
   }
-  
+
   requestPatients(args: SelectPersonArgs){
     this.doctor_id = this.credentialsService.user_credentials._id;
     return this.patientsService.getAllExistingPatients(this.doctor_id, args.search)
@@ -54,4 +53,8 @@ export class AddNoteComponent implements OnInit{
       }
     ));
   }
+  
+  handleAddMedication() {
+    throw new Error('Method not implemented.');
+    }
 }

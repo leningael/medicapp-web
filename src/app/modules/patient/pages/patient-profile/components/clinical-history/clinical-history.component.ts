@@ -71,7 +71,11 @@ export class ClinicalHistoryComponent implements OnInit {
     )
   }
 
-
-
-  
+  cancel(){
+    if (this.patient.clinical_history) this.loadForm(this.patient.clinical_history!)
+    else this.clinicalHistoryForm.reset();
+    this.isEditing = false;
+    this.clinicalHistoryForm.disable();
+   
+  }
 }

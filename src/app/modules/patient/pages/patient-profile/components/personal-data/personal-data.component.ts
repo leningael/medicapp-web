@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { Appointment, PatientAppointment } from 'src/app/modules/calendar/models/calendar';
+import {  PatientAppointment } from 'src/app/modules/calendar/models/calendar';
 import { AddPatientComponent } from 'src/app/modules/patient/components/add-patient/add-patient.component';
 import { Patient } from 'src/app/modules/patient/interfaces/patient.interfaces';
 import { PatientService } from 'src/app/modules/patient/services/patient.service';
@@ -13,8 +12,8 @@ import { CredentialsService } from 'src/app/shared/services/credentials.service'
   styleUrls: ['./personal-data.component.css']
 })
 export class PersonalDataComponent implements OnInit{
-  @ViewChild('paginator') paginator!: MatPaginator;
   @Input() patient!: Patient;
+  @Output() onUpdate: EventEmitter<boolean> = new EventEmitter();
   public appointments: PatientAppointment[] = [];
   doctor_id: string = '';
   isLoading: boolean = true;
@@ -40,16 +39,7 @@ export class PersonalDataComponent implements OnInit{
         this.isLoading = false;
       },
       (error) => {
-        this.notFound = true;
-        this.isLoading = false;
-      }
-    )
-  }
-
-  getUpdatedPatient(): void {
-    this.patientService.getPatient(this.patient._id!).subscribe(
-      (patient: Patient) => {
-        this.patient = patient;
+        this.appointments = [];
         this.isLoading = false;
       }
     )
@@ -64,8 +54,7 @@ export class PersonalDataComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.isLoading = true;
-        this.getUpdatedPatient();
+        this.onUpdate.emit(true);
       }
     });
   }

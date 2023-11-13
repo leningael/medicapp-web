@@ -18,7 +18,7 @@ export class AddPatientComponent {
       name: ['', Validators.required],
       lastname: ['', Validators.required],
       gender: ['', Validators.required],
-      curp: ['', Validators.required],
+      curp: ['', [Validators.required, Validators.minLength(18), Validators.maxLength(18)]],
       birthdate: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [
@@ -96,7 +96,6 @@ export class AddPatientComponent {
     saveData(): void {
       this.newPatientForm.markAllAsTouched();
       if (this.newPatientForm.invalid) return;
-      console.log(this.newPatientForm.value)
       this.newPatientForm.value.birthdate = this.newPatientForm.value.birthdate.toISOString();
       if (this.data.patient) {
         this.updatePatient()

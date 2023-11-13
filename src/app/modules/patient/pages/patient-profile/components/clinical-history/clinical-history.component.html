@@ -1,5 +1,6 @@
 <div class="px-20">
-    <div class="flex justify-end pb-10">
+    <div class="flex justify-end pb-10 gap-5">
+        <button mat-stroked-button class="custom-stroked" (click)="cancel()">Cancel</button>
         <button mat-flat-button class="custom" (click)="edit()"><mat-icon>{{isEditing ? 'save' : 'edit'}}</mat-icon>{{isEditing ? 'Guardar' : 'Editar'}}</button>
     </div>
   

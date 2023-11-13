@@ -12,10 +12,6 @@
   color: #fff !important;
 }
 
-.delete-spinner{
-    --mdc-circular-progress-active-indicator-color: #fff !important;
-}
-
 /* Styles for material buttons with an icon */
 .small-button {
   min-width: auto;

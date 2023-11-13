@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AppointmentForm, CreateAppointmentArgs } from '../../models/calendar';
 import { format } from 'date-fns';
 import { SelectPersonArgs } from 'src/app/shared/interfaces/credentials.interfaces';
+import { PatientOverview } from 'src/app/modules/patient/interfaces/patient.interfaces';
 
 @Component({
   selector: 'app-add-appointment-dialog',
@@ -44,7 +45,7 @@ export class AddAppointmentDialogComponent {
     ));
   }
 
-  onSelectPatient(patient: any){
+  onSelectPatient(patient: PatientOverview){
     this.appointmentForm.controls['patient_id'].setValue(patient._id);
     this.saveAppointment();
   }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -9,14 +9,20 @@ import { ReceptionistOverview } from '../interfaces/receptionists.interfaces';
 })
 export class ReceptionistsService {
   apiUrl: string = environment.apiUrl;
+
   constructor(private http:HttpClient) { }
 
-  getReceptionists():Observable<ReceptionistOverview[]> {
-    return this.http.get<ReceptionistOverview[]>(`${this.apiUrl}/receptionist`);
+  getAllReceptionists(doctor_id?:string, search?: string):Observable<ReceptionistOverview[]> {
+    let params = new HttpParams();
+    if(doctor_id) params = params.append('doctor_id', doctor_id);
+    if(search) params = params.append('search', search);
+    return this.http.get<ReceptionistOverview[]>(`${this.apiUrl}/receptionist/all_receptionists`, {params});
   }
 
-  getDrReceptionists(doctor_id:string):Observable<ReceptionistOverview[]> {
-    return this.http.get<ReceptionistOverview[]>(`${this.apiUrl}/receptionist/${doctor_id}`);
+  getDrReceptionists(doctor_id:string, search?: string):Observable<ReceptionistOverview[]> {
+    let params = new HttpParams();
+    if(search) params = params.append('search', search);
+    return this.http.get<ReceptionistOverview[]>(`${this.apiUrl}/receptionist/dr_receptionists/${doctor_id}`, {params});
   }
 
   assignDoctor(receptionist_id:string, doctor_id:string):Observable<any> {

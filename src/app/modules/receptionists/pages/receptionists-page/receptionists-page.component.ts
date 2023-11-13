@@ -5,24 +5,26 @@ import { CredentialsService } from 'src/app/shared/services/credentials.service'
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { AddReceptionistDialogComponent } from '../../components/add-receptionist-dialog/add-receptionist-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-receptionists-page',
   templateUrl: './receptionists-page.component.html',
-  styleUrls: ['./receptionists-page.component.css']
+  styleUrls: ['./receptionists-page.component.css'],
 })
 export class ReceptionistsPageComponent implements OnInit {
   receptionists: ReceptionistOverview[] = [];
   doctorId: string = this.credentialsService.user_credentials._id;
   isLoading: boolean = false;
+  removing: string | false = false;
 
   constructor(
-    private receptionistsService:ReceptionistsService, 
-    private credentialsService:CredentialsService,
-    private dialog:MatDialog,
-    private toastr: ToastrService,
-    ) { }
-  
+    private receptionistsService: ReceptionistsService,
+    private credentialsService: CredentialsService,
+    private dialog: MatDialog,
+    private toastr: ToastrService
+  ) {}
+
   ngOnInit(): void {
     this.requestReceptionists();
   }
@@ -35,7 +37,10 @@ export class ReceptionistsPageComponent implements OnInit {
         this.isLoading = false;
       },
       error: () => {
-        this.toastr.error("Error al cargar la lista de recepcionistas", "Error");
+        this.toastr.error(
+          'Error al cargar la lista de recepcionistas',
+          'Error'
+        );
         this.isLoading = false;
       },
     });
@@ -55,4 +60,31 @@ export class ReceptionistsPageComponent implements OnInit {
     });
   }
 
+  unassignReceptionist(receptionist: ReceptionistOverview) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Eliminar recepcionista',
+        message: '¿Está seguro que desea eliminar este recepcionista?',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      this.removing = receptionist._id;
+      this.receptionistsService
+        .unassignDoctor(receptionist._id, this.doctorId)
+        .subscribe({
+          next: () => {
+            this.receptionists = this.receptionists.filter(
+              (receptionist) => receptionist._id !== this.removing
+            );
+            this.removing = false;
+          },
+          error: () => {
+            this.toastr.error('Error al desasignar recepcionista', 'Error');
+            this.removing = false;
+          },
+        });
+    });
+  }
 }

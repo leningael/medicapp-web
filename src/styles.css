@@ -27,3 +27,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 .mat-mdc-form-field .mdc-notched-outline__notch {
   border-right: none;
 }
+
+.white-spinner{
+  --mdc-circular-progress-active-indicator-color: #fff !important;
+}

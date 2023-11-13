@@ -1,108 +1,115 @@
 <div class="px-20">
-    <ng-container *ngIf="!isLoading; else loading">
-        <div class="flex justify-between">
-            <p class="font-medium text-3xl py-6">{{patient.name}} {{patient.lastname}}</p>
-             <button mat-flat-button class="custom" (click)="openEditPatient()"><mat-icon>edit</mat-icon> Editar</button>
-        </div> 
-        <div class="flex justify-between">
-            <mat-card class="card text-center mt-5 flex flex-col justify-center">
-                <mat-card-content>
-                    <p class="text-xs text-gray-500 tracking-widest">Género</p>
-                    <p class="tracking-widest">{{patient.gender}}</p>
-                </mat-card-content>
-            </mat-card>
-        
-            <mat-card class="card text-center mt-5 flex flex-col justify-center">
-                <mat-card-content>
-                    <p class="text-xs text-gray-500 tracking-widest">Fecha de nacimiento</p>
-                    <p class=" tracking-widest">{{patient.birthdate | date:'dd/MM/yyyy'}}</p>
-                </mat-card-content>
-            </mat-card>
-        
-            <mat-card class="card text-center mt-5 flex flex-col justify-center">
-                <mat-card-content>
-                    <p class="text-xs text-gray-500 tracking-widest">Teléfono</p>
-                    <p class="tracking-widest">{{patient.phone}}</p>
-                </mat-card-content>
-            </mat-card>
-    
-            <mat-card class="card text-center mt-5 flex flex-col justify-center">
-                <mat-card-content>
-                    <p class="text-xs text-gray-500 tracking-widest">Correo electrónico</p>
-                    <p class="tracking-widest">{{patient.email}}</p>
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="flex justify-between">
-            <mat-card class="card text-center mt-5  flex flex-col justify-center">
-                <mat-card-content>
-                    <p class="text-xs text-gray-500 tracking-widest">Grupo Sanguíneo</p>
-                    <p class="tracking-widest">{{patient.bloodtype}}</p>
-                </mat-card-content>
-            </mat-card>
-        
-            <mat-card class="card text-center mt-5 flex flex-col justify-center">
-                <mat-card-content>
-                    <p class="text-xs text-gray-500 tracking-widest">CURP</p>
-                    <p class="tracking-widest">{{patient.curp}}</p>
-                </mat-card-content>
-            </mat-card>
-        
-            <mat-card class="card text-center mt-5 flex flex-col justify-center">
-                <mat-card-content>
-                    <p class="text-xs text-gray-500 tracking-widest">Dirección</p>
-                    <p class="tracking-widest">{{patient.address}}</p>
-                </mat-card-content>
-            </mat-card>
-    
-            <mat-card class="card text-center mt-5 flex flex-col justify-center">
-                <mat-card-content>
-                    <p class="text-xs text-gray-500 tracking-widest">Código Postal</p>
-                    <p class="tracking-widest">{{patient.zipcode}}</p>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    
-        <p class="text-2xl py-6 text-end">Historial de citas</p>
-        <mat-card class="">
-            <mat-card-content class="pb-0">
-                <ng-container *ngIf="!appointments || notFound; else appointmentsTable">
-                    <p class="text-center">No hay citas registradas.</p>
-                </ng-container>
-                
-                <ng-template #appointmentsTable>
-                    <table class="table-auto w-full bg-white divide-y divide-black">
-                        <thead>
-                            <tr class="text-center">
-                                <th class="py-4">Fecha</th>
-                                <th class="py-4">Descripción</th>
-                                <th class="py-4">Estado de la cita</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center" *ngFor="let appointment of appointments">
-                                <td class="px-4 py-3"> {{ appointment.start_datetime | date:'MMM dd, HH:mm ' }} </td>
-                                <td class="px-4 py-3"> {{ appointment.cause }} </td> 
-                                <td class="px-4 py-5"> 
-                                    <span class="bg-emerald-500 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"
-                                        *ngIf = "appointment.status == 'completed'">
-                                        Finalizada
-                                    </span>
-                                    <span class="bg-indigo-800 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"
-                                        *ngIf = "appointment.status == 'pending'">
-                                        Pendiente
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </ng-template>
-                
-            </mat-card-content>
-        </mat-card>
-    </ng-container>
+  <div class="flex justify-between">
+    <p class="font-medium text-3xl py-6">
+      {{ patient.name }} {{ patient.lastname }}
+    </p>
+    <button mat-flat-button class="custom" (click)="openEditPatient()">
+      <mat-icon>edit</mat-icon> Editar
+    </button>
+  </div>
+  <div class="flex justify-between">
+    <mat-card class="card text-center mt-5 flex flex-col justify-center">
+      <mat-card-content>
+        <p class="text-xs text-gray-500 tracking-widest">Género</p>
+        <p class="tracking-widest">{{ patient.gender }}</p>
+      </mat-card-content>
+    </mat-card>
 
-    <ng-template #loading>
-        <loading-spinner whatIsLoading="paciente"></loading-spinner>
-    </ng-template>
+    <mat-card class="card text-center mt-5 flex flex-col justify-center">
+      <mat-card-content>
+        <p class="text-xs text-gray-500 tracking-widest">Fecha de nacimiento</p>
+        <p class="tracking-widest">
+          {{ patient.birthdate | date : "dd/MM/yyyy" }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card text-center mt-5 flex flex-col justify-center">
+      <mat-card-content>
+        <p class="text-xs text-gray-500 tracking-widest">Teléfono</p>
+        <p class="tracking-widest">{{ patient.phone }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card text-center mt-5 flex flex-col justify-center">
+      <mat-card-content>
+        <p class="text-xs text-gray-500 tracking-widest">Correo electrónico</p>
+        <p class="tracking-widest">{{ patient.email }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="flex justify-between">
+    <mat-card class="card text-center mt-5 flex flex-col justify-center">
+      <mat-card-content>
+        <p class="text-xs text-gray-500 tracking-widest">Grupo Sanguíneo</p>
+        <p class="tracking-widest">{{ patient.bloodtype }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card text-center mt-5 flex flex-col justify-center">
+      <mat-card-content>
+        <p class="text-xs text-gray-500 tracking-widest">CURP</p>
+        <p class="tracking-widest">{{ patient.curp }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card text-center mt-5 flex flex-col justify-center">
+      <mat-card-content>
+        <p class="text-xs text-gray-500 tracking-widest">Dirección</p>
+        <p class="tracking-widest">{{ patient.address }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card text-center mt-5 flex flex-col justify-center">
+      <mat-card-content>
+        <p class="text-xs text-gray-500 tracking-widest">Código Postal</p>
+        <p class="tracking-widest">{{ patient.zipcode }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <p class="text-2xl py-6 text-end">Historial de citas</p>
+  
+    <mat-card>
+      <mat-card-content class="pb-0" *ngIf="!isLoading; else loadingTxt">
+          <p *ngIf="!appointments.length; else appointmentsTable" class="text-center">No hay citas registradas.</p>
+        <ng-template #appointmentsTable>
+          <table class="table-auto w-full bg-white divide-y divide-black">
+            <thead>
+              <tr class="text-center">
+                <th class="py-4">Fecha</th>
+                <th class="py-4">Descripción</th>
+                <th class="py-4">Estado de la cita</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center" *ngFor="let appointment of appointments">
+                <td class="px-4 py-3">
+                  {{ appointment.start_datetime | date : "MMM dd, HH:mm " }}
+                </td>
+                <td class="px-4 py-3">{{ appointment.cause }}</td>
+                <td class="px-4 py-5">
+                  <span
+                    class="bg-emerald-500 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"
+                    *ngIf="appointment.status == 'completed'"
+                  >
+                    Finalizada
+                  </span>
+                  <span
+                    class="bg-indigo-800 text-white w-40 text-sm font-semibold px-6 py-2 rounded tracking-widest"
+                    *ngIf="appointment.status == 'pending'"
+                  >
+                    Pendiente
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </mat-card-content>
+      <ng-template #loadingTxt>
+        <p class="text-center p-5">Cargando citas...</p>
+      </ng-template>
+      
+    </mat-card>
 </div>

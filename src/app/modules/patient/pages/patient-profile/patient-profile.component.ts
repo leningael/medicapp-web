@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPatientComponent } from '../../components/add-patient/add-patient.component';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
@@ -13,8 +13,7 @@ import { is, th } from 'date-fns/locale';
   styleUrls: ['./patient-profile.component.css']
 })
 export class PatientProfileComponent implements OnInit{
-
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   patiendId: string = '';
   public patient!: Patient;
 
@@ -31,6 +30,7 @@ export class PatientProfileComponent implements OnInit{
   }
 
   getPatient(): void {
+    this.isLoading = true;
     this.patientService.getPatient(this.patiendId.toString()).subscribe(
       (patient: Patient) => {
         this.patient = patient;

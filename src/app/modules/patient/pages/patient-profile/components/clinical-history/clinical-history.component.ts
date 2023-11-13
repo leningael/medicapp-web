@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { is } from 'date-fns/locale';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ClinicalHistory, Patient } from 'src/app/modules/patient/interfaces/patient.interfaces';
 import { PatientService } from 'src/app/modules/patient/services/patient.service';
 
@@ -71,7 +70,11 @@ export class ClinicalHistoryComponent implements OnInit {
     )
   }
 
-
-
-  
+  cancel(){
+    if (this.patient.clinical_history) this.loadForm(this.patient.clinical_history!)
+    else this.clinicalHistoryForm.reset();
+    this.isEditing = false;
+    this.clinicalHistoryForm.disable();
+   
+  }
 }

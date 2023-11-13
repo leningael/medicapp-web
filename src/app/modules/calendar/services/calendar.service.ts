@@ -25,6 +25,10 @@ export class CalendarService {
     return this.http.get<DayAppointments>(`${this.apiUrl}/calendar/get_day_appointments/${doctorId}`, {params});
   }
 
+  getActiveAppointments(doctorId:string): Observable<Appointment[]>{
+    return this.http.get<Appointment[]>(`${this.apiUrl}/calendar/get_active_appointments/${doctorId}`);
+  }
+
   deleteAppointment(appointmentId:string): Observable<any>{
     return this.http.delete<any>(`${this.apiUrl}/calendar/delete_appointment/${appointmentId}`);
   }

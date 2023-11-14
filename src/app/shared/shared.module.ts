@@ -56,6 +56,7 @@ import { SearchPipe } from './pipes/search.pipe';
     MatInputModule,
     MatTableModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     SidebarLayoutComponent,
@@ -80,6 +81,7 @@ import { SearchPipe } from './pipes/search.pipe';
     MatTabsModule,
     MatPaginatorModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class SharedModule {}

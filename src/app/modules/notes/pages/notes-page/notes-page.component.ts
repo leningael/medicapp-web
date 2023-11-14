@@ -86,8 +86,9 @@ export class NotesPageComponent implements OnInit{
       data: {
         noteId
       },
-      width: '800px',
-      height: '600px'
+      width: '90vw',
+      height: '90vh',
+      hasBackdrop: false,
     });
     dialog.afterClosed().subscribe(result => {
       console.log(result);

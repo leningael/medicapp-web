@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CalendarService } from 'src/app/modules/calendar/services/calendar.service';
-import { PatientService } from 'src/app/modules/patient/services/patient.service';
-import { UserCredentials, UserData, useInformation } from 'src/app/shared/interfaces/credentials.interfaces';
+import { UserCredentials, UserData, userInformation } from 'src/app/shared/interfaces/credentials.interfaces';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
 import { EditProfileComponent } from '../../components/edit-profile/edit-profile.component';
 import { UserService } from '../../services/user.service';
@@ -15,17 +13,16 @@ import { UserService } from '../../services/user.service';
 export class ProfilePageComponent implements OnInit{
   public user!: UserData;
   public userRole!: string;
-  public isLoading: boolean = true;
-  public userInformation: useInformation = {
+  public isLoading: boolean = false;
+  public userInformation: userInformation = {
     numberPatients: 0,
     numberAppointments: 0,
     numberReceptionists: 0,
+    numberDoctors: 0,
   };
 
   constructor(
     private credentialService: CredentialsService,
-    private patientService: PatientService,
-    private calendarService: CalendarService,
     private dialog: MatDialog,
     private userService: UserService,
   ) {
@@ -33,9 +30,7 @@ export class ProfilePageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.getMyPatients();
-    this.getMyAppointments();
-    this.getMyReceptionists();
+    this.getUserinformation();
   }
 
   getUserData(): void {
@@ -43,24 +38,14 @@ export class ProfilePageComponent implements OnInit{
     this.userRole = this.credentialService.role;
   }
 
-  getMyPatients(): void {
-    this.patientService.getDrPatients(this.user._id)
-    .subscribe((patient) => {
-      this.userInformation.numberPatients = patient.length;
+  getUserinformation(): void {
+    this.isLoading = true;
+    this.userService.getUserInformation(this.user._id)
+      .subscribe(
+        (userInformation) => {
+        this.userInformation = userInformation;
+        this.isLoading = false;
     });
-  }
-
-  getMyAppointments(): void {
-    this.calendarService.getActiveAppointments(this.user._id)
-    .subscribe((appointments) => {
-      this.userInformation.numberAppointments = appointments.length;
-      this.isLoading = false;
-    });
-  }
-
-  getMyReceptionists(): void {
-   //Falta crear el servicio para obtener numberReceptionists
-   this.userInformation.numberReceptionists = 0;
   }
 
   setNewCredentials(user: UserData): void {

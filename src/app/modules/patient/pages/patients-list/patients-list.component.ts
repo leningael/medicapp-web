@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CredentialsService } from 'src/app/shared/services/credentials.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPatientComponent } from '../../components/add-patient/add-patient.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-patients-list',
@@ -23,6 +24,7 @@ export class PatientsListComponent implements OnInit {
     private patientService: PatientService,
     private credentialsService: CredentialsService,
     private router: Router,
+    private toastr: ToastrService,
     public dialog: MatDialog,
     ) { 
   }
@@ -57,12 +59,18 @@ export class PatientsListComponent implements OnInit {
   }
 
   deletePatient(patient_id: string): void {
-    this.patientService.deletePatient(patient_id).subscribe(
-      (response: Patient) => {
+    this.patientService.deletePatient(patient_id, this.doctor_id)
+    .subscribe({
+      next: (patient) => {
         this.isLoading = true;
         this.get_patients(this.doctor_id);
-      }
-    );
+        this.toastr.success("Paciente eliminado", "Éxito");
+      },
+      error: () => {
+        this.toastr.error('No se pudo eliminar paciente', 'Error');
+      },
+    }
+  );
   }
 
   searchPatient(term: string): void {

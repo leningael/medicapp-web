@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ClinicalHistory, Patient } from 'src/app/modules/patient/interfaces/patient.interfaces';
 import { PatientService } from 'src/app/modules/patient/services/patient.service';
 
@@ -23,7 +24,8 @@ export class ClinicalHistoryComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private toastr: ToastrService
   ){
     this.clinicalHistoryForm.disable();
   }
@@ -63,11 +65,17 @@ export class ClinicalHistoryComponent implements OnInit {
   }
 
   savePatientData(){
-    this.patientService.updatePatientClinicalHistory(this.patient._id!, this.clinicalHistoryForm.value).subscribe(
-      (patient: Patient) => {
-        this.getUpdatedClinicalHistory()
+    this.patientService.updatePatientClinicalHistory(this.patient._id!, this.clinicalHistoryForm.value)
+      .subscribe({
+        next: (patient) => {
+          this.getUpdatedClinicalHistory()
+          this.toastr.success("Cambios guardados", "Éxito");
+        },
+        error: () => {
+          this.toastr.error('No se pudieron guardar los cambios', 'Error');
+        },
       }
-    )
+    );  
   }
 
   cancel(){

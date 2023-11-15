@@ -26,8 +26,9 @@ export interface SelectPersonArgs{
     doctor_id?: string;
 }
 
-export interface useInformation{
-    numberPatients: number;
-    numberAppointments: number;
-    numberReceptionists: number;
+export interface userInformation{
+    numberPatients?: number;
+    numberAppointments?: number;
+    numberReceptionists?: number;
+    numberDoctors?: number;
 }

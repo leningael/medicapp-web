@@ -1,15 +1,16 @@
 <section class="text-white text-center items-center bg-primary-light p-5 border border-y-black border-separate mb-1">
-    <div class="place-items-start text-end align-top">
-        <button mat-raised-button (click)="closeDialog()" [disabled]="!selected_patient">Guardar</button>
+    <div class="flex place-items-start text-end justify-between">
+        <button mat-button (click)="closeDialog(false)" class="bg-primary-light "><mat-icon class="text-white">close</mat-icon></button>
+        <button mat-raised-button (click)="closeDialog()" [disabled]="selected_patient.name === '' || !form_data.valid">Guardar</button>
     </div>
     <div class="hover:cursor-pointer" (click)="toggle = !toggle">
         <h1>{{ selected_patient && (selectPatient.name && selected_patient.lastname) ? 
             selected_patient.name + ' ' + selected_patient.lastname 
             : 'Ninguno' }} - Seleccionado</h1>
-            <h3>{{selected_patient && (selected_patient.gender && selected_patient.bloodtype) ? 
+            <!-- <h3>{{selected_patient && (selected_patient.gender && selected_patient.bloodtype) ? 
                 selected_patient.gender + '-' + selected_patient.bloodtype : 
                 'Genero - Grupo Sanguíneo'
-            }}</h3>
+             }}</h3>  -->
     </div>
 </section>
 
@@ -29,7 +30,7 @@
 
 <main >
     <h1 class="w-full h-full bg-primary-light text-center items-start p-4 text-white border border-y-black">{{ !note_id ? 'Agregar' : 'Editar'}} Nota</h1>
-    <div class="justify-between w-full h-full p-2">
+    <div class="justify-between w-full h-full p-2" *ngIf="!isLoading">
         <form class="flex flex-row w-full" [formGroup]="form_data">
             <div style="width:50%;">
                 <mat-form-field class="w-full ">
@@ -65,7 +66,7 @@
                 </mat-form-field>
                 <mat-form-field class="w-full px-2 ">
                     <label for="imc">IMC</label>
-                    <input formControlName="imc" id="imc" matInput placeholder="IMC (peso / altura)" type="text-">
+                    <input formControlName="imc" id="imc" matInput placeholder="IMC (Kg / altura)^2" type="text-">
                 </mat-form-field>
             </div>
         </form>
@@ -79,8 +80,5 @@
                 (click)="handleAddMedication()">
             <p class="text-white text-center">Añadir</p>
         </button>
-    </div>
-    <div *ngFor="let med of medication">
-        {{med.medicament}}
     </div>
 </main >

@@ -22,12 +22,12 @@
             </mat-form-field>
 
             <div class="flex justify-between gap-2 mt-6">
-                <button mat-raised-button color="default" style="background-color: greenyellow;"
+                <button mat-raised-button color="primary"
                         (click)="addMedicament()"> 
-                    <mat-icon class="text-center ">done</mat-icon>
+                    <mat-icon class="text-center m-0">done</mat-icon>
                 </button>
-                <button mat-raised-button style="background-color: brown;">
-                    <mat-icon class="text-center ">
+                <button mat-raised-button color="warn">
+                    <mat-icon class="text-center m-0">
                         delete_forever
                     </mat-icon>
                 </button>
@@ -75,6 +75,10 @@
             </mat-form-field>
             <div class="flex items-center mr-3 justify-center text-white text-center font-light">
             <button class="bg-orange-600 hover:bg-orange-700 mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                (click)="editMed(i)">
+                <mat-icon fontSet="material-icons">edit_note</mat-icon>
+            </button>
+            <button class="bg-warn-light hover:bg-warn-hover mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
                 (click)="deleteMed(i)">
                 <mat-icon fontSet="material-icons">delete_forever</mat-icon>
             </button>

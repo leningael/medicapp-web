@@ -43,12 +43,27 @@ export class AddMedicationComponent {
       duration: this.formData.value["duration"],
       notes: this.formData.value["notes"],
       consume_method: this.formData.value["consume_method"],
+      dose: this.formData.value["dose"],
     }
     this.formData.reset();
     this.meds.push(newMed);
   }
+  editMed(index: number){
+    if(this.meds.length === 0) return;
+    const medicament: Meds = this.meds[index];
+    this.formData.setValue({
+      medicament: medicament.medicament,
+      quantity: medicament.quantity,
+      frequency: medicament.frequency,
+      duration: medicament.duration,
+      notes: medicament.notes,
+      consume_method: medicament.consume_method,
+      dose: medicament.dose,
+    });
+    this.meds.splice(index, 1);
+    console.log(this.meds);
+  }
   deleteMed(id: number) {
     this.meds = this.meds.filter((med, index) => index !== id);
-    console.log(this.meds);
   }
 }

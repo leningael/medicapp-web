@@ -9,12 +9,12 @@ import { AddPatientComponent } from '../../components/add-patient/add-patient.co
 @Component({
   selector: 'app-patients-list',
   templateUrl: './patients-list.component.html',
-  styleUrls: ['./patients-list.component.css']
+  styleUrls: ['./patients-list.component.css'],
 })
 export class PatientsListComponent implements OnInit {
   public patients: PatientOverview[] = [];
   public userName: string = '';
-  public isLoading: boolean = true;
+  public isLoading: boolean = false;
   public options: string[] = ['Nombre (A-Z)', 'Nombre (Z-A)'];
   private doctor_id: string = '';
   public notFound: boolean = false;
@@ -23,25 +23,27 @@ export class PatientsListComponent implements OnInit {
     private patientService: PatientService,
     private credentialsService: CredentialsService,
     private router: Router,
-    public dialog: MatDialog,
-    ) { 
+    public dialog: MatDialog
+  ) {
+    this.doctor_id = this.credentialsService.user_credentials._id;
   }
 
   ngOnInit(): void {
-    this.doctor_id = this.credentialsService.user_credentials._id;
-    this.get_patients(this.doctor_id);
+    this.get_patients();
   }
 
-  get_patients(doctor_id: string): void {
-    this.patientService.getDrPatients(doctor_id).subscribe(
-      (response) => {
-        this.patients = response;
+  get_patients(): void {
+    this.isLoading = true;
+    this.patientService.getDrPatients(this.doctor_id).subscribe({
+      next: (patients) => {
+        this.patients = patients;
         this.isLoading = false;
-      } , (error) => {
+      },
+      error: () => {
+        this.patients = [];
         this.isLoading = false;
-        this.notFound = true;
-      }
-    );
+      },
+    });
   }
 
   get_fullname(patient: PatientOverview): string {
@@ -50,44 +52,39 @@ export class PatientsListComponent implements OnInit {
 
   seePatientProfile(patient_id: string): void {
     this.router.navigate([`/patients/patient-profile/${patient_id}`]);
-  };
+  }
 
   addNote(patient_id: string): void {
     //falta agregar que abra el modal para la creacion de la nota
   }
 
   deletePatient(patient_id: string): void {
-    this.patientService.deletePatient(patient_id).subscribe(
-      (response: Patient) => {
-        this.isLoading = true;
-        this.get_patients(this.doctor_id);
-      }
-    );
+    this.patientService.deletePatient(patient_id).subscribe(() => {
+      this.get_patients();
+    });
   }
 
   searchPatient(term: string): void {
     this.isLoading = true;
-    this.patientService.getDrPatients(this.doctor_id, term).subscribe(
-      (response) => {
+    this.patientService
+      .getDrPatients(this.doctor_id, term)
+      .subscribe((response) => {
         this.patients = response;
         this.isLoading = false;
-      }
-    );
+      });
   }
 
   openAddPatient(): void {
     const doctorID = this.doctor_id;
     const dialogRef = this.dialog.open(AddPatientComponent, {
       disableClose: true,
-      data: {doctorID ,patient: null}
+      data: { doctorID, patient: null },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.isLoading = true;
-        this.get_patients(this.doctor_id);
+        this.get_patients();
       }
     });
   }
-
 }

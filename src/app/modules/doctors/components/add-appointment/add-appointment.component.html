@@ -1,0 +1,12 @@
+<section class="h-full flex flex-col">
+  <div class="bg-secondary p-4 text-center">
+    <p>Agregar cita</p>
+    <p class="text-sm font-medium">Dr. {{doctor.name + " " + doctor.lastname}}</p>
+  </div>
+  <!-- <div class="flex items-center gap-2">
+    <p>{{selectedDate | date: 'EEEE d, MMMM y'}}</p>
+  </div> -->
+  <button>
+    {{selectedDate | date: 'EEEE d, MMMM y'}}
+  </button>
+</section>

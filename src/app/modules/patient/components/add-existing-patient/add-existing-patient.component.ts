@@ -4,7 +4,6 @@ import { PatientService } from '../../services/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { SelectPersonArgs } from 'src/app/shared/interfaces/credentials.interfaces';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AddPatientComponent } from '../add-patient/add-patient.component';
 import { Patient } from '../../interfaces/patient.interfaces';
 import { CredentialsService } from '../../../../shared/services/credentials.service';
 
@@ -20,7 +19,7 @@ export class AddExistingPatientComponent {
     private patientsService: PatientService,
     private credentialsService: CredentialsService,
     private toastr: ToastrService,
-    public dialogRef: MatDialogRef<AddPatientComponent>,
+    public dialogRef: MatDialogRef<AddExistingPatientComponent>,
   ) { 
    
   }
@@ -41,9 +40,9 @@ export class AddExistingPatientComponent {
     this.isSaving = true;
     this.doctor_id = this.credentialsService.user_credentials._id;
     this.patientsService.addDoctorToPatient(patient._id!, this.doctor_id).subscribe(
-      (patient) => {
+      () => {
         this.toastr.success("Paciente añadido", "Éxito");
-        this.dialogRef.close(patient);
+        this.dialogRef.close(true);
       }
     )
   }

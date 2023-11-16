@@ -46,7 +46,7 @@ export const NAV_ITEMS: NavItem[] = [
   // Receptionist routes
   {
     route: 'doctors/doctors-list',
-    title: 'Lista de doctores',
+    title: 'Mis doctores',
     permissions: ['receptionist'],
     icon: 'groups',
   }

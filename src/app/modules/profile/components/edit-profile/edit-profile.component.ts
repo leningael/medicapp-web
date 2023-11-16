@@ -18,7 +18,7 @@ export class EditProfileComponent {
     lastname: [''],
     username: [''],
     email: ['', [Validators.pattern(this.validatorService.emailPattern)]],
-    password: [''],
+    password: ['', Validators.minLength(8)],
   })
   constructor(
     public dialogRef: MatDialogRef<ProfilePageComponent>,
@@ -40,10 +40,11 @@ export class EditProfileComponent {
     });
   }
 
-  saveData(): void {
-    if (this.userEditForm.value.password !== '' && this.userEditForm.value.password < 8) return
-    // this.userEditForm.markAllAsTouched();
-    // if (this.userEditForm.invalid) return;
+  saveData(): void {    
+    if (this.userEditForm.invalid) {
+      this.userEditForm.markAllAsTouched();
+      return;
+    }
     this.userService.updateUser(this.user._id, this.userEditForm.value)
     .subscribe(
     (user) => {

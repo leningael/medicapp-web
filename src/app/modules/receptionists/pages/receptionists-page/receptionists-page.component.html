@@ -1,17 +1,23 @@
-<div class="h-full flex flex-col px-10 py-6">
+<div class="absolute inset-0 h-full flex flex-col px-10 py-6">
   <div class="flex items-center justify-between mb-8">
-    <shared-search-box placeholder="Buscar recepcionista"> </shared-search-box>
+    <shared-search-box placeholder="Buscar recepcionista" (onValue)="searchReceptionists($event)"></shared-search-box>
     <button mat-flat-button color="primary" (click)="addReceptionist()">
       <mat-icon>add</mat-icon>
       Agregar recepcionista
     </button>
   </div>
-  <div class="grow">
+  <div class="grow overflow-auto">
     <loading-spinner
       *ngIf="isLoading; else receptionistsList"
       whatIsLoading="recepcionistas"
     ></loading-spinner>
     <ng-template #receptionistsList>
+      <div
+        *ngIf="!receptionists.length"
+        class="bg-yellow-100 p-4 rounded-md text-center"
+      >
+        No se encontraron recepcionistas.
+      </div>
       <mat-card
         *ngFor="let receptionist of receptionists"
         class="px-4 py-3 mb-3"

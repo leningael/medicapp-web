@@ -12,9 +12,9 @@
     </div>
     <div class="grow overflow-auto my-5">
         <ng-container *ngIf="!isLoading; else loading">
-            <ng-container *ngIf="!patients.length || notFound ; else table">
+            <ng-container *ngIf="!patients.length ; else table">
                 <div class="bg-yellow-100 p-4 rounded-md mt-6 text-center">
-                    No se econtraron pacientes.
+                    No se encontraron pacientes.
                 </div>
             </ng-container>
             <ng-template #table class="">

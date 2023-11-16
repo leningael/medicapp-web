@@ -14,6 +14,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 })
 export class ReceptionistsPageComponent implements OnInit {
   receptionists: ReceptionistOverview[] = [];
+  receptionistsToSearch: string = '';
   doctorId: string = this.credentialsService.user_credentials._id;
   isLoading: boolean = false;
   removing: string | false = false;
@@ -31,7 +32,7 @@ export class ReceptionistsPageComponent implements OnInit {
 
   requestReceptionists() {
     this.isLoading = true;
-    this.receptionistsService.getDrReceptionists(this.doctorId).subscribe({
+    this.receptionistsService.getDrReceptionists(this.doctorId, this.receptionistsToSearch).subscribe({
       next: (receptionists) => {
         this.receptionists = receptionists;
         this.isLoading = false;
@@ -41,9 +42,15 @@ export class ReceptionistsPageComponent implements OnInit {
           'Error al cargar la lista de recepcionistas',
           'Error'
         );
+        this.receptionists = [];
         this.isLoading = false;
       },
     });
+  }
+
+  searchReceptionists(search: string) {
+    this.receptionistsToSearch = search;
+    this.requestReceptionists();
   }
 
   addReceptionist() {

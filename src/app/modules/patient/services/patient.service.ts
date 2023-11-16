@@ -35,15 +35,15 @@ export class PatientService {
     return this.http.get<PatientAppointment[]>(`${this.apiUrl}/calendar/get_patient_appointments/${doctor_id}/${patient_id}`);
   }
 
-  addPatient(patient: Patient): Observable<Patient> {
+  addPatient(patient: Patient): Observable<any> {
     return this.http.post<Patient>(`${this.apiUrl}/patients`, patient);
   }
 
-  addDoctorToPatient(patient_id: string, doctor_id: string): Observable<Patient> {
+  addDoctorToPatient(patient_id: string, doctor_id: string): Observable<any> {
     return this.http.put<Patient>(`${this.apiUrl}/patients/linkExistingPatient`, {patient_id, doctor_id});
   }
 
-  updatePatient(patient_id: string, patient: Patient): Observable<Patient> {
+  updatePatient(patient_id: string, patient: Patient): Observable<any> {
     return this.http.put<Patient>(`${this.apiUrl}/patients/${patient_id}`, patient);
   }
 

@@ -26,28 +26,48 @@
         <div *ngIf="userRole == 'doctor'" class="flex gap-24 py-12">
           <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
             <mat-card-content>
-              <p class="tracking-widest text-6xl ">{{userInformation.numberPatients}}</p>
-              <p class="text-xs text-gray-500 tracking-widest">Pacientes</p>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberPatients}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberPatients == 1 ? 'Paciente' : 'Pacientes'}}</p>
             </mat-card-content>
           </mat-card>
           <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
             <mat-card-content>
-              <p class="tracking-widest text-6xl ">{{userInformation.numberAppointments}}</p>
-              <p class="text-xs text-gray-500 tracking-widest">Citas pendientes</p>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberAppointments}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberAppointments == 1 ? 'Cita pendiente' : 'Citas pendientes'}}</p>
             </mat-card-content>
           </mat-card>
           <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
             <mat-card-content>
-              <p class="tracking-widest text-6xl ">{{userInformation.numberReceptionists}}</p>
-              <p class="text-xs text-gray-500 tracking-widest">Recepcionistas</p>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberReceptionists}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberReceptionists == 1 ? 'Recepcionista' : 'Recepcionistas'}}</p>
             </mat-card-content>
           </mat-card>
         </div>
         <div *ngIf="userRole == 'receptionist'" class="py-16">
           <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
             <mat-card-content>
-              <p class="tracking-widest text-6xl ">{{userInformation.numberPatients}}</p>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberDoctors}}</p>
               <p class="text-xs text-gray-500 tracking-widest">Mis doctores</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div *ngIf="userRole == 'admin'" class="flex gap-24 py-12">
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberPatients}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberPatients == 1 ? 'Paciente' : 'Pacientes'}}</p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberDoctors}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberDoctors == 1 ? 'Doctor' : 'Doctores'}}</p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberReceptionists}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberReceptionists == 1 ? 'Recepcionista' : 'Recepcionistas'}}</p>
             </mat-card-content>
           </mat-card>
         </div>

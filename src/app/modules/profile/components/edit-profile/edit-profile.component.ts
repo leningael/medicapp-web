@@ -18,7 +18,7 @@ export class EditProfileComponent {
     lastname: [''],
     username: [''],
     email: ['', [Validators.pattern(this.validatorService.emailPattern)]],
-    password: ['', Validators.minLength(8)],
+    password: ['', [Validators.minLength(8)]],
   })
   constructor(
     public dialogRef: MatDialogRef<ProfilePageComponent>,
@@ -26,6 +26,7 @@ export class EditProfileComponent {
     @Inject(MAT_DIALOG_DATA) public user: UserEditData,
     private validatorService: ValidatorsService,
     private userService: UserService,
+    private toastr: ToastrService,
   ) { 
     this.loadForm(this.user);
   }
@@ -46,10 +47,16 @@ export class EditProfileComponent {
       return;
     }
     this.userService.updateUser(this.user._id, this.userEditForm.value)
-    .subscribe(
-    (user) => {
-      this.dialogRef.close(user);
-    });
+      .subscribe({
+        next: (user) => {
+          this.toastr.success("Cambios guardados", "Éxito");
+          this.dialogRef.close(user);
+        },
+        error: () => {
+          this.toastr.error('No se pudieron guardar los cambios', 'Error');
+        },
+      }
+    );
   }
 
   onCancel(): void {

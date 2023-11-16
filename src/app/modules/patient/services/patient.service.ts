@@ -51,8 +51,8 @@ export class PatientService {
     return this.http.put<Patient>(`${this.apiUrl}/patients/${patient_id}/clinicalHistory`, clinicalHistory);
   }
 
-  deletePatient(patient_id: string): Observable<Patient> {
-    return this.http.delete<Patient>(`${this.apiUrl}/patients/${patient_id}`);
+  deletePatient(patient_id: string, doctor_id: string): Observable<Patient> {
+    return this.http.delete<Patient>(`${this.apiUrl}/patients/${patient_id}/deleteDoctor/${doctor_id}`);
   }
 
 }

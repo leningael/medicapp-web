@@ -19,7 +19,7 @@ export interface PatientOverview {
     _id: string
     name: string
     lastname: string
-    curp: string
+    curp?: string
 }
 
 export interface ClinicalHistory {

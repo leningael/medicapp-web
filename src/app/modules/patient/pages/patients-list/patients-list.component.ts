@@ -6,6 +6,9 @@ import { CredentialsService } from 'src/app/shared/services/credentials.service'
 import { MatDialog } from '@angular/material/dialog';
 import { AddPatientComponent } from '../../components/add-patient/add-patient.component';
 import { ToastrService } from 'ngx-toastr';
+import { NotesService } from 'src/app/modules/notes/services/notes.service';
+import { AddNoteComponent } from 'src/app/modules/notes/components/add-note/add-note.component';
+import { DeletePatientComponent } from '../../components/delete-patient/delete-patient.component';
 
 @Component({
   selector: 'app-patients-list',
@@ -22,11 +25,11 @@ export class PatientsListComponent implements OnInit {
   constructor(
     private patientService: PatientService,
     private credentialsService: CredentialsService,
+    private notesService: NotesService,
     private router: Router,
     private toastr: ToastrService,
-    public dialog: MatDialog,
-    ) { 
-  }
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.get_patients();
@@ -54,22 +57,49 @@ export class PatientsListComponent implements OnInit {
     this.router.navigate([`/patients/patient-profile/${patient_id}`]);
   }
 
-  addNote(patient_id: string): void {
-    //falta agregar que abra el modal para la creacion de la nota
+  addNote(patient: PatientOverview): void {
+    const dialogRef = this.dialog.open(AddNoteComponent, {
+      data: { patient },
+      width: '80vw',
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      if (!result._id)
+        this.notesService.postNote(result).subscribe(() => this.succesUpload());
+      else
+        this.notesService
+          .updateNote(result)
+          .subscribe(() => this.succesUpload());
+    });
+  }
+  private succesUpload(): void {
+    this.toastr.success('Nota agregadada correctamente', 'Éxito');
+  }
+
+  deletePatientAlert(patient_id: string): void {
+    const dialogRef = this.dialog.open(DeletePatientComponent, {
+      width: '300px',
+      hasBackdrop: false,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deletePatient(patient_id);
+      }
+    });
   }
 
   deletePatient(patient_id: string): void {
-    this.patientService.deletePatient(patient_id, this.doctor_id)
-    .subscribe({
+    this.patientService.deletePatient(patient_id, this.doctor_id).subscribe({
       next: (patient) => {
         this.get_patients();
-        this.toastr.success("Paciente eliminado", "Éxito");
+        this.toastr.success('Paciente eliminado', 'Éxito');
       },
       error: () => {
         this.toastr.error('No se pudo eliminar paciente', 'Error');
       },
-    }
-  );
+    });
   }
 
   searchPatient(term: string): void {

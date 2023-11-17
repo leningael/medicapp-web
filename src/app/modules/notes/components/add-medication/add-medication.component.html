@@ -4,7 +4,8 @@
         <button mat-raised-button 
         class="h-full align-middle" 
         style="background-color: rgb(88, 147, 1); align-self: center;" 
-        (click)="handleClose()">
+        (click)="handleClose()"
+        >
         <p class="text-white text-center">Añadir</p>
     </button>
 </div>
@@ -17,8 +18,8 @@
                 <input matInput formControlName="medicament" id="med" type="text" placeholder="Ingrese el nombre del medicamento">
             </mat-form-field>
             <mat-form-field class="p-2 flex-grow">
-                <label for="dose">Cantidad</label>
-                <input matInput formControlName="dose" id="dose" type="text" placeholder="Ingrese la cantidad">
+                <label for="dose">Dosis</label>
+                <input matInput formControlName="dose" id="dose" type="text" placeholder="Ingrese la Dosis">
             </mat-form-field>
 
             <div class="flex justify-between gap-2 mt-6">
@@ -26,22 +27,22 @@
                         (click)="addMedicament()"> 
                     <mat-icon class="text-center m-0">done</mat-icon>
                 </button>
-                <button mat-raised-button color="warn">
+                <button mat-raised-button color="warn" (click)="formData.reset()">
                     <mat-icon class="text-center m-0">
                         delete_forever
                     </mat-icon>
                 </button>
             </div>
         </div>
-        <div class="w-full py-2 flex flex-nowrap gap-2 h-fit">
+        <div class="w-full py-2 flex flex-nowrap gap-2 h-fit mx-3">
             <mat-form-field>
                 <label for="consume_method">Via de administración</label>
                 <input matInput formControlName="consume_method" id="consume_method" type="text" placeholder="Ingrese la via de administración">
             </mat-form-field>
 
             <mat-form-field>
-                <label for="dose">Dosis</label>
-                <input matInput formControlName="dose" id="dose" type="text" placeholder="Ingrese la dosis">
+                <label for="quantity">Cantidad</label>
+                <input matInput formControlName="quantity" id="quantity" type="text" placeholder="Ingrese la cantidad">
             </mat-form-field>
 
             <mat-form-field>
@@ -53,25 +54,27 @@
                 <label for="duration">Durante</label>
                 <input matInput formControlName="duration" id="duration" type="text" placeholder="| días">
             </mat-form-field>
-
-            <mat-form-field>
-                <label for="notes">Anotaciones</label>
-                <input matInput formControlName="notes" id="notes" type="text" placeholder="Ingrese anotaciones">
-            </mat-form-field>
         </div>
+        <mat-form-field class="mx-3">
+            <label for="notes">Anotaciones</label>
+            <textarea 
+                matInput class="flex-grow" formControlName="notes" 
+                id="notes" type="text" placeholder="Ingrese anotaciones"
+                style="resize:none;"></textarea>
+        </mat-form-field>
     </form>
 </section>
 
-<section id="meds-list" *ngFor="let med of meds; index as i">
-    <div id="med-box" class="flex flex-col w-full m-2 border border-slate-500 p-1">
+<section id="meds-list" class="m-3" *ngFor="let med of meds; index as i">
+    <div id="med-box" class="flex flex-col mx-3 w-full border border-slate-500 p-1">
         <div class=" flex flex-row flex-wrap gap-1">
             <mat-form-field class="p-2 flex-grow">
                 <label for="med">Medicamento</label>
                 <input matInput [value]="med.medicament" id="med" type="text" [disabled]="true">
             </mat-form-field>
             <mat-form-field class="p-2 flex-grow">
-                <label for="dose">Cantidad</label>
-                <input matInput [value]="med.quantity" id="dose" type="text" [disabled]="true">
+                <label for="dose">Dosis</label>
+                <input matInput [value]="med.dose" id="dose" type="text" [disabled]="true">
             </mat-form-field>
             <div class="flex items-center mr-3 justify-center text-white text-center font-light">
             <button class="bg-orange-600 hover:bg-orange-700 mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
@@ -83,14 +86,14 @@
                 <mat-icon fontSet="material-icons">delete_forever</mat-icon>
             </button>
         </div>
-        <div class="w-full py-2 flex flex-nowrap gap-2 h-fit">
+        <div class="w-full py-2 flex flex-nowrap gap-2 mx-3 h-fit">
             <mat-form-field>
                 <label for="consume_method">Via de administración</label>
                 <input matInput [value]="med.consume_method" id="consume_method" type="text" placeholder="Ingrese la via de administración" disabled>
             </mat-form-field>
             <mat-form-field>
-                <label for="dose">Dosis</label>
-                <input matInput [value]="med.quantity" id="dose" type="text" placeholder="Ingrese la dosis" disabled>
+                <label for="quantity">Cantidad</label>
+                <input matInput [value]="med.quantity" id="quantity" type="text" placeholder="Ingrese la cantidad" disabled>
             </mat-form-field>
 
             <mat-form-field>
@@ -102,12 +105,14 @@
                 <label for="duration">Durante</label>
                 <input matInput [value]="med.duration" id="duration" type="text" placeholder="| días" disabled>
             </mat-form-field>
-
-            <mat-form-field>
-                <label for="notes">Anotaciones</label>
-                <input matInput [value]="med.notes" id="notes" type="text" placeholder="Ingrese anotaciones" disabled>
-            </mat-form-field>
         </div>
+        <mat-form-field class="flex-grow w-full mx-3">
+            <label for="notes">Anotaciones</label>
+            <textarea 
+                matInput class="flex-grow w-full" [value]="med.notes" id="notes" type="text" 
+                class="mx-3" placeholder="Ingrese anotaciones" disabled
+                style="resize: none;color:black;"></textarea>
+        </mat-form-field>
     </div>
 </div>
 </section>

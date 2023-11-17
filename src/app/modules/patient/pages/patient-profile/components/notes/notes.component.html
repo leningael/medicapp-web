@@ -1,1 +1,39 @@
-<p>notes works!</p>
+<div class="my-5">
+    <loading-spinner *ngIf="isLoading" whatIsLoading="notas"></loading-spinner>
+        <div *ngIf="!isLoading">
+            <table mat-table [dataSource]="this.notes" class="mat-elevation-z8 notes-table">
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"> {{element.date | date : "dd/MM/yyyy"}} </td>
+            </ng-container>
+
+            <!-- Name - Reason Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef ></th>
+                <td mat-cell *matCellDef="let element"> {{element.patient.name}} {{element.patient.lastname}} - {{element.reason}} </td>
+            </ng-container>
+
+            <!-- Options Column -->
+            <ng-container matColumnDef="option">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="flex items-center mr-3 justify-center text-white text-center font-light">
+                        <button class="bg-orange-600 hover:bg-orange-700 mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                        (click)="editNote(element._id, element.patient)">
+                        <mat-icon fontSet="material-icons">edit_note</mat-icon>
+                    </button>
+
+                    <button class="bg-red-500 hover:bg-red-700 mx-2 p-1 pt-2 rounded-md flex items-center justify-center"
+                    (click)="handleDeleteNote(element._id)">
+                        <mat-icon fontSet="material-icons">delete_forever</mat-icon>
+                    </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>

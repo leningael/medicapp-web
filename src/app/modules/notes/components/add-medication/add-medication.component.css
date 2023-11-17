@@ -1,3 +1,7 @@
 .mat-mdc-raised-button>.mat-icon{
     margin:0;
 }
+
+input:disabled{
+    color: #121212 !important;
+}

@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 import { format } from 'date-fns';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { AddNoteComponent } from 'src/app/modules/notes/components/add-note/add-note.component';
+import { NotesService } from 'src/app/modules/notes/services/notes.service';
+import { PatientOverview } from 'src/app/modules/patient/interfaces/patient.interfaces';
 
 @Component({
   selector: 'appointments-list',
@@ -31,6 +33,7 @@ export class AppointmentsListComponent {
     private calendarService: CalendarService,
     private credentialsService: CredentialsService,
     private dialog: MatDialog,
+    private notesService: NotesService,
     private toastr: ToastrService
   ) {}
 
@@ -129,7 +132,25 @@ export class AppointmentsListComponent {
       },
     });
   }
+  addNote(noteId: string = '',appointment_id:string = '',patient?: PatientOverview){
+    const dialogRef = this.dialog.open(AddNoteComponent,{
+      data:{
+        patient,
+        appointment_id,
+        noteId
+      },
+      width:'80vw',
+      height:'60vh'
+    });
+    dialogRef.afterClosed().subscribe(result=>{
+      if(!result) return;
+      this.notesService.postNote(result).subscribe(res=>{
+        this.toastr.success('Nota agregada', 'Éxito');
+        this.onChanges.emit();
+      });
+    });
 
+  }
   onCancelMoveOption() {
     this.moving = false;
   }

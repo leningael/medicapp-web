@@ -10,6 +10,7 @@ import { ClinicalHistoryComponent } from './pages/patient-profile/components/cli
 import { NotesComponent } from './pages/patient-profile/components/notes/notes.component';
 import { PersonalDataComponent } from './pages/patient-profile/components/personal-data/personal-data.component';
 import { AddExistingPatientComponent } from './components/add-existing-patient/add-existing-patient.component';
+import { DeletePatientComponent } from './components/delete-patient/delete-patient.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AddExistingPatientComponent } from './components/add-existing-patient/a
     PersonalDataComponent,
     ClinicalHistoryComponent,
     NotesComponent,
-    AddExistingPatientComponent
+    AddExistingPatientComponent,
+    DeletePatientComponent
   ],
   imports: [
     CommonModule,

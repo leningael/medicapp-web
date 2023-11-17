@@ -79,7 +79,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
       this.businessHours.end_time
     );
     let currentTime = startTime;
-    while (currentTime <= endTime) {
+    while (currentTime < endTime) {
       const slot: CalendarSlot = {
         start_datetime: currentTime,
         end_datetime: addHours(currentTime, 1),

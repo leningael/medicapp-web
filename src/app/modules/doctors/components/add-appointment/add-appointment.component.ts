@@ -72,7 +72,7 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
       this.businessHours.end_time
     );
     let currentTime = startTime;
-    while (currentTime <= endTime) {
+    while (currentTime < endTime) {
       const slot: CalendarSlot = {
         start_datetime: currentTime,
         end_datetime: addHours(currentTime, 1),
@@ -92,5 +92,9 @@ export class AddAppointmentComponent implements OnInit, OnDestroy {
     date.setHours(parseInt(hours));
     date.setMinutes(parseInt(minutes));
     return date;
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }

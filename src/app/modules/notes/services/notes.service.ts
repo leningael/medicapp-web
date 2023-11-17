@@ -12,10 +12,12 @@ export class NotesService {
     private http: HttpClient,
   ) {}
 
-  getNotes(term?: string){
-    return this.http.get<Notes[]>(`${this.apiUrl}/note`);
+  getNotes(){
+    return this.http.get<Notes[]>(`${this.apiUrl}/note/`);
   }
-
+  searchNotes(search: string){
+    return this.http.get<Notes[]>(`${this.apiUrl}/note/search/${search}`);
+  }
   getDetails(id: string){
     return this.http.get<NoteContent>(`${this.apiUrl}/note/${id}`);
   }

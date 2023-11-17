@@ -58,10 +58,6 @@ export class AppointmentsListComponent {
     return `${patient.name} ${patient.lastname}`;
   }
 
-  addNoteToAppointment(appointment: Appointment) {
-    
-  }
-
   deleteAppointment(appointment_id: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -132,6 +128,7 @@ export class AppointmentsListComponent {
       },
     });
   }
+  
   addNote(noteId: string = '',appointment_id:string = '',patient?: PatientOverview){
     const dialogRef = this.dialog.open(AddNoteComponent,{
       data:{

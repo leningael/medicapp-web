@@ -5,19 +5,26 @@
       Dr. {{ doctor.name + " " + doctor.lastname }}
     </p>
   </div>
-  <button mat-button class="mx-auto my-2" [matMenuTriggerFor]="calendarMenu">
-    {{ selectedDate | date : "EEEE d, MMMM y" }}
-    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
-  </button>
-  <mat-menu #calendarMenu="matMenu">
-    <mat-calendar class="w-80" [(selected)]="selectedDate" (selectedChange)="requestDayAppointments()"></mat-calendar>
-  </mat-menu>
-  <section class="grow overflow-auto mb-2">
-    <appointments-list *ngIf="!isLoading; else loadingSpinner" [calendarSlots]="calendarSlots" (onChanges)="requestDayAppointments()" [doctorId]="doctor._id"></appointments-list>
-    <ng-template #loadingSpinner>
-      <div class="flex h-full items-center justify-center">
-        <mat-spinner diameter="40"></mat-spinner>
-      </div>
-    </ng-template>
-  </section>
+  <div class="grow flex flex-col overflow-hidden p-4">
+    <button mat-button class="mx-auto mb-2" [matMenuTriggerFor]="calendarMenu">
+      {{ selectedDate | date : "EEEE d, MMMM y" }}
+      <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #calendarMenu="matMenu">
+      <mat-calendar class="w-80" [(selected)]="selectedDate" (selectedChange)="requestDayAppointments()"></mat-calendar>
+    </mat-menu>
+    <section class="grow overflow-auto mb-2">
+      <appointments-list *ngIf="!isLoading; else loadingSpinner" [calendarSlots]="calendarSlots" (onChanges)="requestDayAppointments()" [doctorId]="doctor._id"></appointments-list>
+      <ng-template #loadingSpinner>
+        <div class="flex h-full items-center justify-center">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      </ng-template>
+    </section>
+    <div class="flex justify-center">
+      <button mat-stroked-button color="primary" (click)="closeDialog()">
+        Cerrar
+      </button>
+    </div>
+  </div>
 </section>

@@ -84,7 +84,7 @@
                 (click)="handleAddMedication()"
                 [disabled]="isLoading"
                 >
-            <p class="text-white text-center">Añadir</p>
+            <p class="text-white text-center">{{medication.length === 0 ? 'Añadir' : 'Editar'}}</p>
         </button>
     </div>
 </main >

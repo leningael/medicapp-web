@@ -60,7 +60,8 @@ export class PatientsListComponent implements OnInit {
   addNote(patient: PatientOverview): void {
     const dialogRef = this.dialog.open(AddNoteComponent, {
       data: { patient },
-      width: '80vw',
+      width: '90vw',
+      height: '90vh',
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe((result) => {

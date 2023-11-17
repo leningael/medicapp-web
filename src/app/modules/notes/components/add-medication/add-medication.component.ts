@@ -11,7 +11,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class AddMedicationComponent {
   public meds: Meds[];
   public formData: FormGroup;
-
   constructor(
     @Inject(MAT_DIALOG_DATA) data:{meds:Meds[]},
     private dialogRef: MatDialogRef<AddMedicationComponent>,
@@ -28,12 +27,9 @@ export class AddMedicationComponent {
         dose: this.fb.control(''),
       });
   }
-
-  
   handleClose(){
     this.dialogRef.close(this.meds);
   }
-
   addMedicament() {
     if(!this.formData.valid) return;
     const newMed: Meds = {

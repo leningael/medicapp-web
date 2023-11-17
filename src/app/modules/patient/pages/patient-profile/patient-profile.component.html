@@ -14,7 +14,7 @@
       ></clinical-history>
     </mat-tab>
     <mat-tab label="Notas">
-      <notes *ngIf="!isLoading"></notes>
+      <notes *ngIf="!isLoading" [patientId]="patient._id"></notes>
     </mat-tab>
   </mat-tab-group>
 

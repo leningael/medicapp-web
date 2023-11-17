@@ -91,11 +91,13 @@ export class NotesPageComponent implements OnInit {
       disableClose: true,
     })
     dialog.afterClosed().subscribe(res =>{
-      if(!res) return
+      if(!res){
+        return;
+      }
+      this.data = this.data.slice().filter((element) => element._id != id);
       this.notesService.deleteNote(id).subscribe({
         next: () => {
           this.toastr.success('Se ha eliminado la nota', 'Éxito');
-          this.data = this.data.slice().filter((element) => element._id != id);
         },
         error: () => {
           this.toastr.error('Ha ocurrido un error al eliminar la nota', 'Error');

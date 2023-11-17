@@ -29,6 +29,7 @@
 
 <main >
     <h1 class="w-full h-full bg-primary-light text-center items-start p-4 text-white border border-y-black">{{ !note_id ? 'Agregar' : 'Editar'}} Nota</h1>
+    <loading-spinner *ngIf="isLoading" whatIsLoading="nota"></loading-spinner>
     <div class="justify-between w-full h-full p-2" *ngIf="!isLoading">
         <form class="flex flex-row w-full" [formGroup]="form_data">
             <div style="width:50%;">

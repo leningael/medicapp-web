@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
+  Appointment,
   AppointmentMove,
   CalendarSlot,
   PatientInfo,
@@ -11,6 +12,7 @@ import { CredentialsService } from 'src/app/shared/services/credentials.service'
 import { ToastrService } from 'ngx-toastr';
 import { format } from 'date-fns';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { AddNoteComponent } from 'src/app/modules/notes/components/add-note/add-note.component';
 
 @Component({
   selector: 'appointments-list',
@@ -51,6 +53,10 @@ export class AppointmentsListComponent {
 
   getCompleteName(patient: PatientInfo): string {
     return `${patient.name} ${patient.lastname}`;
+  }
+
+  addNoteToAppointment(appointment: Appointment) {
+    
   }
 
   deleteAppointment(appointment_id: string) {

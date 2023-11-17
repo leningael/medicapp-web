@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ManageAccountsPageComponent } from './pages/manage-accounts-page/manage-accounts-page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountsPageComponent } from './pages/accounts-page/accounts-page.component';
 
 const routes: Routes = [
   {
@@ -9,7 +8,7 @@ const routes: Routes = [
     children: [
       {
         path: 'manage-accounts',
-        component: ManageAccountsPageComponent,
+        component: AccountsPageComponent,
         data: { title: 'Administrar cuentas' }
       },
       {

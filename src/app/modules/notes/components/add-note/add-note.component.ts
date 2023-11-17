@@ -35,25 +35,25 @@ export class AddNoteComponent implements OnInit{
     private dialogRef: MatDialogRef<AddNoteComponent>,
     @Inject(MAT_DIALOG_DATA) private data: {noteId: string, patient?: any},
     private dialogService: MatDialog){
-              this.note_id = data.noteId;
-              this.form_data = this.fb.group({
-                reason: this.fb.control('', [Validators.required]),
-                description: this.fb.control(''),
-                sistolic_pressure: this.fb.control(''),
-                diagnosis: this.fb.control('', [Validators.required]),
-                temperature: this.fb.control(''),
-                weight: this.fb.control(''),
-                height: this.fb.control(''),
-                imc: this.fb.control(0, [Validators.required]),
-                diastolic_pressure: this.fb.control(''),
-              })
-              this.medication = [];
-              this.selected_patient = {
-                _id:'',
-                name:'',
-                lastname:'',
-                curp:'', 
-              }
+      this.note_id = data.noteId;
+      this.form_data = this.fb.group({
+        reason: this.fb.control('', [Validators.required]),
+        description: this.fb.control(''),
+        sistolic_pressure: this.fb.control(''),
+        diagnosis: this.fb.control('', [Validators.required]),
+        temperature: this.fb.control(''),
+        weight: this.fb.control(''),
+        height: this.fb.control(''),
+        imc: this.fb.control(0, [Validators.required]),
+        diastolic_pressure: this.fb.control(''),
+      })
+      this.medication = [];
+      this.selected_patient = {
+        _id:'',
+        name:'',
+        lastname:'',
+        curp:'', 
+      }
   }
   ngOnInit(): void {
     if(this.note_id){
@@ -92,7 +92,7 @@ export class AddNoteComponent implements OnInit{
     this.selected_patient = patient;
   }
    closeDialog(save?: boolean){
-    if(!save){
+    if(save === false){
       this.dialogRef.close(save)
       return;
     }

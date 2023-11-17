@@ -1,0 +1,91 @@
+<section class="h-full flex flex-col">
+  <div class="bg-secondary p-4 text-center">Agregar cuenta</div>
+  <form
+    [formGroup]="accountForm"
+    class="grow flex flex-col gap-6 p-8"
+  >
+    <div class="flex gap-3">
+      <mat-form-field
+        class="grow"
+        appearance="outline"
+        subscriptSizing="dynamic"
+      >
+        <mat-label>Nombre de usuario</mat-label>
+        <input
+          matInput
+          formControlName="username"
+          placeholder="Ingrese el username"
+        />
+      </mat-form-field>
+      <mat-form-field
+        class="w-2/5"
+        *ngIf="!account"
+        appearance="outline"
+        subscriptSizing="dynamic"
+      >
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="doctor">Doctor</mat-option>
+          <mat-option value="receptionist">Recepcionista</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" placeholder="Ingrese el nombre" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Apellido</mat-label>
+      <input
+        matInput
+        formControlName="lastname"
+        placeholder="Ingrese el apellido"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Correo electrónico</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Ingrese el correo electrónico"
+      />
+    </mat-form-field>
+    <div class="flex gap-3">
+      <mat-form-field
+        class="grow"
+        appearance="outline"
+        subscriptSizing="dynamic"
+      >
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="Ingrese la contraseña"
+        />
+      </mat-form-field>
+      <mat-form-field
+        class="grow"
+        appearance="outline"
+        subscriptSizing="dynamic"
+      >
+        <mat-label>Repite la contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="confirm_password"
+          placeholder="Confirme la contraseña"
+        />
+      </mat-form-field>
+    </div>
+    <div class="flex justify-center items-center gap-3">
+      <button mat-stroked-button type="button" color="primary" (click)="cancel()">
+        Cancelar
+      </button>
+      <button mat-flat-button type="button" color="primary" (click)="saveAccount()">
+        {{ isSaving ? 'Guardando...' : 'Guardar' }}
+      </button>
+    </div>
+  </form>
+</section>

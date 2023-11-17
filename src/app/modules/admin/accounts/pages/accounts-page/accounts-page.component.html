@@ -1,0 +1,55 @@
+<div class="absolute inset-0 h-full flex flex-col px-10 py-6">
+  <div class="flex items-center justify-between mb-8">
+    <shared-search-box
+      placeholder="Buscar cuenta"
+      (onValue)="searchAccounts($event)"
+    ></shared-search-box>
+    <button mat-flat-button color="primary" (click)="postAccount()">
+      <mat-icon>add</mat-icon>
+      Agregar cuenta
+    </button>
+  </div>
+  <div class="grow overflow-auto">
+    <loading-spinner
+      *ngIf="isLoading; else accountsList"
+      whatIsLoading="cuentas"
+    ></loading-spinner>
+    <ng-template #accountsList>
+      <div
+        *ngIf="!accounts.length"
+        class="bg-yellow-100 p-4 rounded-md text-center"
+      >
+        No se encontraron cuentas.
+      </div>
+      <mat-card *ngFor="let account of accounts" class="px-4 py-3 mb-3">
+        <div class="flex items-center gap-3">
+          <div
+            class="rounded-full w-fit py-2 px-3 bg-secondary text-xl text-white"
+          >
+            {{ account.name + " " + account.lastname | shortName }}
+          </div>
+          <div class="grow">
+            <p>{{account.username}} - {{ account.name + " " + account.lastname }}</p>
+            <p class="text-sm"><span class="text-primary-light">Rol: </span>{{account.role}}</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <button mat-flat-button color="orange" class="small-button" (click)="postAccount(account)">
+              <mat-icon class="material-icons-outlined">edit</mat-icon>
+            </button>
+            <button mat-flat-button color="warn" class="small-button" (click)="deleteAccount(account)">
+              <mat-icon
+                class="material-icons-outlined"
+                *ngIf="removing !== account._id; else loadingDelete"
+              >
+                delete
+              </mat-icon>
+              <ng-template #loadingDelete>
+                <mat-spinner class="white-spinner" diameter="20"></mat-spinner>
+              </ng-template>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </ng-template>
+  </div>
+</div>

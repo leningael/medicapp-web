@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -16,7 +16,10 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { es } from 'date-fns/locale';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import localEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localEs, 'es')
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -37,6 +40,10 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
       provide: MAT_DATE_LOCALE,
       useValue: es,
     },
+    {
+      provide: LOCALE_ID,
+      useValue: 'es',
+    }
   ],
   bootstrap: [AppComponent],
 })

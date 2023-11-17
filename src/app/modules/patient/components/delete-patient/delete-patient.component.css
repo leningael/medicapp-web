@@ -1,0 +1,5 @@
+.custom-delete {
+    background-color:var(--warn-color)  !important;
+    color: #fff !important;
+}
+

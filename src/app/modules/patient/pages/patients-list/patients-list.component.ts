@@ -8,6 +8,7 @@ import { AddPatientComponent } from '../../components/add-patient/add-patient.co
 import { ToastrService } from 'ngx-toastr';
 import { NotesService } from 'src/app/modules/notes/services/notes.service';
 import { AddNoteComponent } from 'src/app/modules/notes/components/add-note/add-note.component';
+import { DeletePatientComponent } from '../../components/delete-patient/delete-patient.component';
 
 @Component({
   selector: 'app-patients-list',
@@ -74,6 +75,19 @@ export class PatientsListComponent implements OnInit {
   }
   private succesUpload(): void {
     this.toastr.success('Nota agregadada correctamente', 'Éxito');
+  }
+
+  deletePatientAlert(patient_id: string): void {
+    const dialogRef = this.dialog.open(DeletePatientComponent, {
+      width: '300px',
+      hasBackdrop: false,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deletePatient(patient_id);
+      }
+    });
   }
 
   deletePatient(patient_id: string): void {

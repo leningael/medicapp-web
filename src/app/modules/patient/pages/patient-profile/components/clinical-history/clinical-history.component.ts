@@ -11,8 +11,9 @@ import { PatientService } from 'src/app/modules/patient/services/patient.service
 })
 export class ClinicalHistoryComponent implements OnInit {
   @Input() patient!: Patient;
-  public isEditing: boolean = false
-  patientId: string = ''
+  public isEditing: boolean = false;
+  patientId: string = '';
+  public readonly: boolean = false;
   public clinicalHistoryForm: FormGroup = this.formBuilder.group({
     pathological: [''],
     non_pathological: [''],
@@ -27,7 +28,7 @@ export class ClinicalHistoryComponent implements OnInit {
     private patientService: PatientService,
     private toastr: ToastrService
   ){
-    this.clinicalHistoryForm.disable();
+    this.readonly = true;
   }
   ngOnInit(): void {
     if (this.patient.clinical_history) this.loadForm(this.patient.clinical_history!)
@@ -47,11 +48,13 @@ export class ClinicalHistoryComponent implements OnInit {
   edit() {
     if (this.isEditing == false) {
       this.isEditing = true;
-      this.clinicalHistoryForm.enable();
+      // this.clinicalHistoryForm.enable();
+      this.readonly = false;
     }
     else {
       this.isEditing = false;
-      this.clinicalHistoryForm.disable();
+      // this.clinicalHistoryForm.disable();
+      this.readonly = true;
       this.savePatientData()
     }
   }
@@ -82,7 +85,7 @@ export class ClinicalHistoryComponent implements OnInit {
     if (this.patient.clinical_history) this.loadForm(this.patient.clinical_history!)
     else this.clinicalHistoryForm.reset();
     this.isEditing = false;
-    this.clinicalHistoryForm.disable();
-   
+    // this.clinicalHistoryForm.disable();
+    this.readonly = true;
   }
 }

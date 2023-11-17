@@ -67,9 +67,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-
-  <p class="text-2xl py-6 text-end">Historial de citas</p>
-  
+    <p class="text-xl font-medium  pt-8 pb-2 text-center">Historial de citas</p>
     <mat-card>
       <mat-card-content class="pb-0" *ngIf="!isLoading; else loadingTxt">
           <p *ngIf="!appointments.length; else appointmentsTable" class="text-center">No hay citas registradas.</p>

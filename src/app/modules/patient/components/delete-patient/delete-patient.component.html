@@ -1,0 +1,10 @@
+<div class="p-5 text-center flex justify-center flex-col">
+    <p class="text-xl font-medium">Borrar paciente</p>
+    <p class="py-3">
+      ¿Estás seguro que deseas borrar a este paciente de tu lista?
+    </p>
+    <div class="flex gap-3 justify-center">
+      <button mat-flat-button type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-flat-button type="button" (click)="onDelete()" class="custom-delete" cdkFocusInitial>Borrar</button>
+    </div>
+</div>

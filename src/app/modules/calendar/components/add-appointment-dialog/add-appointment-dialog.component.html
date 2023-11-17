@@ -1,0 +1,26 @@
+<section class="h-full flex flex-col">
+  <div class="bg-secondary p-4 text-center">Agregar cita</div>
+  <div class="grow flex flex-col px-8 py-4 overflow-hidden">
+    <form [formGroup]="appointmentForm">
+      <mat-form-field
+        appearance="outline"
+        class="w-full mb-3"
+        subscriptSizing="dynamic"
+      >
+        <mat-label>Motivo de la consulta</mat-label>
+        <input matInput formControlName="cause" placeholder="Ingrese el motivo de la consulta" />
+      </mat-form-field>
+    </form>
+    <div class="grow overflow-hidden">
+      <select-person
+        [dataSource$]="requestPatients.bind(this)"
+        [frontendSearch]="false"
+        [afterSelectLoading]="isSaving"
+        searchPlaceholder="Buscar paciente"
+        label="Selecciona un paciente para crear la cita"
+        (onSelect)="onSelectPatient($event)"
+        (onCancel)="closeDialog()"
+      ></select-person>
+    </div>
+  </div>
+</section>

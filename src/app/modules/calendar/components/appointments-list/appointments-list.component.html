@@ -1,0 +1,89 @@
+<mat-list role="list">
+  <mat-list-item
+    role="listitem"
+    *ngFor="let slot of calendarSlots"
+    class="w-full hover:bg-gray-200"
+  >
+    <div class="flex items-center w-full py-4 gap-4">
+      <p>{{ slot.start_datetime | date : "HH:mm" }}</p>
+      <div class="grow flex items-center gap-3 overflow-hidden">
+        <ng-container *ngIf="slot.appointment">
+          <div
+            class="rounded-full w-fit py-2 px-[10px] bg-secondary text-xl text-white"
+          >
+            {{ getCompleteName(slot.appointment.patient) | shortName }}
+          </div>
+          <p class="grow" style="text-overflow: ellipsis; overflow: hidden;">
+            {{
+              getCompleteName(slot.appointment.patient) +
+                " - " +
+                slot.appointment.cause
+            }}
+          </p>
+        </ng-container>
+      </div>
+      <div class="flex items-center gap-4">
+        <ng-container *ngIf="moving; else actions">
+          <button
+            *ngIf="
+              moving !== (slot.appointment && slot.appointment._id);
+              else selfOptions
+            "
+            mat-flat-button
+            [color]="(slot.appointment) ? 'orange' : 'primary'"
+            class="small-button"
+            (click)="onSelectSlotToMove(slot)"
+          >
+            <mat-icon>{{(slot.appointment) ? 'swap_horiz' : 'done'}}</mat-icon>
+          </button>
+          <ng-template #selfOptions>
+            <button *ngIf="!loadingMoving" mat-flat-button color="warn" class="small-button" (click)="onCancelMoveOption()">
+              <mat-icon>close</mat-icon>
+            </button>
+            <p *ngIf="loadingMoving">Moviendo...</p>
+          </ng-template>
+        </ng-container>
+        <ng-template #actions>
+          <ng-container *ngIf="slot.appointment; else noAppointment">
+            <button
+              mat-flat-button
+              color="orange"
+              class="small-button"
+              (click)="onClickMoveOption(slot.appointment._id)"
+            >
+              <mat-icon>autorenew</mat-icon>
+            </button>
+            <button mat-flat-button color="success" class="small-button" (click)="addNote(slot.appointment.note_id,slot.appointment._id ,slot.appointment.patient)">
+              <mat-icon class="material-icons-outlined">note_add</mat-icon>
+            </button>
+            <button
+              mat-flat-button
+              color="warn"
+              class="small-button"
+              (click)="deleteAppointment(slot.appointment._id)"
+            >
+              <mat-icon
+                *ngIf="deleting !== slot.appointment._id; else loadingDelete"
+                class="material-icons-outlined"
+                >delete</mat-icon
+              >
+              <ng-template #loadingDelete>
+                <mat-spinner class="white-spinner" diameter="20"></mat-spinner>
+              </ng-template>
+            </button>
+          </ng-container>
+          <ng-template #noAppointment>
+            <button
+              mat-flat-button
+              (click)="addAppointment(slot)"
+              color="primary"
+              class="small-button"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </ng-template>
+        </ng-template>
+      </div>
+    </div>
+  </mat-list-item>
+</mat-list>

@@ -1,0 +1,22 @@
+<div class="m-5 h-full">
+  <mat-tab-group
+    class="w-full"
+    mat-stretch-tabs="false"
+    animationDuration="0ms"
+  >
+    <mat-tab label="Información Personal">
+      <personal-data *ngIf="!isLoading" [patient]="patient" (onUpdate)="getPatient()"></personal-data>
+    </mat-tab>
+    <mat-tab label="Historial Clínico">
+      <clinical-history
+        *ngIf="!isLoading"
+        [patient]="patient"
+      ></clinical-history>
+    </mat-tab>
+    <mat-tab label="Notas">
+      <notes *ngIf="!isLoading" [patientId]="patient._id"></notes>
+    </mat-tab>
+  </mat-tab-group>
+
+  <loading-spinner *ngIf="isLoading" whatIsLoading="paciente"></loading-spinner>
+</div>

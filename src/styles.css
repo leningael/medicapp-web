@@ -11,12 +11,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 
 :root {
   --primary-color: #1C639D;
+  /* --secondary-color: #8DADCA; */
   --secondary-color: #b6d1e9;
   --accent-color: #c89df5;
-  --warn-color: #EC3B3B;
+  --warn-color: #ef4444;
+  --success-color: #16a34a;
   --background-color: #EFEFEF;
 }
 
 .spacer {
   flex: auto;
+}
+
+/* Style to fix the weird border in form fields with angular material */
+.mat-mdc-form-field .mdc-notched-outline__notch {
+  border-right: none;
+}
+
+.white-spinner{
+  --mdc-circular-progress-active-indicator-color: #fff !important;
 }

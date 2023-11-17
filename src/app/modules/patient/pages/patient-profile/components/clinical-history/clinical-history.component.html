@@ -1,0 +1,38 @@
+<div class="px-20">
+    <div class="flex justify-end pb-10 gap-5">
+        <button mat-stroked-button class="custom-stroked" (click)="cancel()">Cancel</button>
+        <button mat-flat-button class="custom" (click)="edit()"><mat-icon>{{isEditing ? 'save' : 'edit'}}</mat-icon>{{isEditing ? 'Guardar' : 'Editar'}}</button>
+    </div>
+  
+    <form [formGroup]="clinicalHistoryForm" (ngSubmit)="savePatientData()">
+        <div class="flex gap-16 pb-10">
+            <mat-form-field class="grow h-64" appearance="outline">
+                <mat-label class="text-xl">Antecedentes patológicos</mat-label>
+                <textarea  cdkTextareaAutosize cdkAutosizeMaxRows="8" matInput formControlName="pathological" [readonly]="readonly"></textarea>
+            </mat-form-field>
+            <mat-form-field class="grow" appearance="outline">
+                <mat-label class="text-xl">Antecedentes no patológicos</mat-label>
+                <textarea  cdkTextareaAutosize cdkAutosizeMaxRows="8" matInput formControlName="non_pathological" [readonly]="readonly"></textarea>
+            </mat-form-field>
+            <mat-form-field class="grow" appearance="outline">
+                <mat-label class="text-xl">Antecedentes heredo-familiares</mat-label>
+                <textarea  cdkTextareaAutosize cdkAutosizeMaxRows="8" matInput formControlName="inherit" [readonly]="readonly"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="flex gap-16">
+            <mat-form-field class="grow h-64" appearance="outline">
+                <mat-label class="text-xl">Antecedentes quirúrgicos</mat-label>
+                <textarea  cdkTextareaAutosize cdkAutosizeMaxRows="8" matInput formControlName="surgical" [readonly]="readonly"></textarea>
+            </mat-form-field>
+            <mat-form-field class="grow" appearance="outline">
+                <mat-label class="text-xl">Medicación actual</mat-label>
+                <textarea  cdkTextareaAutosize cdkAutosizeMaxRows="8" matInput formControlName="current_medication" [readonly]="readonly"></textarea>
+            </mat-form-field>
+            <mat-form-field class="grow" appearance="outline">
+                <mat-label class="text-xl">Alergias conocidas</mat-label>
+                <textarea  cdkTextareaAutosize cdkAutosizeMaxRows="8" matInput formControlName="allergies" [readonly]="readonly"></textarea>
+            </mat-form-field>
+        </div>
+    </form>
+
+</div>

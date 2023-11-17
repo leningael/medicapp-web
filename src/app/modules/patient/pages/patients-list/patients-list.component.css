@@ -1,0 +1,21 @@
+  .small-button {
+    min-width: auto;
+    padding: 5px;
+  }
+  
+  .small-button .mat-icon {
+    margin: 0px;
+    font-size: 24px;
+    width: auto;
+    height: auto;
+  }
+  
+  .mat-primary {
+    background-color:var(--primary-color)  !important;
+    color: #fff !important;
+  }
+  
+  .mat-success {
+    background-color: var(--success-color) !important;
+    color: #fff !important;
+  }

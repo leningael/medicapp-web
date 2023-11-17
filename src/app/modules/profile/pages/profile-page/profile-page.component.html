@@ -1,3 +1,83 @@
-<section class="h-full">
-    <p>profile-page works!</p>
-</section>
+<div class="h-full px-20 py-8">
+  <ng-container *ngIf="!isLoading; else loading">
+      <div class="flex justify-end">
+        <button mat-flat-button class="custom self-end" (click)="openEditProfile()"><mat-icon>edit</mat-icon> Editar</button>
+      </div> 
+      
+      <div class="flex flex-col items-center">
+        <div class="text-center">
+          <p class="font-medium text-5xl">{{user.name}} {{user.lastname}}</p>
+          <p class="text-gray-400 text-xl">{{userRole | titlecase}}</p>
+        </div>
+        <div class="flex gap-24">
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="text-xs text-gray-500 tracking-widest">Nombre de usuario</p>
+              <p class="tracking-widest">{{user.username}}</p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="text-xs text-gray-500 tracking-widest">Email</p>
+              <p class="tracking-widest">{{user.email}}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div *ngIf="userRole == 'doctor'" class="flex gap-24 py-12">
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberPatients}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberPatients == 1 ? 'Paciente' : 'Pacientes'}}</p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberAppointments}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberAppointments == 1 ? 'Cita pendiente' : 'Citas pendientes'}}</p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberReceptionists}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberReceptionists == 1 ? 'Recepcionista' : 'Recepcionistas'}}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div *ngIf="userRole == 'receptionist'" class="py-16">
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberDoctors}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">Mis doctores</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div *ngIf="userRole == 'admin'" class="flex gap-24 py-12">
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberPatients}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberPatients == 1 ? 'Paciente' : 'Pacientes'}}</p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberDoctors}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberDoctors == 1 ? 'Doctor' : 'Doctores'}}</p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card text-center mt-5 flex flex-col justify-center w-96">
+            <mat-card-content>
+              <p class="tracking-widest text-5xl ">{{userInformation.numberReceptionists}}</p>
+              <p class="text-xs text-gray-500 tracking-widest">{{userInformation.numberReceptionists == 1 ? 'Recepcionista' : 'Recepcionistas'}}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <img class="w-96" src="/src/app/modules/profile/assets/profile.svg" alt="">
+      </div> 
+  </ng-container>
+
+  <ng-template #loading>
+      <div class="flex justify-center items-center h-full">
+        <loading-spinner whatIsLoading="perfil"></loading-spinner>
+      </div>
+  </ng-template>
+</div>

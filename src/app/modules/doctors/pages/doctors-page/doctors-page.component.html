@@ -1,0 +1,42 @@
+<div class="absolute inset-0 h-full flex flex-col px-10 py-6">
+  <div class="flex justify-end mb-8">
+    <shared-search-box
+      placeholder="Buscar doctores"
+      (onValue)="searchReceptionists($event)"
+    ></shared-search-box>
+  </div>
+  <div class="grow overflow-auto">
+    <loading-spinner
+      *ngIf="isLoading; else doctorsList"
+      whatIsLoading="doctores"
+    ></loading-spinner>
+    <ng-template #doctorsList>
+      <div
+        *ngIf="!doctors.length"
+        class="bg-yellow-100 p-4 rounded-md text-center"
+      >
+        No se encontraron doctores asignados.
+      </div>
+      <mat-card *ngFor="let doctor of doctors" class="px-4 py-3 mb-3">
+        <div class="flex items-center gap-3">
+          <div
+            class="rounded-full w-fit py-2 px-3 bg-secondary text-xl text-white"
+          >
+            {{ doctor.name + " " + doctor.lastname | shortName }}
+          </div>
+          <p class="grow">Dr. {{ doctor.name + " " + doctor.lastname }}</p>
+          <div class="flex items-center gap-4">
+            <button mat-flat-button color="success" class="small-button" (click)="addPatient(doctor._id)">
+              <mat-icon class="material-icons-outlined">person_add</mat-icon>
+            </button>
+            <button mat-flat-button color="primary" class="small-button" (click)="addAppointment(doctor)">
+              <mat-icon class="material-icons-outlined"
+                >calendar_month</mat-icon
+              >
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </ng-template>
+  </div>
+</div>

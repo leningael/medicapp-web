@@ -18,7 +18,8 @@ export interface Notes {
         sistolic_pressure: string;
         diastolic_pressure: string;
         medication: Meds[];
-    }
+    };
+    appointment_id?: string;
 }
 
 export interface NoteContent {

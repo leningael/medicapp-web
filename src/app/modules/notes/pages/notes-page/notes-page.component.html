@@ -1,4 +1,6 @@
-<div class="m-5">
+
+<loading-spinner *ngIf="isLoading" whatIsLoading="notas"></loading-spinner>
+<div class="m-5" *ngIf="!isLoading">
     <div class="flex justify-between ">
         <select  [(ngModel)]="selectedValue" (change)="handleSort()" class="bg-white border border-black p-3 rounded-md">
             <option value="default" >Ordenar por</option>

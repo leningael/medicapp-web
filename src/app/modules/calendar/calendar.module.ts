@@ -22,6 +22,9 @@ import { AddAppointmentDialogComponent } from './components/add-appointment-dial
     CalendarRoutingModule,
     SharedModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    AppointmentsListComponent
   ]
 })
 export class CalendarModule { }

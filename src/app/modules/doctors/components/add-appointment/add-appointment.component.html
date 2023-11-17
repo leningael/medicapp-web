@@ -1,12 +1,23 @@
 <section class="h-full flex flex-col">
   <div class="bg-secondary p-4 text-center">
     <p>Agregar cita</p>
-    <p class="text-sm font-medium">Dr. {{doctor.name + " " + doctor.lastname}}</p>
+    <p class="text-sm font-medium">
+      Dr. {{ doctor.name + " " + doctor.lastname }}
+    </p>
   </div>
-  <!-- <div class="flex items-center gap-2">
-    <p>{{selectedDate | date: 'EEEE d, MMMM y'}}</p>
-  </div> -->
-  <button>
-    {{selectedDate | date: 'EEEE d, MMMM y'}}
+  <button mat-button class="mx-auto my-2" [matMenuTriggerFor]="calendarMenu">
+    {{ selectedDate | date : "EEEE d, MMMM y" }}
+    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
   </button>
+  <mat-menu #calendarMenu="matMenu">
+    <mat-calendar class="w-80" [(selected)]="selectedDate" (selectedChange)="requestDayAppointments()"></mat-calendar>
+  </mat-menu>
+  <section class="grow overflow-auto mb-2">
+    <appointments-list *ngIf="!isLoading; else loadingSpinner" [calendarSlots]="calendarSlots" (onChanges)="requestDayAppointments()" [doctorId]="doctor._id"></appointments-list>
+    <ng-template #loadingSpinner>
+      <div class="flex h-full items-center justify-center">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
+  </section>
 </section>

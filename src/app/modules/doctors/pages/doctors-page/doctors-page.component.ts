@@ -5,6 +5,7 @@ import { DoctorsService } from '../../services/doctors.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { AddAppointmentComponent } from '../../components/add-appointment/add-appointment.component';
+import { AddPatientComponent } from 'src/app/modules/patient/components/add-patient/add-patient.component';
 
 @Component({
   selector: 'app-doctors-page',
@@ -52,9 +53,16 @@ export class DoctorsPageComponent implements OnInit {
 
   addAppointment(doctor: DoctorOverview) {
     this.dialog.open(AddAppointmentComponent, {
-      width: '400px',
-      height: '500px',
+      width: '580px',
+      height: '600px',
       data: doctor,
+    });
+  }
+
+  addPatient(doctorID: string){
+    this.dialog.open(AddPatientComponent, {
+      disableClose: true,
+      data: {doctorID}
     });
   }
 }

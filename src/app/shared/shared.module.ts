@@ -13,13 +13,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatTableModule} from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { SidebarLayoutComponent } from './components/sidebar-layout/sidebar-layout.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -66,19 +67,19 @@ import { SearchPipe } from './pipes/search.pipe';
     // Material Modules
     MatButtonModule,
     MatCardModule,
-    MatDatepickerModule,
     MatDateFnsModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatTableModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatTableModule,
     MatTabsModule,
-    MatPaginatorModule,
-    
   ],
 })
 export class SharedModule {}

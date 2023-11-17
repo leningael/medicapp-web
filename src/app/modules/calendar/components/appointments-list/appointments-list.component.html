@@ -6,14 +6,14 @@
   >
     <div class="flex items-center w-full py-4 gap-4">
       <p>{{ slot.start_datetime | date : "HH:mm" }}</p>
-      <div class="grow flex items-center gap-3">
+      <div class="grow flex items-center gap-3 overflow-hidden">
         <ng-container *ngIf="slot.appointment">
           <div
             class="rounded-full w-fit py-2 px-[10px] bg-secondary text-xl text-white"
           >
             {{ getCompleteName(slot.appointment.patient) | shortName }}
           </div>
-          <p>
+          <p class="grow" style="text-overflow: ellipsis; overflow: hidden;">
             {{
               getCompleteName(slot.appointment.patient) +
                 " - " +

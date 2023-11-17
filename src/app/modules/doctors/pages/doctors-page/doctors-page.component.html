@@ -26,7 +26,7 @@
           </div>
           <p class="grow">Dr. {{ doctor.name + " " + doctor.lastname }}</p>
           <div class="flex items-center gap-4">
-            <button mat-flat-button color="success" class="small-button">
+            <button mat-flat-button color="success" class="small-button" (click)="addPatient(doctor._id)">
               <mat-icon class="material-icons-outlined">person_add</mat-icon>
             </button>
             <button mat-flat-button color="primary" class="small-button" (click)="addAppointment(doctor)">

@@ -4,6 +4,8 @@ import { DoctorsPageComponent } from './pages/doctors-page/doctors-page.componen
 import { DoctorsRoutingModule } from './doctors-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddAppointmentComponent } from './components/add-appointment/add-appointment.component';
+import { CalendarModule } from '../calendar/calendar.module';
+import { PatientModule } from '../patient/patient.module';
 
 
 
@@ -15,7 +17,9 @@ import { AddAppointmentComponent } from './components/add-appointment/add-appoin
   imports: [
     CommonModule,
     DoctorsRoutingModule,
-    SharedModule
+    SharedModule,
+    CalendarModule,
+    PatientModule
   ]
 })
 export class DoctorsModule { }

@@ -1,4 +1,4 @@
-<div class="px-20 py-8">
+<div class="h-full px-20 py-8">
   <ng-container *ngIf="!isLoading; else loading">
       <div class="flex justify-end">
         <button mat-flat-button class="custom self-end" (click)="openEditProfile()"><mat-icon>edit</mat-icon> Editar</button>
@@ -72,14 +72,12 @@
           </mat-card>
         </div>
         <img class="w-96" src="/src/app/modules/profile/assets/profile.svg" alt="">
-      </div>
-  
-     
-              
-       
+      </div> 
   </ng-container>
 
   <ng-template #loading>
-      <loading-spinner whatIsLoading="perfil"></loading-spinner>
+      <div class="flex justify-center items-center h-full">
+        <loading-spinner whatIsLoading="perfil"></loading-spinner>
+      </div>
   </ng-template>
 </div>

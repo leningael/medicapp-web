@@ -54,8 +54,6 @@ export class NotesComponent implements OnInit {
       },
       width: '90vw',
       height: '90vh',
-      hasBackdrop: false,
-      disableClose: true,
     });
     dialog.afterClosed().subscribe({
       next: (result) => {

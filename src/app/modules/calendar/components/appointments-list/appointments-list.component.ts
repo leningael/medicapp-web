@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
+  Appointment,
   AppointmentMove,
   CalendarSlot,
   PatientInfo,
@@ -55,6 +56,10 @@ export class AppointmentsListComponent {
 
   getCompleteName(patient: PatientInfo): string {
     return `${patient.name} ${patient.lastname}`;
+  }
+
+  addNoteToAppointment(appointment: Appointment) {
+    
   }
 
   deleteAppointment(appointment_id: string) {

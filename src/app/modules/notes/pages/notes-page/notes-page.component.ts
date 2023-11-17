@@ -63,8 +63,6 @@ export class NotesPageComponent implements OnInit {
       },
       width: '90vw',
       height: '90vh',
-      hasBackdrop: false,
-      disableClose: true,
     });
     dialog.afterClosed().subscribe({
       next: (result) => {
@@ -86,8 +84,6 @@ export class NotesPageComponent implements OnInit {
         title: "Eliminar",
         message: "¿Estás seguro de eliminar esta nota?"
       },
-      width: '30vw',
-      height: '20vh',
       disableClose: true,
     })
     dialog.afterClosed().subscribe(res =>{

@@ -19,7 +19,6 @@
         <select-person
         [dataSource$]="requestPatients.bind(this)"
         [frontendSearch]="false"
-        [withInitialData]="false"
         [afterSelectLoading]="isSaving"
         searchPlaceholder="Buscar paciente por CURP"
         (onSelect)="selectPatient($event)"

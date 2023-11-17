@@ -19,6 +19,10 @@ export class NotesService {
   getDetails(id: string){
     return this.http.get<NoteContent>(`${this.apiUrl}/note/${id}`);
   }
+
+  getAppointmentNote(appointment_id: string){
+    return this.http.get<NoteContent>(`${this.apiUrl}/note/appointment/${appointment_id}`);
+  }
   postNote(note: Notes){
     return this.http.post(`${this.apiUrl}/note/`, note);
   }

@@ -41,6 +41,7 @@ export interface Appointment {
     cause: string;
     start_datetime: string;
     end_datetime: string;
+    note_id?: string;
     patient: PatientInfo;
 }
 

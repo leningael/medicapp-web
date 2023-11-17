@@ -2,62 +2,135 @@ import { Component, OnInit } from '@angular/core';
 import { Notes } from '../../interfaces/notes';
 import { NotesService } from '../../services/notes.service';
 import { MatDialog } from '@angular/material/dialog';
-import { PatientsListComponent } from 'src/app/modules/patient/pages/patients-list/patients-list.component';
+import { AddNoteComponent } from '../../components/add-note/add-note.component';
+import { ToastrService } from 'ngx-toastr';
+import { PatientOverview } from 'src/app/modules/patient/interfaces/patient.interfaces';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-notes-page',
   templateUrl: './notes-page.component.html',
-  styleUrls: ['./notes-page.component.css']
+  styleUrls: ['./notes-page.component.css'],
 })
-export class NotesPageComponent implements OnInit{
-  public options: string[] = ['Nombre (A-Z)', 'Fecha (⬇️)'];
+export class NotesPageComponent implements OnInit {
   public data: Notes[];
-  public displayedColumns: string[]= ["date","title", "option"];
+  public displayedColumns: string[] = ['date', 'title', 'option'];
   public isLoading: boolean = true;
+  public sortOptions: string[] = [
+    'Nombre (A-Z)',
+    'Nombre (Z-A)',
+    'Fecha (Asc.)',
+    'Fecha (Desc.)',
+  ];
+  public selectedValue: string = 'default';
 
-  constructor(private ns: NotesService,
-              private matDialog: MatDialog){
+  constructor(
+    private notesService: NotesService,
+    private toastr: ToastrService,
+    private matDialog: MatDialog
+  ) {
     this.data = [];
   }
 
   ngOnInit(): void {
-    this.data = [{
-      id: "1",
-      title: "Note 1",
-      doctor_name: "Doctor 1",
-      pacient_name: "Pacient 1",
-      date: "01/01/2022",
-      reason: "Reason 1",
-      information: "Information 1",
-      diagnosis: "Diagnosis 1",
-      temperature: "Temperature 1",
-      medication: [{medicament: "Medicament 1", quantity: "Quantity 1", consume_method: "Consume Method 1", frequency: "Frequency 1", duration: "Duration 1", notes: "Notes 1"}],
-      weight: "Weight 1",
-      height: "Height 1",
-      imc: "IMC 1",
-      sistolic_pressure: "Sistolic Pressure 1",
-      diastolic_pressure: "Diastolic Pressure 1"
-    }]
-    this.isLoading = false;
-    // this.ns.getNotes().subscribe({
-    //   next: (data) => {
-    //     this.data = data;
-    //     this.isLoading = false;
-    //   }
-    // });
-  }
-  searchNotes(search: string): void{
-    const term = search.trim();
+    this.fetchData();
   }
 
-  addNote(){
-    let dialog = this.matDialog.open(PatientsListComponent,{
-      data: {},
-      width: '800px',
+  fetchData() {
+    this.notesService.getNotes().subscribe({
+      next: (data) => {
+        this.isLoading = true;
+        this.data = data;
+        this.isLoading = false;
+      },
     });
-    dialog.afterClosed().subscribe(result => {
-      console.log(result);
+  }
+  searchNotes(search: any): void {
+    this.notesService.getNotes(search).subscribe({
+      next: (data) => {
+        this.isLoading = true;
+        this.data = data;
+        this.isLoading = false;
+      },
     });
+  }
 
+  addNote(noteId?: string, patient?: PatientOverview) {
+    let dialog = this.matDialog.open(AddNoteComponent, {
+      data: {
+        noteId,
+        patient,
+      },
+      width: '90vw',
+      height: '90vh',
+      hasBackdrop: false,
+      disableClose: true,
+    });
+    dialog.afterClosed().subscribe({
+      next: (result) => {
+        if(!result) return;
+        if (!result._id) this.notesService.postNote(result).subscribe(()=> this.succesUpload());
+        else this.notesService.updateNote(result).subscribe(()=> this.succesUpload());
+      },
+    });
+  }
+  succesUpload(){
+    this.toastr.success('Nota cargada correctamente', 'Éxito');
+    this.data = [];
+    this.isLoading = true;
+    this.fetchData();
+  }
+  handleDeleteNote(id: string) {
+    let dialog = this.matDialog.open(ConfirmDialogComponent, {
+      data: {
+        title: "Eliminar",
+        message: "¿Estás seguro de eliminar esta nota?"
+      },
+      width: '30vw',
+      height: '20vh',
+      disableClose: true,
+    })
+    dialog.afterClosed().subscribe(res =>{
+      if(!res) return
+      this.notesService.deleteNote(id).subscribe({
+        next: () => {
+          this.toastr.success('Se ha eliminado la nota', 'Éxito');
+          this.data = this.data.slice().filter((element) => element._id != id);
+        },
+        error: () => {
+          this.toastr.error('Ha ocurrido un error al eliminar la nota', 'Error');
+        },
+      });
+    });
+  }
+
+  handleSort() {
+    const option = this.selectedValue.split(' ');
+    switch (option[0].toLowerCase().trim()) {
+      case 'nombre':
+        const sortName: Record<string, (a: Notes, b: Notes) => number> = {
+          '(a-z)': (a: Notes, b: Notes) =>
+            ('' + a.patient.name).localeCompare(b.patient.name),
+          '(z-a)': (a: Notes, b: Notes) =>
+            ('' + b.patient.name).localeCompare(a.patient.name),
+        };
+        this.data = this.data
+          .slice()
+          .sort(sortName[option[1].toLowerCase().trim()]);
+        break;
+      case 'fecha':
+        const dateSort: Record<string, (a: Notes, b: Notes) => number> = {
+          '(asc.)': (a: Notes, b: Notes) =>
+            new Date(a.date!).getTime() - new Date(b.date!).getTime(),
+          '(desc.)': (a: Notes, b: Notes) =>
+            new Date(b.date!).getTime() - new Date(a.date!).getTime(),
+        };
+        this.data = this.data
+          .slice()
+          .sort(dateSort['' + option[1].toLowerCase().trim()]);
+        break;
+      default:
+        break;
+    }
   }
 }

@@ -32,7 +32,7 @@
     <loading-spinner *ngIf="isLoading" whatIsLoading="nota"></loading-spinner>
     <div class="justify-between w-full h-full p-2" *ngIf="!isLoading">
         <form class="flex flex-row w-full" [formGroup]="form_data">
-            <div style="width:50%;">
+            <div class="flex flex-col content-between justify-between" style="width:50%;">
                 <mat-form-field class="w-full ">
                     <label for="motivo">Motivo de consulta</label>
                     <input formControlName="reason" id="motivo" matInput placeholder="Ingrese el motivo de la consulta">
@@ -47,7 +47,7 @@
                     <input formControlName="sistolic_pressure" id="tenSis" matInput placeholder="Tensión sistólica | mmHg">
                 </mat-form-field>
             </div>
-            <div style="width:50%;">
+            <div class="flex flex-col justify-between h-full" style="width:50%;">
                 <mat-form-field class="w-full px-2 ">
                     <label for="diagnostico">Diagnostico principal</label>
                     <input formControlName="diagnosis" id="diagnostico" matInput placeholder="Diagnostico principal" type="text-">
@@ -58,15 +58,19 @@
                 </mat-form-field>
                 <mat-form-field class="w-full px-2 ">
                     <label for="height">Altura</label>
-                    <input formControlName="height" id="height" matInput placeholder="Altura" type="text-">
+                    <input formControlName="height" id="height" (keydown)="handleIMCChange('height')" matInput placeholder="Altura (m)" type="text-">
                 </mat-form-field>
                 <mat-form-field class="w-full px-2 ">
                     <label for="weight">Peso</label>
-                    <input formControlName="weight" id="weight" matInput placeholder="Peso" type="text-">
+                    <input formControlName="weight" id="weight" (keydown)="handleIMCChange('weight')" matInput placeholder="Peso (kg)" type="text-">
                 </mat-form-field>
                 <mat-form-field class="w-full px-2 ">
                     <label for="imc">IMC</label>
-                    <input formControlName="imc" id="imc" matInput placeholder="IMC (Kg / altura)^2" type="text-">
+                    <input formControlName="imc" id="imc" matInput placeholder="IMC Kg /(altura)^2" type="text">
+                </mat-form-field>
+                <mat-form-field class="w-full px-2 ">
+                    <label for="diastolic_pressure">Tensión diastólica</label>
+                    <input formControlName="diastolic_pressure" id="diastolic_pressure" matInput placeholder="Tensión diastólica | mmHg" type="text-">
                 </mat-form-field>
             </div>
         </form>
@@ -77,7 +81,9 @@
         <button mat-raised-button 
                 class="h-full align-middle" 
                 style="background-color: rgb(88, 147, 1); align-self: center;" 
-                (click)="handleAddMedication()">
+                (click)="handleAddMedication()"
+                [disabled]="isLoading"
+                >
             <p class="text-white text-center">Añadir</p>
         </button>
     </div>

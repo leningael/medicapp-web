@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, of } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of } from 'rxjs';
 import { PatientOverview } from 'src/app/modules/patient/interfaces/patient.interfaces';
 import { PatientService } from 'src/app/modules/patient/services/patient.service';
 import { SelectPersonArgs } from 'src/app/shared/interfaces/credentials.interfaces';
@@ -46,7 +46,7 @@ export class AddNoteComponent implements OnInit {
       temperature: this.fb.control(''),
       weight: this.fb.control(''),
       height: this.fb.control(''),
-      imc: this.fb.control(0, [Validators.required]),
+      imc: this.fb.control({value:0, disabled:true}, [Validators.required]),
       diastolic_pressure: this.fb.control(''),
     });
     this.medication = [];
@@ -96,7 +96,7 @@ export class AddNoteComponent implements OnInit {
       temperature: this.fb.control(res.temperature || ''),
       weight: this.fb.control(res.weight || ''),
       height: this.fb.control(res.height || ''),
-      imc: this.fb.control(res.imc ?? 0, Validators.required),
+      imc: this.fb.control({value:res.imc ?? 0, disabled: true}, [Validators.required]),
       diastolic_pressure: this.fb.control(res.diastolic_pressure ?? ''),
     });
     this.medication = res.medication;
@@ -112,12 +112,13 @@ export class AddNoteComponent implements OnInit {
       return;
     }
     let note: Notes = {
-      content: { ...this.form_data.value, medication: this.medication },
+      content: { ...this.form_data.value, medication: this.medication, imc: this.form_data.get('imc')!.value},
       patient: this.selected_patient,
       doctor_name: this.credentialsService.user_credentials.name,
       date: '' + Date.now(),
       appointment_id: this.data.appointment_id,
     };
+    console.log(this.form_data.value);
     if (this.note_id) note._id = this.note_id;
     this.dialogRef.close(note);
   }
@@ -147,5 +148,25 @@ export class AddNoteComponent implements OnInit {
       if (result === this.medication) return;
       this.medication = result;
     });
+  }
+  handleIMCChange(key: string){
+    try{
+    this.form_data.get(key)!.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(val =>{
+      let valNumber = parseFloat(val)
+      if(key === "height"){
+        let weight = this.form_data.get('weight')!.value
+        this.form_data.controls["imc"].setValue(parseFloat(weight) / (valNumber * valNumber))
+      }
+      else{
+        let height = this.form_data.get('height')!.value;
+        this.form_data.controls["imc"].setValue(valNumber/(height*height))
+      }
+    })
+    } catch(err){
+      this.form_data.controls["imc"].setValue(0)
+    }
   }
 }

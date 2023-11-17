@@ -34,7 +34,7 @@ export class AddMedicationComponent {
     if(!this.formData.valid) return;
     const newMed: Meds = {
       medicament: this.formData.value["medicament"],
-      quantity: this.formData.value["dose"],
+      quantity: this.formData.value["quantity"],
       frequency: this.formData.value["frequency"],
       duration: this.formData.value["duration"],
       notes: this.formData.value["notes"],

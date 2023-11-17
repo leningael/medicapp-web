@@ -54,7 +54,7 @@ export class DoctorsPageComponent implements OnInit {
   addAppointment(doctor: DoctorOverview) {
     this.dialog.open(AddAppointmentComponent, {
       width: '580px',
-      height: '600px',
+      height: '650px',
       data: doctor,
     });
   }

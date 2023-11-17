@@ -46,13 +46,12 @@ export class NotesPageComponent implements OnInit {
     });
   }
   searchNotes(search: any): void {
-    this.notesService.getNotes(search).subscribe({
-      next: (data) => {
-        this.isLoading = true;
-        this.data = data;
-        this.isLoading = false;
-      },
-    });
+    if(search === '') {this.fetchData(); return}
+    this.notesService.searchNotes(search).subscribe(res =>{
+      this.isLoading = true;
+      this.data = res;
+      this.isLoading = false;
+    })
   }
 
   addNote(noteId?: string, patient?: PatientOverview) {

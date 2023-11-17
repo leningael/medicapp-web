@@ -28,13 +28,13 @@
             <!-- Date Column -->
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"> {{element.date | date : "dd/MM/yyyy"}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.date | date : " EEEE dd/MM/yyyy" : 'es' | titlecase }}  </td>
             </ng-container>
 
             <!-- Name - Reason Column -->
             <ng-container matColumnDef="title">
                 <th mat-header-cell *matHeaderCellDef ></th>
-                <td mat-cell *matCellDef="let element"> {{element.patient.name}} {{element.patient.lastname}} - {{element.reason}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.patient.name}} {{element.patient.lastname}} - {{element.reason}}</td>
             </ng-container>
 
             <!-- Options Column -->

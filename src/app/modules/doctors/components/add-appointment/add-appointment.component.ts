@@ -1,38 +1,31 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { CalendarService } from '../../services/calendar.service';
-import { CredentialsService } from 'src/app/shared/services/credentials.service';
+import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DoctorOverview } from '../../interfaces/doctors.interfaces';
 import { addHours, format, isEqual, startOfDay } from 'date-fns';
-import {
-  Appointment,
-  BuissinessHours,
-  CalendarSlot,
-} from '../../models/calendar';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { SetBusinessHoursDialogComponent } from '../../components/set-business-hours-dialog/set-business-hours-dialog.component';
+import { Appointment, BuissinessHours, CalendarSlot } from 'src/app/modules/calendar/models/calendar';
+import { CalendarService } from 'src/app/modules/calendar/services/calendar.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-calendar-page',
-  templateUrl: './calendar-page.component.html',
-  styleUrls: ['./calendar-page.component.css'],
+  selector: 'app-add-appointment',
+  templateUrl: './add-appointment.component.html',
+  styleUrls: ['./add-appointment.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CalendarPageComponent implements OnInit, OnDestroy {
+export class AddAppointmentComponent implements OnInit, OnDestroy {
   selectedDate: Date = startOfDay(new Date());
-  doctorId: string = this.credentialsService.user_credentials._id;
   businessHours: BuissinessHours = new BuissinessHours();
   appointments: Appointment[] = [];
   calendarSlots: CalendarSlot[] = [];
   isLoading: boolean = false;
   subs!: Subscription;
-
   constructor(
     private calendarService: CalendarService,
-    private credentialsService: CredentialsService,
     private toastr: ToastrService,
-    private dialog: MatDialog
-  ) {}
+    private dialogRef: MatDialogRef<AddAppointmentComponent>,
+    @Inject(MAT_DIALOG_DATA) public doctor: DoctorOverview,
+  ) { }
 
   ngOnInit(): void {
     this.requestDayAppointments();
@@ -47,7 +40,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const date: string = format(this.selectedDate, 'yyyy-MM-dd');
     this.subs = this.calendarService
-      .getDayAppointments(this.doctorId, date)
+      .getDayAppointments(this.doctor._id, date)
       .subscribe({
         next: ({ business_hours, appointments }) => {
           this.businessHours = Object.assign(
@@ -99,18 +92,5 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     date.setHours(parseInt(hours));
     date.setMinutes(parseInt(minutes));
     return date;
-  }
-
-  setBusinessHours() {
-    const dialogRef = this.dialog.open(SetBusinessHoursDialogComponent, {
-      width: '400px',
-      data: this.businessHours,
-      autoFocus: false,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (!result) return;
-      this.businessHours = Object.assign(this.businessHours, result);
-      this.generateCalendarSlots();
-    });
   }
 }

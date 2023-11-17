@@ -1,6 +1,6 @@
 <div class="mb-4" >
     <div class="bg-secondary text-center py-5 mb-5">
-        <p class="text-2xl">Agregar paciente</p>
+        <p class="text-2xl">{{(this.data.patient) ? 'Editar' : 'Agregar'}} paciente</p>
     </div>
     
     <form [formGroup]="newPatientForm" (ngSubmit)="saveData()" class="p-4 px-9 w-full">
@@ -65,16 +65,16 @@
             </mat-form-field>
         </div>
         
-        <div class="flex justify-center mb-4">
-            <button mat-button color="primary" (click)="openAddExistingPatient()">Buscar paciente existente</button>
+        <div class="flex justify-center mb-4" *ngIf="!this.data.patient">
+            <button type="button" mat-button color="primary" (click)="openAddExistingPatient()">Buscar paciente existente</button>
         </div>
         
 
         <div class="flex gap-4 justify-center">
-            <button mat-stroked-button color="primary" (click)="onCancel()">
+            <button type="button" mat-stroked-button color="primary" (click)="onCancel()">
                 Cancelar
             </button>
-            <button  mat-flat-button color="primary">
+            <button type="submit" mat-flat-button color="primary">
                 Guardar
             </button>
         </div>

@@ -41,8 +41,11 @@ export class EditProfileComponent {
     });
   }
 
-  saveData(): void {
-    if (this.userEditForm.invalid) return;
+  saveData(): void {    
+    if (this.userEditForm.invalid) {
+      this.userEditForm.markAllAsTouched();
+      return;
+    }
     this.userService.updateUser(this.user._id, this.userEditForm.value)
       .subscribe({
         next: (user) => {

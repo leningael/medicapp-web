@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddPatientComponent } from '../../components/add-patient/add-patient.component';
-import { CredentialsService } from 'src/app/shared/services/credentials.service';
 import { PatientService } from '../../services/patient.service';
 import { ActivatedRoute } from '@angular/router';
 import { Patient } from '../../interfaces/patient.interfaces';

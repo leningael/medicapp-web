@@ -1,0 +1,56 @@
+<div class="absolute inset-0 h-full flex flex-col px-10 py-6">
+  <div class="flex items-center justify-between mb-8">
+    <shared-search-box placeholder="Buscar recepcionista" (onValue)="searchReceptionists($event)"></shared-search-box>
+    <button mat-flat-button color="primary" (click)="addReceptionist()">
+      <mat-icon>add</mat-icon>
+      Agregar recepcionista
+    </button>
+  </div>
+  <div class="grow overflow-auto">
+    <loading-spinner
+      *ngIf="isLoading; else receptionistsList"
+      whatIsLoading="recepcionistas"
+    ></loading-spinner>
+    <ng-template #receptionistsList>
+      <div
+        *ngIf="!receptionists.length"
+        class="bg-yellow-100 p-4 rounded-md text-center"
+      >
+        No se encontraron recepcionistas.
+      </div>
+      <mat-card
+        *ngFor="let receptionist of receptionists"
+        class="px-4 py-3 mb-3"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="rounded-full w-fit py-2 px-3 bg-secondary text-xl text-white"
+          >
+            {{ receptionist.name + " " + receptionist.lastname | shortName }}
+          </div>
+          <p class="grow">
+            {{ receptionist.name + " " + receptionist.lastname }}
+          </p>
+          <div class="flex items-center gap-4">
+            <button
+              mat-flat-button
+              color="warn"
+              class="small-button"
+              (click)="unassignReceptionist(receptionist)"
+            >
+              <mat-icon
+                class="material-icons-outlined"
+                *ngIf="removing !== receptionist._id; else loadingDelete"
+              >
+                delete
+              </mat-icon>
+              <ng-template #loadingDelete>
+                <mat-spinner class="white-spinner" diameter="20"></mat-spinner>
+              </ng-template>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </ng-template>
+  </div>
+</div>

@@ -35,7 +35,7 @@ export class AddPatientComponent {
       private formBuilder: FormBuilder,
       private validatorService: ValidatorsService,
       private patientService: PatientService,
-      @Inject(MAT_DIALOG_DATA) public data: any,
+      @Inject(MAT_DIALOG_DATA) public data: {doctorID: string, patient?: Patient},
       private dialog: MatDialog,
       private toastr: ToastrService,
     ) { 
@@ -65,18 +65,18 @@ export class AddPatientComponent {
     }
 
     updatePatient(): void {
-      this.patientService.updatePatient(this.data.patient._id, this.newPatientForm.value).subscribe(
+      this.patientService.updatePatient(this.data.patient?._id!, this.newPatientForm.value).subscribe(
         (response) => {
           this.toastr.success("Información del paciente actualizada", "Éxito");
-          this.dialogRef.close(response);
+          this.dialogRef.close(true);
       })
     }
 
     addPatient(): void {
       this.patientService.addPatient(this.newPatientForm.value).subscribe(
-        (response) => {
+        () => {
           this.toastr.success("Paciente añadido", "Éxito");
-          this.dialogRef.close(response);
+          this.dialogRef.close(true);
         }
       )
     }
@@ -86,9 +86,11 @@ export class AddPatientComponent {
         disableClose: true,
         width: '480px',
         height: '650px',
+        data: this.data.doctorID,
       });
       dialogRef.afterClosed().subscribe((result) => {
-        this.dialogRef.close(result);
+        if (!result) return;
+        this.dialogRef.close(true);
       })
     };
     
@@ -100,7 +102,7 @@ export class AddPatientComponent {
       if (this.data.patient) {
         this.updatePatient()
       }else {
-        this.newPatientForm.get('doctors')!.patchValue([...this.newPatientForm.get('doctors')!.value, this.data.doctorID])
+        this.newPatientForm.controls['doctors'].setValue([...this.newPatientForm.controls['doctors'].value, this.data.doctorID])
         this.addPatient()  
       }
     }

@@ -46,11 +46,25 @@ const routes: Routes = [
         data: { permissions: ['doctor'] }
       },
       {
+        path: 'receptionists',
+        loadChildren: () => import('./modules/receptionists/receptionists.module').then(m => m.ReceptionistsModule),
+        canLoad: [AuthGuard],
+        canActivate: [PermissionGuard],
+        data: { permissions: ['doctor'] }
+      },
+      {
         path: 'notes',
         loadChildren: () => import('./modules/notes/notes.module').then(m => m.NotesModule),
         canLoad: [AuthGuard],
         canActivate: [PermissionGuard],
         data: { permissions: ['doctor'] }
+      },
+      {
+        path: 'doctors',
+        loadChildren: () => import('./modules/doctors/doctors.module').then(m => m.DoctorsModule),
+        canLoad: [AuthGuard],
+        canActivate: [PermissionGuard],
+        data: { permissions: ['receptionist'] }
       },
     ]
   }

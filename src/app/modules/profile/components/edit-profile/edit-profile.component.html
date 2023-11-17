@@ -25,14 +25,14 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-full">
             <mat-label>Nueva contraseña</mat-label>
-            <input type="password" matInput placeholder="Ingrese una nueva constraseña" formControlName="password">
+            <input type="password" matInput placeholder="Ingrese una nueva contraseña" formControlName="password">
         </mat-form-field>
     
         <div class="flex gap-4 justify-center">
-            <button mat-stroked-button color="primary" (click)="onCancel()">
+            <button type="button" mat-stroked-button color="primary" (click)="onCancel()">
                 Cancelar
             </button>
-            <button  mat-flat-button color="primary">
+            <button type="submit" mat-flat-button color="primary">
                 Guardar
             </button>
         </div>

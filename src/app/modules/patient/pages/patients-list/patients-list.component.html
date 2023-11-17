@@ -12,13 +12,13 @@
     </div>
     <div class="grow overflow-auto my-5">
         <ng-container *ngIf="!isLoading; else loading">
-            <ng-container *ngIf="!patients.length || notFound ; else table">
+            <ng-container *ngIf="!patients.length ; else table">
                 <div class="bg-yellow-100 p-4 rounded-md mt-6 text-center">
-                    No se econtraron pacientes.
+                    No se encontraron pacientes.
                 </div>
             </ng-container>
             <ng-template #table class="">
-                <mat-card *ngFor="let patient of patients" class="mb-3">
+                <mat-card *ngFor="let patient of patients" class="mb-4">
                     <mat-card-content>
                         <div class="flex justify-between px-4">
                             <div class="flex items-center gap-2">
@@ -44,12 +44,8 @@
             </ng-template>
         </ng-container>
   
-        <ng-template #loading>
-            
+        <ng-template #loading>  
             <loading-spinner whatIsLoading="pacientes"></loading-spinner>
         </ng-template>
      </div>
-
-
 </div>
-   

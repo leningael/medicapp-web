@@ -26,6 +26,9 @@ import { AddExistingPatientComponent } from './components/add-existing-patient/a
     SharedModule,
     PatientRoutingModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    AddPatientComponent
   ]
 })
 export class PatientModule { }

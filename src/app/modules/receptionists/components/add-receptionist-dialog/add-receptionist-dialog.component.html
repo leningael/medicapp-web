@@ -1,0 +1,13 @@
+<section class="h-full flex flex-col">
+  <div class="bg-secondary p-4 text-center">Selecciona un recepcionista</div>
+  <div class="grow overflow-hidden px-8 py-4">
+    <select-person
+      [dataSource$]="requestReceptionists.bind(this)"
+      [frontendSearch]="false"
+      [afterSelectLoading]="isSaving"
+      searchPlaceholder="Buscar recepcionista"
+      (onSelect)="onSelectReceptionist($event)"
+      (onCancel)="closeDialog()"
+    ></select-person>
+  </div>
+</section>

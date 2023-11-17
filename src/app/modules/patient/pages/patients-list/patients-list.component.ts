@@ -10,14 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-patients-list',
   templateUrl: './patients-list.component.html',
-  styleUrls: ['./patients-list.component.css']
+  styleUrls: ['./patients-list.component.css'],
 })
 export class PatientsListComponent implements OnInit {
   public patients: PatientOverview[] = [];
   public userName: string = '';
-  public isLoading: boolean = true;
-  public options: string[] = ['Nombre (A-Z)', 'Nombre (Z-A)'];
-  private doctor_id: string = '';
+  public isLoading: boolean = false;
+  private doctor_id: string = this.credentialsService.user_credentials._id;
   public notFound: boolean = false;
 
   constructor(
@@ -30,20 +29,21 @@ export class PatientsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.doctor_id = this.credentialsService.user_credentials._id;
-    this.get_patients(this.doctor_id);
+    this.get_patients();
   }
 
-  get_patients(doctor_id: string): void {
-    this.patientService.getDrPatients(doctor_id).subscribe(
-      (response) => {
-        this.patients = response;
+  get_patients(): void {
+    this.isLoading = true;
+    this.patientService.getDrPatients(this.doctor_id).subscribe({
+      next: (patients) => {
+        this.patients = patients;
         this.isLoading = false;
-      } , (error) => {
+      },
+      error: () => {
+        this.patients = [];
         this.isLoading = false;
-        this.notFound = true;
-      }
-    );
+      },
+    });
   }
 
   get_fullname(patient: PatientOverview): string {
@@ -52,7 +52,7 @@ export class PatientsListComponent implements OnInit {
 
   seePatientProfile(patient_id: string): void {
     this.router.navigate([`/patients/patient-profile/${patient_id}`]);
-  };
+  }
 
   addNote(patient_id: string): void {
     //falta agregar que abra el modal para la creacion de la nota
@@ -62,8 +62,7 @@ export class PatientsListComponent implements OnInit {
     this.patientService.deletePatient(patient_id, this.doctor_id)
     .subscribe({
       next: (patient) => {
-        this.isLoading = true;
-        this.get_patients(this.doctor_id);
+        this.get_patients();
         this.toastr.success("Paciente eliminado", "Éxito");
       },
       error: () => {
@@ -75,27 +74,25 @@ export class PatientsListComponent implements OnInit {
 
   searchPatient(term: string): void {
     this.isLoading = true;
-    this.patientService.getDrPatients(this.doctor_id, term).subscribe(
-      (response) => {
+    this.patientService
+      .getDrPatients(this.doctor_id, term)
+      .subscribe((response) => {
         this.patients = response;
         this.isLoading = false;
-      }
-    );
+      });
   }
 
   openAddPatient(): void {
     const doctorID = this.doctor_id;
     const dialogRef = this.dialog.open(AddPatientComponent, {
       disableClose: true,
-      data: {doctorID ,patient: null}
+      data: { doctorID, patient: null },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.isLoading = true;
-        this.get_patients(this.doctor_id);
+        this.get_patients();
       }
     });
   }
-
 }
